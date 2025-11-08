@@ -1,0 +1,68 @@
+﻿<Window x:Class="Theater_Management_FE.Views.AuditoriumListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Auditorium List"
+        Height="700" Width="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FFF9FAFB">
+
+    <Grid Margin="20">
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <!-- Close button -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,0,10">
+                <Button Content="❌"
+                        Width="30" Height="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"/>
+            </StackPanel>
+
+            <!-- Static Table -->
+            <DataGrid Width="520"
+                      Height="600"
+                      Margin="0,0,0,20"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      GridLinesVisibility="None"
+                      HeadersVisibility="Column">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên phòng" Binding="{Binding}" Width="180"/>
+                    <DataGridTextColumn Header="Loại phòng" Binding="{Binding}" Width="130"/>
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding}" Width="80"/>
+                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding}" Width="130"/>
+                </DataGrid.Columns>
+
+                <DataGrid.Items>
+                    <sys:String>Phòng 1 | 2D | 120 | Ghế da VIP</sys:String>
+                    <sys:String>Phòng 2 | 3D | 90 | Máy lạnh cực mạnh</sys:String>
+                    <sys:String>Phòng 3 | IMAX | 200 | Màn cong siêu to</sys:String>
+                    <sys:String>Phòng 4 | 4DX | 60 | Ghế rung phê</sys:String>
+                </DataGrid.Items>
+            </DataGrid>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="Delete all"
+                        Width="100"
+                        Height="32"
+                        Margin="0,0,10,0"
+                        Background="#E74C3C"
+                        Foreground="White"/>
+                <Button Content="Add Auditorium"
+                        Width="120"
+                        Height="32"
+                        Background="#3498DB"
+                        Foreground="White"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

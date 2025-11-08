@@ -1,0 +1,67 @@
+﻿<Window x:Class="TheaterManagementApp.Views.MovieInformationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Movie Information"
+        Width="500"
+        Height="700"
+        Background="White">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+
+            <Label Content="🎬 Movie Information" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <StackPanel Width="400" Background="#F5F5F5" Margin="0,0,0,20">
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Movie Name"/>
+                    <TextBox Width="340" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Description"/>
+                    <TextBox Width="340" Height="150" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Director ID"/>
+                    <TextBox Width="340" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Genres (comma-separated)"/>
+                    <TextBox Width="340" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Premiere (YYYY-MM-DD HH:mm:ss)"/>
+                    <TextBox Width="340" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12" HorizontalAlignment="Left">
+                    <StackPanel Margin="0,0,30,0">
+                        <Label Content="Duration (min)"/>
+                        <TextBox Width="80" Margin="0,4,0,0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Rated (age)"/>
+                        <TextBox Width="80" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,12">
+                    <Label Content="Language"/>
+                    <TextBox Width="200" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button Content="Back" Width="80" Background="#CCCCCC" Margin="0,0,14,0"/>
+                    <Button Content="Edit" Width="80" Background="#2196F3" Foreground="White" Margin="0,0,14,0"/>
+                    <Button Content="Delete" Width="80" Background="#F44336" Foreground="White"/>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>

@@ -1,0 +1,22 @@
+﻿<Window x:Class="TheaterManagementApp.Views.HomePageManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Home Page Manager"
+        Width="800"
+        Height="600"
+        Background="#FFF">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,10,0,15">
+                <Button Content="Movie" Width="100" Height="40" Background="#2196F3" Foreground="White" FontWeight="Bold" Margin="0,0,25,0"/>
+                <Button Content="Auditorium" Width="100" Height="40" Background="#2196F3" Foreground="White" FontWeight="Bold" Margin="0,0,25,0"/>
+                <Button Content="Showtime" Width="100" Height="40" Background="#2196F3" Foreground="White" FontWeight="Bold" Margin="0,0,25,0"/>
+                <Button Content="Profile" Width="100" Height="40" Background="#2196F3" Foreground="White" FontWeight="Bold" Margin="0,0,25,0"/>
+                <Button Content="Log Out" Width="100" Height="40" Background="#2196F3" Foreground="White" FontWeight="Bold"/>
+            </StackPanel>
+
+            <Separator HorizontalAlignment="Stretch"/>
+        </StackPanel>
+    </Grid>
+</Window>

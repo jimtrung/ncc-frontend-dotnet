@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "09mlDCZv73g=",
+  "dgSpecHash": "rREjLCAWrd4=",
   "success": true,
   "projectFilePath": "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\HAI TRUNG\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\HAI TRUNG\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\HAI TRUNG\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

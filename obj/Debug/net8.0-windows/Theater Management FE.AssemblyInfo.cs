@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Theater Management FE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2622e98796378314ffb49ba50a3dc5ee3860338")]
 [assembly: System.Reflection.AssemblyProductAttribute("Theater Management FE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Theater Management FE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

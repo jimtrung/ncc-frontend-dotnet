@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\program-languages\\c#\\Theater Management FE\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\addshowtime.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\addshowtime.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\addmovie.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\addmovie.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,35 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AddShowtime.xaml",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddShowtime.xaml",
-              "RelativeDocumentMoniker": "Views\\AddShowtime.xaml",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddShowtime.xaml",
-              "RelativeToolTip": "Views\\AddShowtime.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-06T16:46:39.403Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AddMovie.xaml",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddMovie.xaml",
-              "RelativeDocumentMoniker": "Views\\AddMovie.xaml",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddMovie.xaml",
-              "RelativeToolTip": "Views\\AddMovie.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-06T16:43:39.629Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -32,6 +32,35 @@
           }
         }
       },
+      "Microsoft.Maui.Essentials/8.0.100": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Graphics": "8.0.100"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Maui.Essentials.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Maui.Essentials.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Microsoft.Maui.Graphics/8.0.100": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Maui.Graphics.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Maui.Graphics.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "System.IO.Pipelines/5.0.2": {
         "type": "package",
         "compile": {
@@ -89,6 +118,152 @@
         "version.txt"
       ]
     },
+    "Microsoft.Maui.Essentials/8.0.100": {
+      "sha512": "quiPMYj10eDiKUkHLEEKAjuI0SAn7ZeZohmrh90Ebdl6fz4hVdDCmVfFyITGLtNbbSpkXvNJpeZwOWp2H5V9kQ==",
+      "type": "package",
+      "path": "microsoft.maui.essentials/8.0.100",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0-android33.0/Microsoft.Maui.Essentials.aar",
+        "lib/net7.0-android33.0/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-android33.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-android33.0/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Essentials.xml",
+        "lib/net7.0/Microsoft.Maui.Essentials.dll",
+        "lib/net7.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net7.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-android34.0/Microsoft.Maui.Essentials.aar",
+        "lib/net8.0-android34.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-android34.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-android34.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Essentials.xml",
+        "lib/net8.0/Microsoft.Maui.Essentials.dll",
+        "lib/net8.0/Microsoft.Maui.Essentials.pdb",
+        "lib/net8.0/Microsoft.Maui.Essentials.xml",
+        "lib/netstandard2.0/Microsoft.Maui.Essentials.dll",
+        "lib/netstandard2.0/Microsoft.Maui.Essentials.pdb",
+        "lib/netstandard2.0/Microsoft.Maui.Essentials.xml",
+        "lib/netstandard2.1/Microsoft.Maui.Essentials.dll",
+        "lib/netstandard2.1/Microsoft.Maui.Essentials.pdb",
+        "lib/netstandard2.1/Microsoft.Maui.Essentials.xml",
+        "microsoft.maui.essentials.8.0.100.nupkg.sha512",
+        "microsoft.maui.essentials.nuspec"
+      ]
+    },
+    "Microsoft.Maui.Graphics/8.0.100": {
+      "sha512": "FRvNIXnALXysAw0t0R5jmS4j4qs2n/NaWMcLrinMIoC2tQ/QIL68XEdN1OCtFRWvME8cR180TwSxpEjAIvlebA==",
+      "type": "package",
+      "path": "microsoft.maui.graphics/8.0.100",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-android33.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-android33.0/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-macos13.0/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-macos13.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-macos13.0/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-tizen7.0/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0-windows10.0.20348/Microsoft.Maui.Graphics.xml",
+        "lib/net7.0/Microsoft.Maui.Graphics.dll",
+        "lib/net7.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net7.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-android34.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-android34.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-android34.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-ios17.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-ios18.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-maccatalyst17.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-maccatalyst18.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-macos14.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-macos14.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-macos14.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-tizen7.0/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-windows10.0.19041/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0-windows10.0.20348/Microsoft.Maui.Graphics.xml",
+        "lib/net8.0/Microsoft.Maui.Graphics.dll",
+        "lib/net8.0/Microsoft.Maui.Graphics.pdb",
+        "lib/net8.0/Microsoft.Maui.Graphics.xml",
+        "lib/netstandard2.0/Microsoft.Maui.Graphics.dll",
+        "lib/netstandard2.0/Microsoft.Maui.Graphics.pdb",
+        "lib/netstandard2.0/Microsoft.Maui.Graphics.xml",
+        "lib/netstandard2.1/Microsoft.Maui.Graphics.dll",
+        "lib/netstandard2.1/Microsoft.Maui.Graphics.pdb",
+        "lib/netstandard2.1/Microsoft.Maui.Graphics.xml",
+        "microsoft.maui.graphics.8.0.100.nupkg.sha512",
+        "microsoft.maui.graphics.nuspec"
+      ]
+    },
     "System.IO.Pipelines/5.0.2": {
       "sha512": "Iew+dfa6FFiyvWBdRmXApixRY1db+beyutpIck4SOSe0NLM8FD/7AD54MscqVLhvfSMLHO7KadjTRT7fqxOGTA==",
       "type": "package",
@@ -118,7 +293,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "Microsoft.AspNetCore.Http.Features >= 5.0.17"
+      "Microsoft.AspNetCore.Http.Features >= 5.0.17",
+      "Microsoft.Maui.Essentials >= 8.0.*"
     ]
   },
   "packageFolders": {
@@ -175,6 +351,10 @@
           "Microsoft.AspNetCore.Http.Features": {
             "target": "Package",
             "version": "[5.0.17, )"
+          },
+          "Microsoft.Maui.Essentials": {
+            "target": "Package",
+            "version": "[8.0.*, )"
           }
         },
         "imports": [

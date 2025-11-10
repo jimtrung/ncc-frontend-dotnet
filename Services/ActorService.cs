@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿namespace Theater_Management_FE.Services;
+
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -6,8 +8,6 @@ using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
-
-namespace MyApp.Services;
 
 public class ActorService
 {

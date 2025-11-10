@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR
 D:\program-languages\c#\Theater Management FE\App.xaml
 111129483875
 
-421708359330
-20394376989
+44-1778905394
+204-603835428
 MainWindow.xaml;Views\AddMovieWindow.xaml;Views\AddShowtimeWindow.xaml;Views\AuditoriumListWindow.xaml;Views\MovieInformationWindow.xaml;Views\MovieListWindow.xaml;Views\ProfileWindow.xaml;Views\ShowtimeListWindow.xaml;Views\SignInWindow.xaml;Views\SignUpWindow.xaml;Views\TinTucWindow.xaml;
 
-False
+True
 

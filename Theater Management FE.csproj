@@ -1,57 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>Theater_Management_FE</RootNamespace>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows7.0</TargetFramework>
+		<RootNamespace>Theater_Management_FE</RootNamespace>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<EnableDefaultPageItems>false</EnableDefaultPageItems>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Page Remove="Views\AddAuditoriumWindow.xaml" />
-    <Page Remove="Views\AuditoriumInformationWindow.xaml" />
-    <Page Remove="Views\HomePageManagerWindow.xaml" />
-    <Page Remove="Views\HomePageUserWindow.xaml" />
-    <Page Remove="Views\HomeWindow.xaml" />
-    <Page Remove="Views\ViewWindow.xaml" />
-  </ItemGroup>
+	<ItemGroup>
+		<Page Include="Views\**\*.xaml">
+			<Generator>MSBuild:Compile</Generator>
+			<SubType>Designer</SubType>
+		</Page>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="Views\AddAuditoriumWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="Views\AuditoriumInformationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="Views\HomePageManagerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="Views\HomePageUserWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="Views\HomeWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-    <Compile Include="Views\ViewWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Commands\" />
+		<Folder Include="Helpers\" />
+		<Folder Include="Config\" />
+		<Folder Include="Utils\" />
+		<Folder Include="Resources\" />
+		<Folder Include="Services\" />
+		<Folder Include="ViewModels\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Config\" />
-    <Folder Include="Utils\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-    <PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.*" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.*" />
+	</ItemGroup>
 
 </Project>

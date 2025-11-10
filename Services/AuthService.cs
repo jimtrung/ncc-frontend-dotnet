@@ -1,4 +1,4 @@
-﻿namespace Theater_Management_BE.src.Services;
+﻿namespace Theater_Management_FE.Services;
 
 using System.Net.Http;
 using System.Net.Http.Headers;

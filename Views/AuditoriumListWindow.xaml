@@ -24,7 +24,7 @@
 
             <!-- Static Table -->
             <DataGrid Width="520"
-                      Height="600"
+                      Height="552"
                       Margin="0,0,0,20"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"

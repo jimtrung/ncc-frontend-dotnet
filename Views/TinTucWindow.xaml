@@ -1,4 +1,4 @@
-﻿<Window x:Class="TheaterManagementApp.Views.TinTucWindow"
+﻿<Window x:Class="Theater_Management_FE.Views.TinTucWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Tin tức"

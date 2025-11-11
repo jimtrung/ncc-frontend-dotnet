@@ -21,10 +21,8 @@
 		<Folder Include="Commands\" />
 		<Folder Include="Helpers\" />
 		<Folder Include="Config\" />
-		<Folder Include="Utils\" />
 		<Folder Include="Resources\" />
 		<Folder Include="Services\" />
-		<Folder Include="ViewModels\" />
 	</ItemGroup>
 
 	<ItemGroup>

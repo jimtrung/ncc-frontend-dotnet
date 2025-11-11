@@ -3,76 +3,20 @@
   "WorkspaceRootPath": "D:\\program-languages\\c#\\Theater Management FE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\homewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\homewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\tintucwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\tintucwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\signupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\signupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\signinwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\signinwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\showtimelistwindow.xaml..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\showtimelistwindow.xaml..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\profilewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\profilewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\movielistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\movielistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\movieinformationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\movieinformationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\homepageuserwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\homepageuserwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\homepagemanagerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\homepagemanagerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\auditoriumlistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\auditoriumlistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\auditoriuminformationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\auditoriuminformationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\auditoriuminformationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\auditoriuminformationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\addshowtimewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\addshowtimewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\addmoviewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\addmoviewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\addauditoriumwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\addauditoriumwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\theater management fe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:theater management fe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,243 +26,62 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HomeWindow.xaml",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomeWindow.xaml",
-              "RelativeDocumentMoniker": "Views\\HomeWindow.xaml",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomeWindow.xaml",
-              "RelativeToolTip": "Views\\HomeWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-10T16:07:34.158Z",
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Views\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T04:06:04.84Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TinTucWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\TinTucWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\TinTucWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\TinTucWindow.xaml.cs",
-              "RelativeToolTip": "Views\\TinTucWindow.xaml.cs",
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:07:10.783Z",
+              "WhenOpened": "2025-11-11T03:59:53.706Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SignUpWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\SignUpWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\SignUpWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\SignUpWindow.xaml.cs",
-              "RelativeToolTip": "Views\\SignUpWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:06:45.841Z",
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Views\\MainWindow.xaml",
+              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-11T03:58:54.135Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SignInWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\SignInWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\SignInWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\SignInWindow.xaml.cs",
-              "RelativeToolTip": "Views\\SignInWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:06:17.638Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ShowtimeListWindow.xaml..cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\ShowtimeListWindow.xaml..cs",
-              "RelativeDocumentMoniker": "Views\\ShowtimeListWindow.xaml..cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\ShowtimeListWindow.xaml..cs",
-              "RelativeToolTip": "Views\\ShowtimeListWindow.xaml..cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:06:01.591Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProfileWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\ProfileWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\ProfileWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\ProfileWindow.xaml.cs",
-              "RelativeToolTip": "Views\\ProfileWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:05:46.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MovieListWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MovieListWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\MovieListWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MovieListWindow.xaml.cs",
-              "RelativeToolTip": "Views\\MovieListWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:05:30.287Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MovieInformationWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MovieInformationWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\MovieInformationWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\MovieInformationWindow.xaml.cs",
-              "RelativeToolTip": "Views\\MovieInformationWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:05:14.852Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HomePageUserWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomePageUserWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\HomePageUserWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomePageUserWindow.xaml.cs",
-              "RelativeToolTip": "Views\\HomePageUserWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:04:43.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "HomePageManagerWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomePageManagerWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\HomePageManagerWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\HomePageManagerWindow.xaml.cs",
-              "RelativeToolTip": "Views\\HomePageManagerWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:04:09.271Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AuditoriumListWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumListWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AuditoriumListWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumListWindow.xaml.cs",
-              "RelativeToolTip": "Views\\AuditoriumListWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:03:49.31Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AuditoriumInformationWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumInformationWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AuditoriumInformationWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumInformationWindow.xaml.cs",
-              "RelativeToolTip": "Views\\AuditoriumInformationWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:03:28.342Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AuditoriumInformationWindow.xaml",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumInformationWindow.xaml",
-              "RelativeDocumentMoniker": "Views\\AuditoriumInformationWindow.xaml",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AuditoriumInformationWindow.xaml",
-              "RelativeToolTip": "Views\\AuditoriumInformationWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-10T16:03:02.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AddShowtimeWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddShowtimeWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AddShowtimeWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddShowtimeWindow.xaml.cs",
-              "RelativeToolTip": "Views\\AddShowtimeWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:02:38.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AddMovieWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddMovieWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AddMovieWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddMovieWindow.xaml.cs",
-              "RelativeToolTip": "Views\\AddMovieWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T16:02:15.315Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Theater Management FE",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj",
-              "RelativeDocumentMoniker": "Theater Management FE.csproj",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj",
-              "RelativeToolTip": "Theater Management FE.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-10T16:00:19.034Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "AddAuditoriumWindow.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddAuditoriumWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\AddAuditoriumWindow.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\Views\\AddAuditoriumWindow.xaml.cs",
-              "RelativeToolTip": "Views\\AddAuditoriumWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T15:53:31.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\App.xaml.cs",
               "RelativeDocumentMoniker": "App.xaml.cs",
               "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\App.xaml.cs",
               "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAIwEkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA4wBkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T15:19:37.391Z",
+              "WhenOpened": "2025-11-11T03:52:00.227Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }

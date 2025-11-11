@@ -2,9 +2,9 @@
 
 namespace Theater_Management_FE.Views
 {
-    public partial class HomeWindow : Window
+    public partial class MainWindow : Window
     {
-        public HomeWindow()
+        public MainWindow()
         {
             InitializeComponent();
         }

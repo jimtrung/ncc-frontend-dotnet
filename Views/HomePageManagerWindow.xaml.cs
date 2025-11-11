@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Theater_Management_FE.ViewModels;
 
 namespace Theater_Management_FE.Views
 {
@@ -7,6 +8,7 @@ namespace Theater_Management_FE.Views
         public HomePageManagerWindow()
         {
             InitializeComponent();
+            this.DataContext = new HomePageManagerViewModel();
         }
     }
 }

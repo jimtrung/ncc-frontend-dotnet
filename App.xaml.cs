@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using Theater_Management_FE.Services;
-//using Theater_Management_FE.ViewModels;
+using Theater_Management_FE.ViewModels;
 using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE;
@@ -26,25 +26,27 @@ public partial class App : Application
         services.AddSingleton<ActorService>();
 
         // === ViewModels (Transient) ===
-        //services.AddTransient<SignInViewModel>();
-        //services.AddTransient<SignUpViewModel>();
-        //services.AddTransient<HomePageUserViewModel>();
-        //services.AddTransient<HomePageManagerViewModel>();
-        //services.AddTransient<MovieListViewModel>();
-        //services.AddTransient<AuditoriumListViewModel>();
-        //services.AddTransient<ProfileViewModel>();
-        //services.AddTransient<ShowtimeListViewModel>();
-        //services.AddTransient<TinTucViewModel>();
-        //services.AddTransient<AddMovieViewModel>();
-        //services.AddTransient<AddAuditoriumViewModel>();
-        //services.AddTransient<MovieInformationViewModel>();
-        //services.AddTransient<AuditoriumInformationViewModel>();
+        services.AddTransient<SignInViewModel>();
+        services.AddTransient<SignUpViewModel>();
+        services.AddTransient<HomePageUserViewModel>();
+        services.AddTransient<HomePageManagerViewModel>();
+        services.AddTransient<MainViewModel>();
+        services.AddTransient<MovieListViewModel>();
+        services.AddTransient<AuditoriumListViewModel>();
+        services.AddTransient<ProfileViewModel>();
+        services.AddTransient<ShowtimeListViewModel>();
+        services.AddTransient<TinTucViewModel>();
+        services.AddTransient<AddMovieViewModel>();
+        services.AddTransient<AddAuditoriumViewModel>();
+        services.AddTransient<MovieInformationViewModel>();
+        services.AddTransient<AuditoriumInformationViewModel>();
 
         // === Windows (Transient – mỗi lần mở là mới) ===
         services.AddTransient<SignInWindow>();
         services.AddTransient<SignUpWindow>();
         services.AddTransient<HomePageUserWindow>();
         services.AddTransient<HomePageManagerWindow>();
+        services.AddTransient<MainWindow>();
         services.AddTransient<MovieListWindow>();
         services.AddTransient<AuditoriumListWindow>();
         services.AddTransient<ProfileWindow>();
@@ -73,8 +75,26 @@ public partial class App : Application
         //    catch { /* ignore */ }
         //});
 
+        // --- STARTUP FIX: Use DI to create and set the MainWindow ---
+
+        // 1. Get the initial window instance
+        var initialWindow = Services.GetRequiredService<MainWindow>();
+
+        // 2. Set it as the application's main window (CRUCIAL for keeping the app running)
+        this.MainWindow = initialWindow;
+
+        // 3. Show the window
+        // Use the NavigationService only if it correctly sets the DataContext and shows the window.
+        // If not, you may need to set DataContext here and use initialWindow.Show().
         var nav = Services.GetRequiredService<NavigationService>();
-        var tokenUtil = Services.GetRequiredService<AuthTokenUtil>();
-        nav.Show<HomeWindow>();
+        nav.Show<MainWindow>();
+
+        // The above nav.Show<HomeWindow>() is kept, assuming your NavigationService handles
+        // setting the DataContext and showing the window correctly after we set MainWindow.
+        // If the problem persists, replace the nav.Show line with:
+        // initialWindow.DataContext = Services.GetRequiredService<HomeViewModel>();
+        // initialWindow.Show();
+
+        // --- END OF STARTUP FIX ---
     }
 }

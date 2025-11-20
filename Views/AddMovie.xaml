@@ -1,0 +1,110 @@
+<Window x:Class="Theater_Management_FE.Views.AddMovie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="Add movie"
+                       x:Name="titleLabel"
+                       HorizontalAlignment="Center"/>
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <StackPanel>
+                                <TextBlock Text="Enter movie name"/>
+                                <TextBox x:Name="movieNameField"
+                                         Text="{Binding MovieName, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Select genre(s)"/>
+                                <TextBox x:Name="searchGenreField"
+                                         Text="{Binding SearchGenreText, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListView x:Name="genreListView"
+                                          ItemsSource="{Binding FilteredGenres}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding}" />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Enter movie description"/>
+                                <TextBox x:Name="movieDescriptionField"
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         Text="{Binding MovieDescription}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <TextBlock Text="Age limit"/>
+                                    <TextBox x:Name="movieRatedField"
+                                             Text="{Binding MovieRated, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Duration"/>
+                                    <TextBox x:Name="movieDurationField"
+                                             Text="{Binding MovieDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Language"/>
+                                    <TextBox x:Name="movieLanguageField"
+                                             Text="{Binding MovieLanguage}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel>
+                                <TextBlock Text="Select director"/>
+                                <TextBox x:Name="searchDirectorField"
+                                         Text="{Binding SearchDirectorText, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListView x:Name="directorListView"
+                                          ItemsSource="{Binding FilteredDirectors}"
+                                          SelectedItem="{Binding SelectedDirector}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <RadioButton Content="{Binding}" GroupName="Directors"
+                                                         IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsSelected}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Select actor(s)"/>
+                                <TextBox x:Name="searchActorField"
+                                         Text="{Binding SearchActorText, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListView x:Name="actorListView"
+                                          ItemsSource="{Binding FilteredActors}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Content="Back"
+                                x:Name="backButton"
+                                Command="{Binding BackCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                        <Button Content="Add"
+                                x:Name="addMovieButton"
+                                Command="{Binding AddMovieCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

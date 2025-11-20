@@ -1,100 +1,92 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http;
 using System.Windows;
+using Theater_Management_FE.Controllers;
+using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Services;
-using Theater_Management_FE.ViewModels;
 using Theater_Management_FE.Views;
 
-namespace Theater_Management_FE;
-
-public partial class App : Application
+namespace Theater_Management_FE
 {
-    public static IServiceProvider Services { get; private set; } = null!;
-
-    protected override void OnStartup(StartupEventArgs e)
+    public partial class App : Application
     {
-        base.OnStartup(e);
+        public static IServiceProvider Services { get; private set; } = null!;
 
-        var services = new ServiceCollection();
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
-        // === Services (Singleton) ===
-        services.AddSingleton<AuthTokenUtil>();
-        services.AddSingleton<AuthService>();
-        services.AddSingleton<MovieService>();
-        services.AddSingleton<AuditoriumService>();
-        services.AddSingleton<MovieActorService>();
-        services.AddSingleton<DirectorService>();
-        services.AddSingleton<ActorService>();
+            var services = new ServiceCollection();
 
-        // === ViewModels (Transient) ===
-        services.AddTransient<SignInViewModel>();
-        services.AddTransient<SignUpViewModel>();
-        services.AddTransient<HomePageUserViewModel>();
-        services.AddTransient<HomePageManagerViewModel>();
-        services.AddTransient<MainViewModel>();
-        services.AddTransient<MovieListViewModel>();
-        services.AddTransient<AuditoriumListViewModel>();
-        services.AddTransient<ProfileViewModel>();
-        services.AddTransient<ShowtimeListViewModel>();
-        services.AddTransient<TinTucViewModel>();
-        services.AddTransient<AddMovieViewModel>();
-        services.AddTransient<AddAuditoriumViewModel>();
-        services.AddTransient<MovieInformationViewModel>();
-        services.AddTransient<AuditoriumInformationViewModel>();
+            // HttpClient Factory
+            services.AddHttpClient();
 
-        // === Windows (Transient – mỗi lần mở là mới) ===
-        services.AddTransient<SignInWindow>();
-        services.AddTransient<SignUpWindow>();
-        services.AddTransient<HomePageUserWindow>();
-        services.AddTransient<HomePageManagerWindow>();
-        services.AddTransient<MainWindow>();
-        services.AddTransient<MovieListWindow>();
-        services.AddTransient<AuditoriumListWindow>();
-        services.AddTransient<ProfileWindow>();
-        services.AddTransient<ShowtimeListWindow>();
-        services.AddTransient<TinTucWindow>();
-        services.AddTransient<AddMovieWindow>();
-        services.AddTransient<AddAuditoriumWindow>();
-        services.AddTransient<MovieInformationWindow>();
-        services.AddTransient<AuditoriumInformationWindow>();
+            // === Services ===
+            services.AddSingleton<AuthTokenUtil>();
+            services.AddSingleton<AuthService>(sp =>
+            {
+                var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient();
+                var tokenUtil = sp.GetRequiredService<AuthTokenUtil>();
+                return new AuthService(httpClient, tokenUtil);
+            });
+            services.AddSingleton<MovieService>();
+            services.AddSingleton<AuditoriumService>();
+            services.AddSingleton<MovieActorService>();
+            services.AddSingleton<DirectorService>();
+            services.AddSingleton<ActorService>();
 
-        // === Navigation Service (Singleton) ===
-        services.AddSingleton<NavigationService>();
+            // === Controllers ===
+            services.AddTransient<SignInController>();
+            services.AddTransient<SignUpController>();
+            services.AddTransient<HomePageUserController>();
+            services.AddTransient<HomePageManagerController>();
+            services.AddTransient<HomeController>();
+            services.AddTransient<MovieListController>();
+            services.AddTransient<AuditoriumListController>();
+            services.AddTransient<ProfileController>();
+            services.AddTransient<AddMovieController>();
+            services.AddTransient<AddAuditoriumController>();
+            services.AddTransient<MovieInformationController>();
+            services.AddTransient<AuditoriumInformationController>();
 
-        Services = services.BuildServiceProvider();
+            // === Windows ===
+            services.AddTransient<SignIn>();
+            services.AddTransient<SignUp>();
+            services.AddTransient<HomePageUser>();
+            services.AddTransient<HomePageManager>();
+            services.AddTransient<Home>();
+            services.AddTransient<MovieList>();
+            services.AddTransient<AuditoriumList>();
+            services.AddTransient<Profile>();
+            services.AddTransient<AddMovie>();
+            services.AddTransient<AddAuditorium>();
+            services.AddTransient<MovieInformation>();
+            services.AddTransient<AuditoriumInformation>();
 
-        // === Try auto-refresh token ===
-        //_ = Task.Run(async () =>
-        //{
-        //    try
-        //    {
-        //        var auth = Services.GetRequiredService<AuthService>();
-        //        var util = Services.GetRequiredService<AuthTokenUtil>();
-        //        var token = await auth.RefreshAsync();
-        //        util.SaveAccessToken(token);
-        //    }
-        //    catch { /* ignore */ }
-        //});
+            // ScreenController
+            services.AddSingleton<ScreenController>();
 
-        // --- STARTUP FIX: Use DI to create and set the MainWindow ---
+            Services = services.BuildServiceProvider();
 
-        // 1. Get the initial window instance
-        var initialWindow = Services.GetRequiredService<MainWindow>();
+            var sc = Services.GetRequiredService<ScreenController>();
 
-        // 2. Set it as the application's main window (CRUCIAL for keeping the app running)
-        this.MainWindow = initialWindow;
+            // --- REGISTER ALL WINDOWS + CONTROLLERS ---
+            sc.AutoRegister<Home, HomeController>(Services);
+            sc.AutoRegister<SignIn, SignInController>(Services);
+            sc.AutoRegister<SignUp, SignUpController>(Services);
+            sc.AutoRegister<HomePageUser, HomePageUserController>(Services);
+            sc.AutoRegister<HomePageManager, HomePageManagerController>(Services);
+            sc.AutoRegister<MovieList, MovieListController>(Services);
+            sc.AutoRegister<AuditoriumList, AuditoriumListController>(Services);
+            sc.AutoRegister<Profile, ProfileController>(Services);
+            sc.AutoRegister<AddMovie, AddMovieController>(Services);
+            sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
+            sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
+            sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
 
-        // 3. Show the window
-        // Use the NavigationService only if it correctly sets the DataContext and shows the window.
-        // If not, you may need to set DataContext here and use initialWindow.Show().
-        var nav = Services.GetRequiredService<NavigationService>();
-        nav.Show<MainWindow>();
-
-        // The above nav.Show<HomeWindow>() is kept, assuming your NavigationService handles
-        // setting the DataContext and showing the window correctly after we set MainWindow.
-        // If the problem persists, replace the nav.Show line with:
-        // initialWindow.DataContext = Services.GetRequiredService<HomeViewModel>();
-        // initialWindow.Show();
-
-        // --- END OF STARTUP FIX ---
+            // --- STARTUP MAIN WINDOW ---
+            // Use ScreenController so that navigation & HandleOnOpen are consistent
+            sc.NavigateTo<Home>();
+        }
     }
 }

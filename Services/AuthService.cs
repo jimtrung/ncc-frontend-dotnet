@@ -8,7 +8,6 @@ using System.Text.Json.Serialization;
 using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
-using Theater_Management_FE.Services;
 
 public class AuthService
 {
@@ -31,7 +30,7 @@ public class AuthService
         _authTokenUtil = authTokenUtil;
     }
 
-    public async Task<object> SignUp(User user)
+    public object SignUp(User user)
     {
         var body = new
         {
@@ -41,18 +40,18 @@ public class AuthService
             password = user.Password
         };
 
-        var response = await _httpClient.PostAsJsonAsync("auth/signup", body, JsonOptions);
+        var response = _httpClient.PostAsJsonAsync("auth/signup", body, JsonOptions).Result;
 
         if (!response.IsSuccessStatusCode)
         {
-            var error = await response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions);
+            var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
             return error!;
         }
 
-        return await response.Content.ReadAsStringAsync();
+        return response.Content.ReadAsStringAsync().Result;
     }
 
-    public async Task<object> SignIn(User user)
+    public object SignIn(User user)
     {
         var body = new
         {
@@ -60,41 +59,85 @@ public class AuthService
             password = user.Password
         };
 
-        var response = await _httpClient.PostAsJsonAsync("auth/signin", body, JsonOptions);
+        HttpResponseMessage response;
+        try
+        {
+            response = _httpClient.PostAsJsonAsync("auth/signin", body, JsonOptions).Result;
+        }
+        catch (Exception ex)
+        {
+            // Wrap low-level HTTP/serialization issues into an ErrorResponse
+            return new ErrorResponse(DateTime.UtcNow, 500, "SignIn request failed", ex.Message, "/auth/signin");
+        }
+
+        var raw = response.Content.ReadAsStringAsync().Result ?? "";
 
         if (!response.IsSuccessStatusCode)
         {
-            var error = await response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions);
-            return error!;
+            // Try parse backend error, otherwise surface raw body for debugging
+            try
+            {
+                var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
+                if (error != null) return error;
+            }
+            catch
+            {
+                // ignore and fall through
+            }
+
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignIn failed", raw, "/auth/signin");
         }
 
-        return await response.Content.ReadFromJsonAsync<TokenPair>(JsonOptions) ?? new TokenPair("", "");
+        try
+        {
+            var token = response.Content.ReadFromJsonAsync<TokenPair>(JsonOptions).Result;
+            if (token == null)
+            {
+                return new ErrorResponse(DateTime.UtcNow, 500, "Invalid token response", "Token payload was empty", "/auth/signin");
+            }
+
+            return token;
+        }
+        catch (Exception ex)
+        {
+            // Most likely a JSON shape mismatch between backend and TokenPair
+            return new ErrorResponse(DateTime.UtcNow, 500, "Failed to parse token response",
+                $"Could not parse token JSON: {ex.Message}. Raw response: {raw}", "/auth/signin");
+        }
     }
 
-    public async Task<object> GetUser()
+    public object GetUser()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "user/");
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authTokenUtil.LoadAccessToken());
+        var token = _authTokenUtil.LoadAccessToken();
         
-        var response = await _httpClient.SendAsync(request);
+        if (string.IsNullOrEmpty(token))
+        {
+            return new ErrorResponse(DateTime.UtcNow, 401, "Unauthorized", "No access token", "/user/");
+        }
+
+        var request = new HttpRequestMessage(HttpMethod.Get, "user/");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = _httpClient.SendAsync(request).Result;
 
         if (!response.IsSuccessStatusCode)
         {
-            var error = await response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions);
+            var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
             return error!;
         }
 
-        return await response.Content.ReadFromJsonAsync<User>(JsonOptions) ?? new User();
+        var user = response.Content.ReadFromJsonAsync<User>(JsonOptions).Result;
+        return user ?? new User();
     }
 
-    public async Task<string> Refresh()
+    public string Refresh()
     {
         var body = new
         {
             refresh_token = _authTokenUtil.LoadRefreshToken()
         };
 
-        var response = await _httpClient.PostAsJsonAsync("auth/refresh", body, JsonOptions);
-        return await response.Content.ReadAsStringAsync();
+        var response = _httpClient.PostAsJsonAsync("auth/refresh", body, JsonOptions).Result;
+        return response.Content.ReadAsStringAsync().Result;
     }
 }

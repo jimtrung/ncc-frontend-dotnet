@@ -1,0 +1,31 @@
+﻿<Window x:Class="Theater_Management_FE.Views.MovieList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Movie List" Height="450" Width="800">
+    <StackPanel HorizontalAlignment="Center">
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Close" x:Name="closeBtn"/>
+        </StackPanel>
+
+        <Grid HorizontalAlignment="Center">
+            <DataGrid x:Name="movieTable" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="nameColumn" Header="Tên phim"/>
+                    <DataGridTextColumn x:Name="directorColumn" Header="Đạo diễn (ID)"/>
+                    <DataGridTextColumn x:Name="genresColumn" Header="Thể loại"/>
+                    <DataGridTextColumn x:Name="premiereColumn" Header="Khởi chiếu"/>
+                    <DataGridTextColumn x:Name="durationColumn" Header="Thời lượng"/>
+                    <DataGridTextColumn x:Name="ratedColumn" Header="Giới hạn tuổi"/>
+                    <DataGridTextColumn x:Name="languageColumn" Header="Ngôn ngữ"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Delete all" x:Name="deleteAllBtn"/>
+            <Button Content="Add Movie" x:Name="addMovieBtn"/>
+        </StackPanel>
+
+    </StackPanel>
+</Window>

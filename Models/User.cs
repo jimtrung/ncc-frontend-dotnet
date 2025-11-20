@@ -11,8 +11,8 @@ namespace Theater_Management_FE.Models
         private string _password;
         private UserRole _role;
         private Provider _provider;
-        private string _token;
-        private int _otp;
+        private string? _token;
+        private string? _otp;
         private bool _verified;
         private DateTime _createdAt;
         private DateTime _updatedAt;
@@ -56,7 +56,7 @@ namespace Theater_Management_FE.Models
             get => _token;
             set { _token = value; OnPropertyChanged(nameof(Token)); }
         }
-        public int OTP
+        public string OTP
         {
             get => _otp;
             set { _otp = value; OnPropertyChanged(nameof(OTP)); }

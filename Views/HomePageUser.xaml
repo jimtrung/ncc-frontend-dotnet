@@ -46,7 +46,6 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
-                    <Image Source="http://localhost:8080/uploads/logos/logo.png" Width="80" Height="40" Margin="0,0,12,0"/>
                     <StackPanel>
                         <TextBlock Text="TRUNG TÂM CHIẾU PHIM QUỐC GIA"
                                    Foreground="White"
@@ -67,6 +66,7 @@
                     <Button x:Name="showTimesButton" Style="{StaticResource NavButtonStyle}" Content="Lịch chiếu" />
                     <Button x:Name="newsButton" Style="{StaticResource NavButtonStyle}" Content="Tin tức" />
                     <Button x:Name="promotionButton" Style="{StaticResource NavButtonStyle}" Content="Khuyến mãi" />
+                    <Button x:Name="priceButton" Style="{StaticResource NavButtonStyle}" Content="Giá vé" />
                     <Button x:Name="aboutButton" Style="{StaticResource NavButtonStyle}" Content="Giới thiệu" />
                 </StackPanel>
 

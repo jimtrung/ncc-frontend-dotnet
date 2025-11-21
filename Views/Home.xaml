@@ -1,28 +1,65 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.Home"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Home"
-        WindowState="Maximized">
+        Title="Theater Management"
+        WindowState="Maximized"
+        Background="{StaticResource PrimaryBackground}">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-            <Label x:Name="titleLabel"
-                   Content="Theater Management"
-                   FontSize="28"
-                   HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
-                <Button x:Name="signupButton"
-                        Content="Sign Up"
-                        Margin="5"
-                        Padding="16,8"/>
+        <!-- Gradient Background -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0F1419" Offset="0"/>
+                <GradientStop Color="#1A1F2E" Offset="0.5"/>
+                <GradientStop Color="#0F1419" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Main Content -->
+        <Border Style="{StaticResource card}"
+                Width="500"
+                Padding="48,40"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <StackPanel>
+                <!-- Logo/Title -->
+                <TextBlock Text="🎬" 
+                           FontSize="64" 
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,16"/>
+                
+                <TextBlock Text="Theater Management"
+                           x:Name="titleLabel"
+                           Style="{StaticResource title}"
+                           FontSize="28"
+                           Margin="0,0,0,8"/>
+                
+                <TextBlock Text="Welcome to the National Cinema Center"
+                           Foreground="{StaticResource SecondaryText}"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,32"/>
+
+                <!-- Action Buttons -->
                 <Button x:Name="signinButton"
                         Content="Sign In"
-                        Margin="5"
-                        Padding="16,8"/>
+                        Style="{StaticResource button-primary}"
+                        Margin="0,0,0,12"
+                        Padding="24,14"
+                        FontSize="16"/>
+                
+                <Button x:Name="signupButton"
+                        Content="Sign Up"
+                        Style="{StaticResource button-secondary}"
+                        Margin="0,0,0,12"
+                        Padding="24,14"
+                        FontSize="16"/>
+                
                 <Button x:Name="settingsButton"
-                        Content="Settings"
-                        Margin="5"
-                        Padding="16,8"/>
+                        Content="⚙️ Settings"
+                        Style="{StaticResource button-secondary}"
+                        Padding="24,14"
+                        FontSize="16"/>
             </StackPanel>
-        </StackPanel>
+        </Border>
     </Grid>
 </Window>

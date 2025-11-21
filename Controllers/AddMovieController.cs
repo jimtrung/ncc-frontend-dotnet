@@ -5,6 +5,7 @@ using System.Linq;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
+using Theater_Management_FE.Utils;
 using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE.Controllers
@@ -44,11 +45,14 @@ namespace Theater_Management_FE.Controllers
 
         public Button backButton;
         public Button addMovieButton;
+        public Button selectImageButton;
+        public Image moviePosterImage;
 
         // Data
         private List<SelectableItem<string>> _allGenres = new();
         private List<SelectableItem<Director>> _allDirectors = new();
         private List<SelectableItem<Actor>> _allActors = new();
+        private string _selectedImagePath;
 
         private bool _isInitialized = false;
 
@@ -58,6 +62,7 @@ namespace Theater_Management_FE.Controllers
             {
                 if (backButton != null) backButton.Click += (s, e) => HandleBackButton();
                 if (addMovieButton != null) addMovieButton.Click += (s, e) => HandleAddMovieButtonClick();
+                if (selectImageButton != null) selectImageButton.Click += (s, e) => HandleSelectImageButton();
 
                 if (searchGenreField != null) searchGenreField.TextChanged += (s, e) => FilterGenres();
                 if (searchDirectorField != null) searchDirectorField.TextChanged += (s, e) => FilterDirectors();
@@ -68,6 +73,8 @@ namespace Theater_Management_FE.Controllers
 
             LoadData();
         }
+
+        // ... (LoadData and Filter methods remain same) ...
 
         private void LoadData()
         {
@@ -141,6 +148,23 @@ namespace Theater_Management_FE.Controllers
                 : _allActors.Where(i => (i.Item.FirstName + " " + i.Item.LastName).ToLower().Contains(query)).ToList();
         }
 
+        public void HandleSelectImageButton()
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _selectedImagePath = openFileDialog.FileName;
+                if (moviePosterImage != null)
+                {
+                    moviePosterImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(_selectedImagePath));
+                }
+            }
+        }
+
         public void HandleAddMovieButtonClick()
         {
             if (string.IsNullOrWhiteSpace(movieNameField.Text) ||
@@ -190,6 +214,26 @@ namespace Theater_Management_FE.Controllers
 
             try
             {
+                // Save Image
+                if (!string.IsNullOrEmpty(_selectedImagePath))
+                {
+                    try 
+                    {
+                        var destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
+                        // Ensure directory exists
+                        var dir = System.IO.Path.GetDirectoryName(destPath);
+                        if (!System.IO.Directory.Exists(dir))
+                        {
+                            System.IO.Directory.CreateDirectory(dir);
+                        }
+                        System.IO.File.Copy(_selectedImagePath, destPath, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to save image: {ex.Message}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
                 _movieService.InsertMovie(movie);
 
                 // Insert movie actors using the movie ID we generated

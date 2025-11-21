@@ -1,51 +1,58 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.MovieInformation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Background="{StaticResource PrimaryBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel HorizontalAlignment="Center">
-            <Label Content="Movie Information" HorizontalAlignment="Center"/>
-            <StackPanel>
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+            <TextBlock Text="Movie Information" Style="{StaticResource title}"/>
+            <Border Style="{StaticResource card}" Padding="32" Width="600">
                 <StackPanel>
-                    <Label Content="Movie Name"/>
-                    <TextBox x:Name="movieNameField"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Description"/>
-                    <TextBox x:Name="movieDescriptionField" TextWrapping="Wrap" AcceptsReturn="True"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Director ID"/>
-                    <TextBox x:Name="movieDirectorIdField"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Genres (comma-separated)"/>
-                    <TextBox x:Name="movieGenresField"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Premiere (YYYY-MM-DD HH:mm:ss)"/>
-                    <TextBox x:Name="moviePremiereField"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <StackPanel>
-                        <Label Content="Duration (min)"/>
-                        <TextBox x:Name="movieDurationField"/>
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Movie Name" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieNameField" Style="{StaticResource form-input}"/>
                     </StackPanel>
-                    <StackPanel>
-                        <Label Content="Rated (age)"/>
-                        <TextBox x:Name="movieRatedField"/>
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Description" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieDescriptionField" 
+                                 TextWrapping="Wrap" 
+                                 AcceptsReturn="True"
+                                 Height="100"
+                                 Style="{StaticResource form-input}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Director ID" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieDirectorIdField" Style="{StaticResource form-input}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Genres (comma-separated)" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieGenresField" Style="{StaticResource form-input}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Premiere (YYYY-MM-DD HH:mm:ss)" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="moviePremiereField" Style="{StaticResource form-input}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <StackPanel Margin="0,0,16,0">
+                            <TextBlock Text="Duration (min)" Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="movieDurationField" Width="120" Style="{StaticResource form-input}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Rated (age)" Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="movieRatedField" Width="120" Style="{StaticResource form-input}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,24">
+                        <TextBlock Text="Language" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieLanguageField" Style="{StaticResource form-input}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" Margin="0,0,12,0"/>
+                        <Button x:Name="editButton" Content="Edit" Style="{StaticResource button-primary}" Margin="0,0,12,0"/>
+                        <Button x:Name="deleteButton" Content="Delete" Style="{StaticResource button-danger}"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel>
-                    <Label Content="Language"/>
-                    <TextBox x:Name="movieLanguageField"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="backButton" Content="Back"/>
-                    <Button x:Name="editButton" Content="Edit"/>
-                    <Button x:Name="deleteButton" Content="Delete"/>
-                </StackPanel>
-            </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Window>

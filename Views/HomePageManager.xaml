@@ -1,17 +1,17 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.HomePageManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Background="{StaticResource PrimaryBackground}">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"
-                    HorizontalAlignment="Left">
-            <Button x:Name="movieButton" Content="Movie"/>
-            <Button x:Name="auditoriumButton" Content="Auditorium"/>
-            <Button x:Name="profileButton" Content="Profile"/>
-            <Button x:Name="logOutButton" Content="Log Out"/>
-        </StackPanel>
-        <Separator DockPanel.Dock="Top"/>
-        <Grid x:Name="contentGrid">
-        </Grid>
+        <Border DockPanel.Dock="Top" Background="{StaticResource SecondaryBackground}" BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1" Padding="16">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button x:Name="movieButton" Content="Movie" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="auditoriumButton" Content="Auditorium" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="profileButton" Content="Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}"/>
+            </StackPanel>
+        </Border>
+        <Grid x:Name="contentGrid" Margin="20"/>
     </DockPanel>
 </Window>

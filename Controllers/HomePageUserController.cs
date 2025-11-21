@@ -6,6 +6,7 @@ using System.Windows.Documents;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -55,7 +56,7 @@ namespace Theater_Management_FE.Controllers
                 // Check if required services are available
                 if (authService == null || movieService == null || screenController == null)
                 {
-                    MessageBox.Show("Required services not initialized", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Diagnostics.Debug.WriteLine("Required services not initialized");
                     return;
                 }
 
@@ -68,8 +69,8 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // If error, navigate to Home
-                    MessageBox.Show($"Failed to get user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Diagnostics.Debug.WriteLine($"Failed to get user: {ex.Message}");
+                    // Treat as guest or navigate to Home if strict
                     screenController.NavigateTo<Home>();
                     return;
                 }
@@ -86,20 +87,32 @@ namespace Theater_Management_FE.Controllers
                 if (movieList != null) movieList.Children.Clear();
 
                 List<Movie> movies = null;
+                string errorMessage = null;
                 try
                 {
                     movies = movieService.GetAllMovies();
                 }
                 catch (Exception ex)
                 {
-                    // fallback: show empty with error message
-                    MessageBox.Show($"Failed to load movies: {ex.Message}\n\nStack: {ex.StackTrace}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    System.Diagnostics.Debug.WriteLine($"Failed to load movies: {ex.Message}");
+                    errorMessage = "Unable to load movies. Please try again later.";
                     movies = new List<Movie>();
                 }
 
                 if (movies == null || movies.Count == 0)
                 {
-                    if (movieList != null) movieList.Children.Add(new Label { Content = "No movies available 🎬" });
+                    if (movieList != null)
+                    {
+                        var msg = errorMessage ?? "No movies available 🎬";
+                        var color = errorMessage != null ? Brushes.Red : Brushes.White;
+                        movieList.Children.Add(new TextBlock 
+                        { 
+                            Text = msg, 
+                            Foreground = color, 
+                            FontSize = 16,
+                            Margin = new Thickness(10)
+                        });
+                    }
                     return;
                 }
 
@@ -110,7 +123,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred in HomePageUser: {ex.Message}\n\nStack: {ex.StackTrace}", "Critical Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Diagnostics.Debug.WriteLine($"An error occurred in HomePageUser: {ex.Message}");
             }
         }
 
@@ -170,12 +183,17 @@ namespace Theater_Management_FE.Controllers
                 Background = System.Windows.Media.Brushes.LightGray
             };
 
+            var imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
+            var imageUri = System.IO.File.Exists(imagePath) 
+                ? new Uri(imagePath) 
+                : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
+
             var poster = new Image
             {
                 Width = 204,
                 Height = 280,
                 Stretch = System.Windows.Media.Stretch.UniformToFill,
-                Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/cat.jpg"))
+                Source = new BitmapImage(imageUri)
             };
             posterBorder.Child = poster;
 
@@ -189,7 +207,7 @@ namespace Theater_Management_FE.Controllers
                 TextWrapping = TextWrapping.Wrap,
                 MaxHeight = 40,
                 TextTrimming = TextTrimming.CharacterEllipsis,
-                Foreground = new SolidColorBrush(Color.FromRgb(31, 41, 55))
+                Foreground = Brushes.White
             };
 
             // Genres
@@ -197,7 +215,7 @@ namespace Theater_Management_FE.Controllers
             {
                 Text = string.Join(", ", movie.Genres),
                 FontSize = 12,
-                Foreground = new SolidColorBrush(Color.FromRgb(107, 114, 128)),
+                Foreground = Brushes.LightGray,
                 TextTrimming = TextTrimming.CharacterEllipsis,
                 Margin = new Thickness(0, 0, 0, 4)
             };
@@ -206,7 +224,7 @@ namespace Theater_Management_FE.Controllers
             var infoText = new TextBlock
             {
                 FontSize = 12,
-                Foreground = new SolidColorBrush(Color.FromRgb(107, 114, 128)),
+                Foreground = Brushes.LightGray,
                 Margin = new Thickness(0, 0, 0, 4)
             };
             infoText.Inlines.Add(new Run { Text = $"Rated: {movie.Rated}+ • " });
@@ -217,7 +235,7 @@ namespace Theater_Management_FE.Controllers
             {
                 Text = $"Lang: {movie.Language}",
                 FontSize = 12,
-                Foreground = new SolidColorBrush(Color.FromRgb(107, 114, 128))
+                Foreground = Brushes.LightGray
             };
 
             card.Children.Add(posterBorder);
@@ -227,6 +245,19 @@ namespace Theater_Management_FE.Controllers
             card.Children.Add(languageText);
 
             return card;
+        }
+
+        public void BindUIControls(WrapPanel movieList, Button logoutButton, TextBlock usernameText)
+        {
+            this.movieList = movieList;
+            this.logoutButton = logoutButton;
+            this.usernameText = usernameText;
+
+            if (this.logoutButton != null)
+            {
+                this.logoutButton.Click -= HandleLogOutButton;
+                this.logoutButton.Click += HandleLogOutButton;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -71,6 +72,12 @@ namespace Theater_Management_FE.Controllers
                 MessageBox.Show("Failed to sign up", "Sign up error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            // Clear fields
+            usernameField.Clear();
+            emailField.Clear();
+            phoneNumberField.Clear();
+            passwordField.Clear();
 
             _screenController.NavigateTo<SignIn>();
         }

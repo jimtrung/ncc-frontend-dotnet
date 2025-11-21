@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Views;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -27,7 +28,7 @@ namespace Theater_Management_FE.Controllers
             _authTokenUtil = authTokenUtil;
         }
 
-        public Label titleLabel;
+        public TextBlock titleLabel;
         public Button signupButton;
         public Button signinButton;
         public Button settingsButton;
@@ -75,7 +76,7 @@ namespace Theater_Management_FE.Controllers
             MessageBox.Show("Settings not implemented yet.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        public void BindUIControls(Label titleLabel, Button signupButton, Button signinButton, Button settingsButton)
+        public void BindUIControls(TextBlock titleLabel, Button signupButton, Button signinButton, Button settingsButton)
         {
             this.titleLabel = titleLabel;
             this.signupButton = signupButton;

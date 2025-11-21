@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
+using Theater_Management_FE.Utils;
 using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE.Controllers

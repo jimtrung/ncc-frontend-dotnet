@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
+using Theater_Management_FE.Utils;
 using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE.Controllers
@@ -73,6 +74,10 @@ namespace Theater_Management_FE.Controllers
                 var tokenPair = (TokenPair)response;
                 _authTokenUtil.SaveAccessToken(tokenPair.AccessToken);
                 _authTokenUtil.SaveRefreshToken(tokenPair.RefreshToken);
+
+                // Clear fields
+                usernameField.Clear();
+                passwordField.Clear();
             }
             catch (Exception ex)
             {

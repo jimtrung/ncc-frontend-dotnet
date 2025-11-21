@@ -16,6 +16,9 @@ namespace Theater_Management_FE
         {
             base.OnStartup(e);
 
+            // Set shutdown mode to close app when main window closes
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
+
             var services = new ServiceCollection();
 
             // HttpClient Factory

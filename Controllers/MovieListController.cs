@@ -40,9 +40,19 @@ namespace Theater_Management_FE.Controllers
         public void SetDirectorService(DirectorService directorService) => _directorService = directorService;
         public void SetMovieActorService(MovieActorService movieActorService) => _movieActorService = movieActorService;
 
+        private bool _isInitialized = false;
+
         public void HandleOnOpen()
         {
             if (movieTable == null) return;
+
+            if (!_isInitialized)
+            {
+                if (closeBtn != null) closeBtn.Click += (s, e) => HandleCloseBtn();
+                if (addMovieBtn != null) addMovieBtn.Click += (s, e) => HandleAddMovie();
+                if (deleteAllBtn != null) deleteAllBtn.Click += (s, e) => HandleDeleteAllMovie();
+                _isInitialized = true;
+            }
 
             nameColumn.Binding = new System.Windows.Data.Binding("Name");
             directorColumn.Binding = new System.Windows.Data.Binding("DirectorId") { Converter = new GuidToStringConverter() };
@@ -75,16 +85,17 @@ namespace Theater_Management_FE.Controllers
         {
             try
             {
-                var movieInfoWindow = new MovieInformation();
-                var controller = movieInfoWindow.DataContext as MovieInformationController;
-                controller.SetScreenController(_screenController);
-                controller.SetMovieService(_movieService);
-                controller.SetAuthTokenUtil(_authTokenUtil);
-                controller.SetMovieListController(this);
-                controller.SetMovieId(id);
-                movieInfoWindow.ShowDialog();
+                var controller = _screenController.GetController<MovieInformationController>();
+                if (controller != null)
+                {
+                    controller.SetMovieId(id);
+                    _screenController.NavigateTo<MovieInformation>();
+                }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to navigate to movie details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void HandleDeleteAllMovie()
@@ -103,10 +114,17 @@ namespace Theater_Management_FE.Controllers
         {
             if (_movieService != null)
             {
-                var movies = _movieService.GetAllMovies();
-                MovieList.Clear();
-                foreach (var m in movies)
-                    MovieList.Add(m);
+                try
+                {
+                    var movies = _movieService.GetAllMovies();
+                    MovieList.Clear();
+                    foreach (var m in movies)
+                        MovieList.Add(m);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to load movies: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -116,7 +134,8 @@ namespace Theater_Management_FE.Controllers
             if (existing != null)
             {
                 int idx = MovieList.IndexOf(existing);
-                MovieList[idx] = updatedMovie;
+                MovieList.RemoveAt(idx);
+                MovieList.Insert(idx, updatedMovie);
             }
         }
     }

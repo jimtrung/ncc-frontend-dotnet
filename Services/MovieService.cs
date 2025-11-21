@@ -16,7 +16,8 @@ namespace Theater_Management_FE.Services
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters = { new JsonStringEnumConverter() }
         };
 
         public MovieService(HttpClient http, AuthTokenUtil tokenUtil)
@@ -29,32 +30,49 @@ namespace Theater_Management_FE.Services
         public void InsertMovie(Movie movie)
         {
             var content = JsonContent.Create(movie, options: JsonOptions);
-            var request = new HttpRequestMessage(HttpMethod.Post, "movies") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, "Movie") { Content = content };
             var response = _http.Send(request);
-            var body = response.Content.ReadAsStringAsync().Result;
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorBody = response.Content.ReadAsStringAsync().Result;
+                throw new Exception($"Failed to insert movie. Status: {response.StatusCode}, Body: {errorBody}");
+            }
         }
 
         public void DeleteMovieById(Guid id)
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"movies/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"Movie/{id}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            _http.Send(request);
+            var response = _http.Send(request);
+             if (!response.IsSuccessStatusCode)
+            {
+                 throw new Exception($"Failed to delete movie. Status: {response.StatusCode}");
+            }
         }
 
         public void DeleteAllMovies()
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "movies");
-            _http.Send(request);
+            var request = new HttpRequestMessage(HttpMethod.Delete, "Movie");
+            var response = _http.Send(request);
+             if (!response.IsSuccessStatusCode)
+            {
+                 throw new Exception($"Failed to delete all movies. Status: {response.StatusCode}");
+            }
         }
 
         public List<Movie> GetAllMovies()
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, "movies");
+            var request = new HttpRequestMessage(HttpMethod.Get, "Movie");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = _http.Send(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                 throw new Exception($"Failed to get movies. Status: {response.StatusCode}");
+            }
             var body = response.Content.ReadAsStringAsync().Result;
 
             if (string.IsNullOrWhiteSpace(body))
@@ -66,10 +84,14 @@ namespace Theater_Management_FE.Services
         public Movie? GetMovieById(Guid id)
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, $"movies/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"Movie/{id}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = _http.Send(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                 throw new Exception($"Failed to get movie by id. Status: {response.StatusCode}");
+            }
             var body = response.Content.ReadAsStringAsync().Result;
 
             if (string.IsNullOrWhiteSpace(body))
@@ -81,9 +103,13 @@ namespace Theater_Management_FE.Services
         public void UpdateMovie(Guid id, Movie movie)
         {
             var content = JsonContent.Create(movie, options: JsonOptions);
-            var request = new HttpRequestMessage(HttpMethod.Put, $"movies/{id}") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Put, $"Movie/{id}") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
-            _http.Send(request);
+            var response = _http.Send(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Failed to update movie. Status: {response.StatusCode}");
+            }
         }
     }
 }

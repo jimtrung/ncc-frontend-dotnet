@@ -29,6 +29,8 @@ namespace Theater_Management_FE.Models
             get => _lastName;
             set { _lastName = value; OnPropertyChanged(nameof(LastName)); }
         }
+
+        public string FullName => $"{FirstName} {LastName}";
         public DateTime? Dob
         {
             get => _dob;

@@ -1,38 +1,39 @@
 <Window x:Class="Theater_Management_FE.Views.Profile"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowState="Maximized">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel HorizontalAlignment="Center">
             <Label Content="User Profile" HorizontalAlignment="Center"/>
             <StackPanel>
                 <StackPanel>
                     <Label Content="Username"/>
-                    <TextBox IsReadOnly="True"/>
+                    <TextBox x:Name="usernameField" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel>
                     <Label Content="Email"/>
-                    <TextBox IsReadOnly="True"/>
+                    <TextBox x:Name="emailField" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel>
                     <Label Content="Password"/>
-                    <PasswordBox IsEnabled="False"/>
+                    <PasswordBox x:Name="passwordField" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel>
                     <Label Content="Phone Number"/>
-                    <TextBox IsReadOnly="True"/>
+                    <TextBox x:Name="phoneNumberField" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel>
                     <Label Content="Verified"/>
-                    <TextBox IsReadOnly="True"/>
+                    <TextBox x:Name="verifiedField" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel>
                     <Label Content="Created Date"/>
-                    <TextBox IsReadOnly="True"/>
+                    <TextBox x:Name="createdAtField" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Back"/>
-                    <Button Content="Edit Profile"/>
-                    <Button Content="Log Out"/>
+                    <Button x:Name="backButton" Content="Back"/>
+                    <Button x:Name="editButton" Content="Edit Profile"/>
+                    <Button x:Name="logOutButton" Content="Log Out"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

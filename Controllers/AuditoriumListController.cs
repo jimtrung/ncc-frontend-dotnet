@@ -16,15 +16,15 @@ namespace Theater_Management_FE.Controllers
 
         public ObservableCollection<Auditorium> AuditoriumList { get; set; } = new ObservableCollection<Auditorium>();
 
-        public DataGrid AuditoriumTable;
-        public Button CloseButton;
-        public Button AddAuditoriumButton;
-        public Button DeleteAllButton;
+        public DataGrid auditoriumTable;
+        public Button closeBtn;
+        public Button addAuditoriumBtn;
+        public Button deleteAllBtn;
 
-        public DataGridTextColumn NameColumn;
-        public DataGridTextColumn TypeColumn;
-        public DataGridTextColumn CapacityColumn;
-        public DataGridTextColumn NoteColumn;
+        public DataGridTextColumn nameColumn;
+        public DataGridTextColumn typeColumn;
+        public DataGridTextColumn capacityColumn;
+        public DataGridTextColumn noteColumn;
 
         // === Setters ===
         public void SetScreenController(ScreenController screenController) => _screenController = screenController;
@@ -32,21 +32,32 @@ namespace Theater_Management_FE.Controllers
         public void SetAuditoriumService(AuditoriumService service) => _auditoriumService = service;
 
         // === Initialize / Open ===
+        private bool _isInitialized = false;
+
+        // === Initialize / Open ===
         public void HandleOnOpen()
         {
-            if (AuditoriumTable == null) return;
+            if (auditoriumTable == null) return;
+
+            if (!_isInitialized)
+            {
+                if (closeBtn != null) closeBtn.Click += (s, e) => HandleCloseButton();
+                if (addAuditoriumBtn != null) addAuditoriumBtn.Click += (s, e) => HandleAddAuditorium();
+                if (deleteAllBtn != null) deleteAllBtn.Click += (s, e) => HandleDeleteAllAuditoriums();
+                _isInitialized = true;
+            }
 
             // Bind columns
-            NameColumn.Binding = new System.Windows.Data.Binding("Name");
-            TypeColumn.Binding = new System.Windows.Data.Binding("Type");
-            CapacityColumn.Binding = new System.Windows.Data.Binding("Capacity");
-            NoteColumn.Binding = new System.Windows.Data.Binding("Note");
+            nameColumn.Binding = new System.Windows.Data.Binding("Name");
+            typeColumn.Binding = new System.Windows.Data.Binding("Type");
+            capacityColumn.Binding = new System.Windows.Data.Binding("Capacity");
+            noteColumn.Binding = new System.Windows.Data.Binding("Note");
 
-            AuditoriumTable.ItemsSource = AuditoriumList;
+            auditoriumTable.ItemsSource = AuditoriumList;
 
-            AuditoriumTable.SelectionChanged += (s, e) =>
+            auditoriumTable.SelectionChanged += (s, e) =>
             {
-                if (AuditoriumTable.SelectedItem is Auditorium a)
+                if (auditoriumTable.SelectedItem is Auditorium a)
                 {
                     _selectedAuditoriumId = a.Id;
                     HandleClickItem(_selectedAuditoriumId);

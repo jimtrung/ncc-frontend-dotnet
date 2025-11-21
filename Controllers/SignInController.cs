@@ -42,8 +42,8 @@ namespace Theater_Management_FE.Controllers
 
             if (user != null)
             {
-                if (user.Role == UserRole.USER) _screenController.NavigateTo<HomePageUser>();
-                if (user.Role == UserRole.ADMINISTRATOR) _screenController.NavigateTo<HomePageManager>();
+                if (user.Role == UserRole.user) _screenController.NavigateTo<HomePageUser>();
+                if (user.Role == UserRole.administrator) _screenController.NavigateTo<HomePageManager>();
             }
         }
 

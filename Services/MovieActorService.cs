@@ -16,7 +16,8 @@ namespace Theater_Management_FE.Services
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters = { new JsonStringEnumConverter() }
         };
 
         public MovieActorService(HttpClient http, AuthTokenUtil tokenUtil)
@@ -31,7 +32,7 @@ namespace Theater_Management_FE.Services
             var payload = new MovieActorsRequest(movieId, actorIds);
             var content = JsonContent.Create(payload, options: JsonOptions);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "movie-actors/")
+            var request = new HttpRequestMessage(HttpMethod.Post, "MovieActor")
             {
                 Content = content
             };

@@ -7,8 +7,16 @@ namespace Theater_Management_FE.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is List<string> list) return string.Join(", ", list);
-            if (value is IEnumerable<string> enumerable) return string.Join(", ", enumerable);
+            if (value is IEnumerable<string> strings) return string.Join(", ", strings);
+            if (value is System.Collections.IEnumerable enumerable)
+            {
+                var list = new List<string>();
+                foreach (var item in enumerable)
+                {
+                    list.Add(item.ToString());
+                }
+                return string.Join(", ", list);
+            }
             return "";
         }
 

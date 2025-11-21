@@ -10,11 +10,12 @@ namespace Theater_Management_FE.Controllers
         private ScreenController _screenController;
         private AuthTokenUtil _authTokenUtil;
 
-        public Button MovieButton;
+        public Button movieButton;
         public Button profileButton;
         public Button auditoriumButton;
-        public Button showtimeButton;
-        public Button logoutButton;
+        public Button logOutButton;
+
+        private bool _isInitialized = false;
 
         public void SetScreenController(ScreenController screenController)
         {
@@ -26,17 +27,16 @@ namespace Theater_Management_FE.Controllers
             _authTokenUtil = authTokenUtil;
         }
 
-        public void BindUIControls(Button movieBtn, Button auditoriumBtn, Button profileBtn, Button logoutBtn)
+        public void HandleOnOpen()
         {
-            MovieButton = movieBtn;
-            auditoriumButton = auditoriumBtn;
-            profileButton = profileBtn;
-            logoutButton = logoutBtn;
-
-            MovieButton.Click += HandleMovieButton;
-            auditoriumButton.Click += HandleAuditoriumButton;
-            profileButton.Click += HandleProfileButton;
-            logoutButton.Click += HandleLogOutButton;
+            if (!_isInitialized)
+            {
+                if (movieButton != null) movieButton.Click += HandleMovieButton;
+                if (auditoriumButton != null) auditoriumButton.Click += HandleAuditoriumButton;
+                if (profileButton != null) profileButton.Click += HandleProfileButton;
+                if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
+                _isInitialized = true;
+            }
         }
 
         private void HandleMovieButton(object sender, RoutedEventArgs e)

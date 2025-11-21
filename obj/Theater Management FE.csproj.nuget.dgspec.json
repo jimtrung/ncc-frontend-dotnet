@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj": {}
+    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {}
   },
   "projects": {
-    "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj": {
+    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj",
+        "projectUniqueName": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
         "projectName": "Theater Management FE",
-        "projectPath": "D:\\program-languages\\c#\\Theater Management FE\\Theater Management FE.csproj",
+        "projectPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
         "packagesPath": "C:\\Users\\HAI TRUNG\\.nuget\\packages\\",
-        "outputPath": "D:\\program-languages\\c#\\Theater Management FE\\obj\\",
+        "outputPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

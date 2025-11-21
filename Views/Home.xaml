@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.Home"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Home">
+        Title="Home"
+        WindowState="Maximized">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
             <Label x:Name="titleLabel"

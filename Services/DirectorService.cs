@@ -16,7 +16,8 @@ namespace Theater_Management_FE.Services
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters = { new JsonStringEnumConverter() }
         };
 
         public DirectorService(HttpClient http, AuthTokenUtil tokenUtil)

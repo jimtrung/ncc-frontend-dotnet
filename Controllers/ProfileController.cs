@@ -12,16 +12,19 @@ namespace Theater_Management_FE.Controllers
         private AuthService _authService;
         private AuthTokenUtil _authTokenUtil;
 
-        public TextBox UsernameField;
-        public TextBox EmailField;
-        public TextBox PhoneNumberField;
-        public PasswordBox PasswordField;
-        public TextBox VerifiedField;
-        public TextBox CreatedAtField;
+        // Fields must match XAML x:Name attributes (camelCase)
+        public TextBox usernameField;
+        public TextBox emailField;
+        public TextBox phoneNumberField;
+        public PasswordBox passwordField;
+        public TextBox verifiedField;
+        public TextBox createdAtField;
 
-        public Button BackButton;
-        public Button EditButton;
-        public Button LogOutButton;
+        public Button backButton;
+        public Button editButton;
+        public Button logOutButton;
+
+        private bool _isInitialized = false;
 
         public void SetScreenController(ScreenController controller) => _screenController = controller;
         public void SetAuthService(AuthService service) => _authService = service;
@@ -29,6 +32,14 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleOnOpen()
         {
+            if (!_isInitialized)
+            {
+                if (backButton != null) backButton.Click += HandleBackButton;
+                if (editButton != null) editButton.Click += HandleEditButton;
+                if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
+                _isInitialized = true;
+            }
+
             // If there's no token, user is not logged in → go back to Home silently
             var token = _authTokenUtil.LoadAccessToken();
             if (string.IsNullOrEmpty(token))
@@ -50,12 +61,12 @@ namespace Theater_Management_FE.Controllers
 
             if (userInfo != null)
             {
-                UsernameField.Text = userInfo.Username;
-                EmailField.Text = userInfo.Email;
-                PhoneNumberField.Text = userInfo.PhoneNumber;
-                PasswordField.Password = userInfo.Password;
-                VerifiedField.Text = userInfo.Verified.ToString();
-                CreatedAtField.Text = userInfo.CreatedAt.ToString();
+                if (usernameField != null) usernameField.Text = userInfo.Username;
+                if (emailField != null) emailField.Text = userInfo.Email;
+                if (phoneNumberField != null) phoneNumberField.Text = userInfo.PhoneNumber;
+                if (passwordField != null) passwordField.Password = userInfo.Password;
+                if (verifiedField != null) verifiedField.Text = userInfo.Verified.ToString();
+                if (createdAtField != null) createdAtField.Text = userInfo.CreatedAt.ToString();
             }
             else
             {
@@ -79,23 +90,6 @@ namespace Theater_Management_FE.Controllers
             _authTokenUtil.ClearAccessToken();
             _authTokenUtil.ClearRefreshToken();
             _screenController.NavigateTo<Home>();
-        }
-
-        public void BindUIControls(TextBox username, TextBox email, TextBox phone, PasswordBox password, TextBox verified, TextBox createdAt, Button back, Button edit, Button logout)
-        {
-            UsernameField = username;
-            EmailField = email;
-            PhoneNumberField = phone;
-            PasswordField = password;
-            VerifiedField = verified;
-            CreatedAtField = createdAt;
-            BackButton = back;
-            EditButton = edit;
-            LogOutButton = logout;
-
-            BackButton.Click += HandleBackButton;
-            EditButton.Click += HandleEditButton;
-            LogOutButton.Click += HandleLogOutButton;
         }
     }
 }

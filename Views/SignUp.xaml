@@ -1,6 +1,7 @@
 <Window x:Class="Theater_Management_FE.Views.SignUp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowState="Maximized">
     <StackPanel HorizontalAlignment="Center">
         <Label Content="Sign Up" HorizontalAlignment="Center"/>
         <StackPanel>

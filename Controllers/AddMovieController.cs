@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
+using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
@@ -25,123 +27,190 @@ namespace Theater_Management_FE.Controllers
         public void SetMovieActorService(MovieActorService service) => _movieActorService = service;
         public void SetMovieListController(MovieListController controller) => _movieListController = controller;
 
-        public TextBox MovieNameField;
-        public TextBox MovieDescriptionField;
-        public TextBox MovieLanguageField;
-        public TextBox MovieDurationField;
-        public TextBox MovieRatedField;
-        public ListBox DirectorListView;
-        public ListBox ActorListView;
-        public ListBox GenreListView;
-        public TextBox SearchDirectorField;
-        public TextBox SearchActorField;
-        public TextBox SearchGenreField;
+        // UI Controls
+        public TextBox movieNameField;
+        public TextBox movieDescriptionField;
+        public TextBox movieLanguageField;
+        public TextBox movieDurationField;
+        public TextBox movieRatedField;
+        
+        public ListView genreListView;
+        public ListView directorListView;
+        public ListView actorListView;
+        
+        public TextBox searchGenreField;
+        public TextBox searchDirectorField;
+        public TextBox searchActorField;
 
-        private ObservableCollection<Director> Directors = new();
-        private ObservableCollection<Actor> Actors = new();
-        private ObservableCollection<string> Genres = new();
+        public Button backButton;
+        public Button addMovieButton;
+
+        // Data
+        private List<SelectableItem<string>> _allGenres = new();
+        private List<SelectableItem<Director>> _allDirectors = new();
+        private List<SelectableItem<Actor>> _allActors = new();
+
+        private bool _isInitialized = false;
 
         public void HandleOnOpen()
         {
-            // Genres
-            var allGenres = Enum.GetNames(typeof(MovieGenre));
-            Genres = new ObservableCollection<string>(allGenres);
-            if (GenreListView != null)
-                GenreListView.ItemsSource = Genres;
-
-            // Directors
-            var allDirectors = _directorService.GetAllDirectors() as List<Director>;
-            if (allDirectors != null)
+            if (!_isInitialized)
             {
-                Directors = new ObservableCollection<Director>(allDirectors);
-                if (DirectorListView != null)
-                    DirectorListView.ItemsSource = Directors;
+                if (backButton != null) backButton.Click += (s, e) => HandleBackButton();
+                if (addMovieButton != null) addMovieButton.Click += (s, e) => HandleAddMovieButtonClick();
+
+                if (searchGenreField != null) searchGenreField.TextChanged += (s, e) => FilterGenres();
+                if (searchDirectorField != null) searchDirectorField.TextChanged += (s, e) => FilterDirectors();
+                if (searchActorField != null) searchActorField.TextChanged += (s, e) => FilterActors();
+
+                _isInitialized = true;
             }
 
-            // Actors
-            var allActors = _actorService.GetAllActors() as List<Actor>;
-            if (allActors != null)
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            try
             {
-                Actors = new ObservableCollection<Actor>(allActors);
-                if (ActorListView != null)
-                    ActorListView.ItemsSource = Actors;
+                // Genres
+                var genreNames = Enum.GetNames(typeof(MovieGenre));
+                _allGenres = genreNames.Select(g => new SelectableItem<string>(g)).ToList();
+                if (genreListView != null) genreListView.ItemsSource = _allGenres;
+
+                // Directors
+                try
+                {
+                    var directorsObj = _directorService.GetAllDirectors();
+                    if (directorsObj is List<Director> directors)
+                    {
+                        _allDirectors = directors.Select(d => new SelectableItem<Director>(d)).ToList();
+                        if (directorListView != null) directorListView.ItemsSource = _allDirectors;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to load directors: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                // Actors
+                try
+                {
+                    var actorsObj = _actorService.GetAllActors();
+                    if (actorsObj is List<Actor> actors)
+                    {
+                        _allActors = actors.Select(a => new SelectableItem<Actor>(a)).ToList();
+                        if (actorListView != null) actorListView.ItemsSource = _allActors;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to load actors: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred while loading data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void FilterGenres()
+        {
+            if (genreListView == null) return;
+            var query = searchGenreField?.Text?.Trim().ToLower() ?? "";
+            genreListView.ItemsSource = string.IsNullOrEmpty(query) 
+                ? _allGenres 
+                : _allGenres.Where(i => i.Item.ToLower().Contains(query)).ToList();
+        }
+
+        private void FilterDirectors()
+        {
+            if (directorListView == null) return;
+            var query = searchDirectorField?.Text?.Trim().ToLower() ?? "";
+            directorListView.ItemsSource = string.IsNullOrEmpty(query)
+                ? _allDirectors
+                : _allDirectors.Where(i => (i.Item.FirstName + " " + i.Item.LastName).ToLower().Contains(query)).ToList();
+        }
+
+        private void FilterActors()
+        {
+            if (actorListView == null) return;
+            var query = searchActorField?.Text?.Trim().ToLower() ?? "";
+            actorListView.ItemsSource = string.IsNullOrEmpty(query)
+                ? _allActors
+                : _allActors.Where(i => (i.Item.FirstName + " " + i.Item.LastName).ToLower().Contains(query)).ToList();
         }
 
         public void HandleAddMovieButtonClick()
         {
-            if (string.IsNullOrWhiteSpace(MovieNameField.Text) ||
-                string.IsNullOrWhiteSpace(MovieDurationField.Text) ||
-                string.IsNullOrWhiteSpace(MovieLanguageField.Text) ||
-                string.IsNullOrWhiteSpace(MovieRatedField.Text))
+            if (string.IsNullOrWhiteSpace(movieNameField.Text) ||
+                string.IsNullOrWhiteSpace(movieDurationField.Text) ||
+                string.IsNullOrWhiteSpace(movieLanguageField.Text) ||
+                string.IsNullOrWhiteSpace(movieRatedField.Text))
             {
                 MessageBox.Show("Please enter complete information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            var movie = new Movie
-            {
-                Id = Guid.NewGuid(),
-                Name = MovieNameField.Text.Trim(),
-                Description = MovieDescriptionField.Text.Trim(),
-                Language = MovieLanguageField.Text.Trim(),
-                Premiere = DateTime.Now,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            };
-
-            if (!int.TryParse(MovieDurationField.Text.Trim(), out var duration))
+            if (!int.TryParse(movieDurationField.Text.Trim(), out var duration))
             {
                 MessageBox.Show("Duration must be a number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            movie.Duration = duration;
 
-            if (!int.TryParse(MovieRatedField.Text.Trim(), out var rated))
+            if (!int.TryParse(movieRatedField.Text.Trim(), out var rated))
             {
                 MessageBox.Show("Rated must be a number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            movie.Rated = rated;
 
-            var selectedGenres = GenreListView.SelectedItems.Cast<MovieGenre>().ToList();
-            movie.Genres = selectedGenres;
+            var selectedGenres = _allGenres.Where(i => i.IsSelected).Select(i => Enum.Parse<MovieGenre>(i.Item)).ToList();
+            var selectedDirectorItem = _allDirectors.FirstOrDefault(i => i.IsSelected);
+            
+            if (selectedDirectorItem == null || selectedDirectorItem.Item == null)
+            {
+                MessageBox.Show("Please select a director", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            var movie = new Movie
+            {
+                Id = Guid.NewGuid(),
+                Name = movieNameField.Text.Trim(),
+                Description = movieDescriptionField.Text.Trim(),
+                Language = movieLanguageField.Text.Trim(),
+                Duration = duration,
+                Rated = rated,
+                Premiere = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                Genres = selectedGenres,
+                DirectorId = selectedDirectorItem.Item.Id
+            };
 
-            var selectedDirector = DirectorListView.SelectedItem as Director;
-            if (selectedDirector != null)
-                movie.DirectorId = selectedDirector.Id;
+            try
+            {
+                _movieService.InsertMovie(movie);
 
-            _movieService.InsertMovie(movie);
+                // Insert movie actors using the movie ID we generated
+                var selectedActors = _allActors.Where(i => i.IsSelected).Select(i => i.Item.Id).ToList();
+                if (selectedActors.Any())
+                {
+                    _movieActorService.InsertMovieActors(movie.Id, selectedActors);
+                }
 
-            var selectedActors = ActorListView.SelectedItems.Cast<Actor>().ToList();
-            var actorIds = selectedActors.ConvertAll(a => a.Id);
-            _movieActorService.InsertMovieActors(movie.Id, actorIds);
-
-            _movieListController.RefreshData();
-            _screenController.NavigateTo<MovieList>();
+                _movieListController.RefreshData();
+                _screenController.NavigateTo<MovieList>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while adding the movie: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void HandleBackButton()
         {
             _screenController.NavigateTo<MovieList>();
-        }
-
-        public void BindUIControls(TextBox name, TextBox desc, TextBox language, TextBox duration, TextBox rated, ListBox directors, ListBox actors, ListBox genres, TextBox searchDirector, TextBox searchActor, TextBox searchGenre, Button back, Button add)
-        {
-            MovieNameField = name;
-            MovieDescriptionField = desc;
-            MovieLanguageField = language;
-            MovieDurationField = duration;
-            MovieRatedField = rated;
-            DirectorListView = directors;
-            ActorListView = actors;
-            GenreListView = genres;
-            SearchDirectorField = searchDirector;
-            SearchActorField = searchActor;
-            SearchGenreField = searchGenre;
-
-            back.Click += (s, e) => HandleBackButton();
-            add.Click += (s, e) => HandleAddMovieButtonClick();
         }
     }
 }

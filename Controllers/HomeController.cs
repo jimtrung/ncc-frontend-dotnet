@@ -51,10 +51,10 @@ namespace Theater_Management_FE.Controllers
 
             if (user != null)
             {
-                if (user.Role == UserRole.USER)
+                if (user.Role == UserRole.user)
                     _screenController.NavigateTo<HomePageUser>();
 
-                if (user.Role == UserRole.ADMINISTRATOR)
+                if (user.Role == UserRole.administrator)
                     _screenController.NavigateTo<HomePageManager>();
             }
             // If user could not be fetched, just stay on Home without auto-login

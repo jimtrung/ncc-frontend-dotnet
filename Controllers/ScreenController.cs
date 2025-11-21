@@ -49,6 +49,18 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
+        public TController? GetController<TController>() where TController : class
+        {
+            foreach (var controller in _controllers.Values)
+            {
+                if (controller is TController typedController)
+                {
+                    return typedController;
+                }
+            }
+            return null;
+        }
+
         public void GoBack()
         {
             if (_history.Count == 0) return;

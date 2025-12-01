@@ -39,8 +39,10 @@ namespace Theater_Management_FE.Models
         public Director Director
         {
             get => _director;
-            set { _director = value; OnPropertyChanged(nameof(Director)); }
+            set { _director = value; OnPropertyChanged(nameof(Director)); OnPropertyChanged(nameof(DirectorName)); }
         }
+
+        public string DirectorName => Director?.FullName ?? "";
         public List<MovieGenre> Genres
         {
             get => _genres;

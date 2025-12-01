@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
@@ -21,13 +22,46 @@ namespace Theater_Management_FE.Controllers
         public void SetAuditoriumListController(AuditoriumListController controller) => _auditoriumListController = controller;
 
         // === Fields from XAML ===
-        public TextBox AuditoriumNameField;
-        public TextBox AuditoriumTypeField;
-        public TextBox AuditoriumCapacityField;
-        public TextBox AuditoriumNoteField;
+        public TextBox auditoriumNameField;
+        public TextBox auditoriumTypeField;
+        public TextBox auditoriumCapacityField;
+        public TextBox auditoriumNoteField;
 
-        public Button BackButton;
-        public Button AddAuditoriumButton;
+        public Button backButton;
+        public Button addAuditoriumButton;
+
+        private bool _isInitialized = false;
+
+        private void ResetFields()
+        {
+            if (auditoriumNameField != null)
+                auditoriumNameField.Text = string.Empty;
+
+            if (auditoriumTypeField != null)
+                auditoriumTypeField.Text = string.Empty;
+
+            if (auditoriumCapacityField != null)
+                auditoriumCapacityField.Text = string.Empty;
+
+            if (auditoriumNoteField != null)
+                auditoriumNoteField.Text = string.Empty;
+        }
+
+        public void HandleOnOpen()
+        {
+            ResetFields();
+            
+            if (!_isInitialized)
+            {
+                if (backButton != null)
+                    backButton.Click += (s, e) => HandleBackButton();
+
+                if (addAuditoriumButton != null)
+                    addAuditoriumButton.Click += (s, e) => HandleAddAuditoriumButtonClick();
+
+                _isInitialized = true;
+            }
+        }
 
         // === Button Handlers ===
         public void HandleBackButton()
@@ -37,51 +71,62 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleAddAuditoriumButtonClick()
         {
-            if (IsEmpty(AuditoriumNameField) ||
-                IsEmpty(AuditoriumTypeField) ||
-                IsEmpty(AuditoriumCapacityField))
+
+            Console.WriteLine("Add Auditorium button clicked");
+            // Validate empty fields
+            if (IsEmpty(auditoriumNameField) ||
+                IsEmpty(auditoriumTypeField) ||
+                IsEmpty(auditoriumCapacityField))
             {
-                MessageBox.Show("Please enter complete information", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter complete information",
+                                "Input Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
                 return;
             }
 
-            if (!int.TryParse(AuditoriumCapacityField.Text.Trim(), out int capacity))
+            // Validate capacity
+            if (!int.TryParse(auditoriumCapacityField.Text.Trim(), out int capacity))
             {
-                MessageBox.Show("Capacity must be a number", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Capacity must be a numeric value",
+                                "Input Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
                 return;
             }
 
+            // === Create Auditorium (only required fields) ===
             var auditorium = new Auditorium
             {
-                Capacity = capacity,
+                Name = auditoriumNameField.Text.Trim(),
+                Type = auditoriumTypeField.Text.Trim(),
+                Note = auditoriumNoteField?.Text?.Trim(),
+                Capacity = capacity
             };
 
             try
             {
                 _auditoriumService.InsertAuditorium(auditorium);
-                _auditoriumListController.RefreshData();
+
+                _auditoriumListController?.RefreshData();
+
+                MessageBox.Show("Auditorium added successfully!",
+                                "Success",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+
                 _screenController.NavigateTo<AuditoriumList>();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add auditorium: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Failed to add auditorium: " + ex.Message,
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
             }
         }
 
         // === Helpers ===
         private bool IsEmpty(TextBox field) => string.IsNullOrWhiteSpace(field?.Text);
-
-        public void BindUIControls(TextBox name, TextBox type, TextBox capacity, TextBox note, Button back, Button add)
-        {
-            AuditoriumNameField = name;
-            AuditoriumTypeField = type;
-            AuditoriumCapacityField = capacity;
-            AuditoriumNoteField = note;
-            BackButton = back;
-            AddAuditoriumButton = add;
-
-            BackButton.Click += (s, e) => HandleBackButton();
-            AddAuditoriumButton.Click += (s, e) => HandleAddAuditoriumButtonClick();
-        }
     }
 }

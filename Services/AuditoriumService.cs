@@ -30,7 +30,7 @@ namespace Theater_Management_FE.Services
         public void InsertAuditorium(Auditorium auditorium)
         {
             var content = JsonContent.Create(auditorium, options: JsonOptions);
-            var request = new HttpRequestMessage(HttpMethod.Post, "auditoriums") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, "auditorium") { Content = content };
             var response = _http.Send(request);
             var body = response.Content.ReadAsStringAsync().Result;
         }
@@ -38,7 +38,7 @@ namespace Theater_Management_FE.Services
         public List<Auditorium> GetAllAuditoriums()
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, "auditoriums");
+            var request = new HttpRequestMessage(HttpMethod.Get, "auditorium");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = _http.Send(request);
@@ -53,7 +53,7 @@ namespace Theater_Management_FE.Services
         public Auditorium? GetAuditoriumById(Guid id)
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, $"auditoriums/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"auditorium/{id}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = _http.Send(request);
@@ -68,21 +68,21 @@ namespace Theater_Management_FE.Services
         public void DeleteAuditoriumById(Guid id)
         {
             var token = _tokenUtil.LoadAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"auditoriums/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"auditorium/{id}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             _http.Send(request);
         }
 
         public void DeleteAllAuditoriums()
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "auditoriums");
+            var request = new HttpRequestMessage(HttpMethod.Delete, "auditorium");
             _http.Send(request);
         }
 
         public void UpdateAuditorium(Guid id, Auditorium auditorium)
         {
             var content = JsonContent.Create(auditorium, options: JsonOptions);
-            var request = new HttpRequestMessage(HttpMethod.Put, $"auditoriums/{id}") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Put, $"auditorium/{id}") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
             _http.Send(request);
         }

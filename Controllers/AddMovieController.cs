@@ -36,11 +36,11 @@ namespace Theater_Management_FE.Controllers
         public TextBox movieLanguageField;
         public TextBox movieDurationField;
         public TextBox movieRatedField;
-        
+
         public ListView genreListView;
         public ListView directorListView;
         public ListView actorListView;
-        
+
         public TextBox searchGenreField;
         public TextBox searchDirectorField;
         public TextBox searchActorField;
@@ -127,8 +127,8 @@ namespace Theater_Management_FE.Controllers
         {
             if (genreListView == null) return;
             var query = searchGenreField?.Text?.Trim().ToLower() ?? "";
-            genreListView.ItemsSource = string.IsNullOrEmpty(query) 
-                ? _allGenres 
+            genreListView.ItemsSource = string.IsNullOrEmpty(query)
+                ? _allGenres
                 : _allGenres.Where(i => i.Item.ToLower().Contains(query)).ToList();
         }
 
@@ -192,13 +192,13 @@ namespace Theater_Management_FE.Controllers
 
             var selectedGenres = _allGenres.Where(i => i.IsSelected).Select(i => Enum.Parse<MovieGenre>(i.Item)).ToList();
             var selectedDirectorItem = _allDirectors.FirstOrDefault(i => i.IsSelected);
-            
+
             if (selectedDirectorItem == null || selectedDirectorItem.Item == null)
             {
                 MessageBox.Show("Please select a director", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             var movie = new Movie
             {
                 Id = Guid.NewGuid(),
@@ -219,7 +219,7 @@ namespace Theater_Management_FE.Controllers
                 // Save Image
                 if (!string.IsNullOrEmpty(_selectedImagePath))
                 {
-                    try 
+                    try
                     {
                         var destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
                         // Ensure directory exists
@@ -262,7 +262,12 @@ namespace Theater_Management_FE.Controllers
                 }
 
                 _movieListController.RefreshData();
+                MessageBox.Show("Movie added successfully!",
+                "Success",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
                 _screenController.NavigateTo<MovieList>();
+
             }
             catch (Exception ex)
             {

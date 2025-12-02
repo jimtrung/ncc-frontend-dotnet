@@ -3,6 +3,8 @@ using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
 using Theater_Management_FE.Utils;
+using System.Windows;
+
 
 namespace Theater_Management_FE.Controllers
 {
@@ -19,9 +21,9 @@ namespace Theater_Management_FE.Controllers
         public TextBox AuditoriumCapacityField;
         public TextBox AuditoriumNoteField;
 
-        public Button BackButton;
-        public Button EditButton;
-        public Button DeleteButton;
+        public Button backButton;
+        public Button editButton;
+        public Button deleteButton;
 
         public void SetScreenController(ScreenController controller) => _screenController = controller;
         public void SetAuditoriumService(AuditoriumService service) => _auditoriumService = service;
@@ -29,12 +31,23 @@ namespace Theater_Management_FE.Controllers
         public void SetAuditoriumListController(AuditoriumListController controller) => _auditoriumListController = controller;
         public void SetAuditoriumId(Guid id) => _auditoriumId = id;
 
+        private bool _isInitialized = false;
         public void HandleOnOpen()
         {
+            if (!_isInitialized)
+            {
+                if (backButton != null) backButton.Click += (s, e) => HandleBackButton();
+                if (editButton != null) editButton.Click += (s, e) => HandleEditButton();
+                if (deleteButton != null) deleteButton.Click += (s, e) => HandleDeleteButton();
+                _isInitialized = true;
+            }
             var auditorium = _auditoriumService.GetAuditoriumById(_auditoriumId);
             if (auditorium == null) return;
 
+            AuditoriumNameField.Text = auditorium.Name;
+            AuditoriumTypeField.Text = auditorium.Type;
             AuditoriumCapacityField.Text = auditorium.Capacity.ToString();
+            AuditoriumNoteField.Text = auditorium.Note;
         }
 
         public void HandleBackButton()
@@ -44,36 +57,53 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleEditButton()
         {
-            try
+            if (string.IsNullOrWhiteSpace(AuditoriumNameField.Text) ||
+                string.IsNullOrWhiteSpace(AuditoriumTypeField.Text) ||
+                string.IsNullOrWhiteSpace(AuditoriumCapacityField.Text))
             {
-                var updatedAuditorium = new Auditorium
-                {
-
-                };
-
-                if (int.TryParse(AuditoriumCapacityField.Text.Trim(), out int capacity))
-                    updatedAuditorium.Capacity = capacity;
-                else
-                {
-                    updatedAuditorium.Capacity = 0;
-                }
-
-                _auditoriumService.UpdateAuditorium(_auditoriumId, updatedAuditorium);
-                var auditorium = _auditoriumService.GetAuditoriumById(_auditoriumId);
-                _auditoriumListController.UpdateAuditorium(auditorium);
-
-                _screenController.NavigateTo<AuditoriumList>();
+                MessageBox.Show("Please fill in all required fields.",
+                                "Input Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
             }
-            catch (Exception)
+
+            if (!int.TryParse(AuditoriumCapacityField.Text.Trim(), out int capacity))
             {
+                MessageBox.Show("Capacity must be a number.",
+                                "Input Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
             }
+
+            var updatedAuditorium = new Auditorium
+            {
+                Name = AuditoriumNameField.Text.Trim(),
+                Type = AuditoriumTypeField.Text.Trim(),
+                Capacity = capacity,
+                Note = AuditoriumNoteField.Text?.Trim()
+            };
+
+            _auditoriumService.UpdateAuditorium(_auditoriumId, updatedAuditorium);
+            MessageBox.Show("Auditorium updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            var updated = _auditoriumService.GetAuditoriumById(_auditoriumId);
+            _auditoriumListController.UpdateAuditorium(updated);
+
+            _screenController.NavigateTo<AuditoriumList>();
         }
+
 
         public void HandleDeleteButton()
         {
-            _auditoriumService.DeleteAuditoriumById(_auditoriumId);
-            _auditoriumListController.RefreshData();
-            _screenController.NavigateTo<AuditoriumList>();
+            var result = MessageBox.Show("Are you sure you want to delete this auditorium?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                _auditoriumService.DeleteAuditoriumById(_auditoriumId);
+                _auditoriumListController.RefreshData();
+                _screenController.NavigateTo<AuditoriumList>();
+            }
         }
 
         public void BindUIControls(TextBox name, TextBox type, TextBox capacity, TextBox note, Button back, Button edit, Button delete)
@@ -82,13 +112,13 @@ namespace Theater_Management_FE.Controllers
             AuditoriumTypeField = type;
             AuditoriumCapacityField = capacity;
             AuditoriumNoteField = note;
-            BackButton = back;
-            EditButton = edit;
-            DeleteButton = delete;
+            backButton = back;
+            editButton = edit;
+            deleteButton = delete;
 
-            BackButton.Click += (s, e) => HandleBackButton();
-            EditButton.Click += (s, e) => HandleEditButton();
-            DeleteButton.Click += (s, e) => HandleDeleteButton();
+            backButton.Click += (s, e) => HandleBackButton();
+            editButton.Click += (s, e) => HandleEditButton();
+            deleteButton.Click += (s, e) => HandleDeleteButton();
         }
     }
 }

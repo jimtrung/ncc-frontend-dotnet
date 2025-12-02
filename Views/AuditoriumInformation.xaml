@@ -1,4 +1,14 @@
-﻿                <Border Style="{StaticResource card}" Padding="32" Width="500">
+<Window x:Class="Theater_Management_FE.Views.AuditoriumInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowState="Maximized"
+        Background="{StaticResource PrimaryBackground}">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Auditorium Information"
+                           Style="{StaticResource title}"/>
+                <Border Style="{StaticResource card}" Padding="32" Width="500">
                     <StackPanel>
                         <StackPanel Margin="0,0,0,16">
                             <TextBlock Text="Auditorium Name" Style="{StaticResource form-label}"/>
@@ -30,16 +40,16 @@
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Right">
                             <Button Content="Back"
-                                    Command="{Binding BackCommand}"
+                                    x:Name="backButton"
                                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                     Style="{StaticResource button-secondary}"
                                     Margin="0,0,12,0"/>
                             <Button Content="Edit"
-                                    Command="{Binding EditCommand}"
+                                    x:Name="editButton"
                                     Style="{StaticResource button-primary}"
                                     Margin="0,0,12,0"/>
                             <Button Content="Delete"
-                                    Command="{Binding DeleteCommand}"
+                                    x:Name="deleteButton"
                                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                     Style="{StaticResource button-danger}"/>
                         </StackPanel>

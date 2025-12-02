@@ -5,7 +5,7 @@
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel HorizontalAlignment="Center" Margin="20">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Movie Information" Style="{StaticResource title}"/>
             <Border Style="{StaticResource card}" Padding="32" Width="600">
                 <StackPanel>
@@ -18,20 +18,19 @@
                         <TextBox x:Name="movieDescriptionField" 
                                  TextWrapping="Wrap" 
                                  AcceptsReturn="True"
-                                 Height="100"
                                  Style="{StaticResource form-input}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,0,16">
-                        <TextBlock Text="Director ID" Style="{StaticResource form-label}"/>
-                        <TextBox x:Name="movieDirectorIdField" Style="{StaticResource form-input}"/>
+                        <TextBlock Text="Director" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieDirectorIdField" Style="{StaticResource form-input}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,0,16">
                         <TextBlock Text="Genres (comma-separated)" Style="{StaticResource form-label}"/>
-                        <TextBox x:Name="movieGenresField" Style="{StaticResource form-input}"/>
+                        <TextBox x:Name="movieGenresField" Style="{StaticResource form-input}" IsReadOnly="True"/>
                     </StackPanel>
-                    <StackPanel Margin="0,0,0,16">
+                    <StackPanel Margin="0,0,0,16" Visibility="Collapsed">
                         <TextBlock Text="Premiere (YYYY-MM-DD HH:mm:ss)" Style="{StaticResource form-label}"/>
-                        <TextBox x:Name="moviePremiereField" Style="{StaticResource form-input}"/>
+                        <TextBox x:Name="moviePremiereField" Style="{StaticResource form-input}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                         <StackPanel Margin="0,0,16,0">

@@ -5,24 +5,61 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
-    <StackPanel HorizontalAlignment="Center">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
-            <Button Content="Close" x:Name="closeBtn" Style="{StaticResource button-secondary}" />
-            <Button Content="Delete all" x:Name="deleteAllBtn" Style="{StaticResource button-danger}" />
-            <Button Content="Add Movie" x:Name="addMovieBtn" Style="{StaticResource button-primary}" />
-        </StackPanel>
-        <Grid HorizontalAlignment="Center">
-            <DataGrid x:Name="movieTable" AutoGenerateColumns="False" Style="{StaticResource data-grid-dark}">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"> 
+        
+        <!-- Layout 1 cột để nút và bảng thẳng hàng -->
+        <Grid Width="800"> <!-- chỉnh số này để khớp độ rộng bảng -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>   <!-- Close -->
+                <RowDefinition Height="Auto"/>      <!-- Table -->
+                <RowDefinition Height="Auto"/>   <!-- Buttons bottom -->
+            </Grid.RowDefinitions>
+
+            <!-- Close button -->
+            <Button Content="Close"
+                    x:Name="closeBtn"
+                    Style="{StaticResource button-secondary}"
+                    HorizontalAlignment="Right"
+                    Margin="0,20,0,20"/>
+
+            <!-- DataGrid -->
+            <DataGrid x:Name="movieTable"
+                      Grid.Row="1"
+                      AutoGenerateColumns="False"
+                      Style="{StaticResource data-grid-dark}"
+                      Width="800">
+
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="nameColumn" Header="Tên phim" />
-                    <DataGridTextColumn x:Name="directorColumn" Header="Đạo diễn (ID)" />
+                    <DataGridTextColumn x:Name="directorColumn" Header="Đạo diễn" />
                     <DataGridTextColumn x:Name="genresColumn" Header="Thể loại" />
                     <DataGridTextColumn x:Name="premiereColumn" Header="Khởi chiếu" />
                     <DataGridTextColumn x:Name="durationColumn" Header="Thời lượng" />
                     <DataGridTextColumn x:Name="ratedColumn" Header="Giới hạn tuổi" />
                     <DataGridTextColumn x:Name="languageColumn" Header="Ngôn ngữ" />
                 </DataGrid.Columns>
+
             </DataGrid>
+
+            <!-- Bottom Buttons aligned with DataGrid -->
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,20,0,20">
+                
+                <Button Content="Delete All"
+                        x:Name="deleteAllBtn"
+                        Style="{StaticResource button-danger}"
+                        Margin="0,0,10,0"/>
+                
+                <Button Content="Add Movie"
+                        x:Name="addMovieBtn"
+                        Style="{StaticResource button-primary}" />
+            </StackPanel>
+
         </Grid>
-    </StackPanel>
+
+    </Grid>
+
 </Window>

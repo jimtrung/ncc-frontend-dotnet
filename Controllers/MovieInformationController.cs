@@ -13,11 +13,13 @@ namespace Theater_Management_FE.Controllers
         private ScreenController _screenController;
         private AuthTokenUtil _authTokenUtil;
         private MovieService _movieService;
+        private DirectorService _directorService;
         private MovieListController _movieListController;
         private Guid _movieId;
 
         public void SetScreenController(ScreenController controller) => _screenController = controller;
         public void SetMovieService(MovieService service) => _movieService = service;
+        public void SetDirectorService(DirectorService service) => _directorService = service;
         public void SetAuthTokenUtil(AuthTokenUtil tokenUtil) => _authTokenUtil = tokenUtil;
         public void SetMovieListController(MovieListController controller) => _movieListController = controller;
         public void SetMovieId(Guid id) => _movieId = id;
@@ -50,10 +52,24 @@ namespace Theater_Management_FE.Controllers
             try
             {
                 var movie = _movieService.GetMovieById(_movieId);
+                var id = movie.DirectorId;
+
+                Director director = null;
+                if (id.HasValue) // kiểm tra nullable
+                {
+                    director = _directorService.GetDirectorById(id.Value);
+                }
+
+                // bây giờ director có thể null nếu movie không có director
+                if (movieDirectorIdField != null)
+                {
+                    movieDirectorIdField.Text = director.FullName;
+                }
+
                 if (movie == null)
                 {
-                     MessageBox.Show("Movie not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                     return;
+                    MessageBox.Show("Movie not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
                 if (movieNameField != null) movieNameField.Text = movie.Name;
@@ -61,7 +77,7 @@ namespace Theater_Management_FE.Controllers
                 if (movieLanguageField != null) movieLanguageField.Text = movie.Language;
                 if (movieDurationField != null) movieDurationField.Text = movie.Duration.ToString();
                 if (movieRatedField != null) movieRatedField.Text = movie.Rated.ToString();
-                if (movieDirectorIdField != null) movieDirectorIdField.Text = movie.DirectorId?.ToString() ?? "";
+                // if (movieDirectorIdField != null) movieDirectorIdField.Text = movie.DirectorId.ToString() ?? "";
                 if (moviePremiereField != null) moviePremiereField.Text = movie.Premiere?.ToString("yyyy-MM-dd HH:mm:ss") ?? "";
                 if (movieGenresField != null) movieGenresField.Text = string.Join(", ", movie.Genres);
             }
@@ -80,27 +96,44 @@ namespace Theater_Management_FE.Controllers
         {
             try
             {
+                var movie_ = _movieService.GetMovieById(_movieId);
+                var id = movie_.DirectorId;
                 var updatedMovie = new Movie
                 {
                     Id = _movieId,
                     Name = movieNameField.Text.Trim(),
                     Description = movieDescriptionField.Text.Trim(),
                     Language = movieLanguageField.Text.Trim(),
-                    UpdatedAt = DateTime.UtcNow
+                    UpdatedAt = DateTime.UtcNow,
+                    DirectorId = id
                 };
 
-                if (Guid.TryParse(movieDirectorIdField.Text.Trim(), out var directorId))
-                    updatedMovie.DirectorId = directorId;
+                // Kiểm tra Rated
+                if (!int.TryParse(movieRatedField.Text.Trim(), out var rated))
+                {
+                    MessageBox.Show("Rated must be an integer.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return; // stop update
 
-                if (int.TryParse(movieRatedField.Text.Trim(), out var rated))
-                    updatedMovie.Rated = rated;
+                }
+                updatedMovie.Rated = rated;
 
-                if (int.TryParse(movieDurationField.Text.Trim(), out var duration))
-                    updatedMovie.Duration = duration;
+                // Kiểm tra Duration
+                if (!int.TryParse(movieDurationField.Text.Trim(), out var duration))
+                {
+                    MessageBox.Show("Duration must be an integer.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return; // stop update
+                }
+                updatedMovie.Duration = duration;
 
-                if (DateTime.TryParse(moviePremiereField.Text.Trim(), out var premiere))
-                    updatedMovie.Premiere = DateTime.SpecifyKind(premiere, DateTimeKind.Utc);
+                // Kiểm tra Premiere
+                if (!DateTime.TryParse(moviePremiereField.Text.Trim(), out var premiere))
+                {
+                    MessageBox.Show("Premiere phải đúng định dạng yyyy-MM-dd HH:mm:ss.", "Lỗi nhập liệu", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                updatedMovie.Premiere = DateTime.SpecifyKind(premiere, DateTimeKind.Utc);
 
+                // Xử lý genres
                 var genresText = movieGenresField.Text.Trim();
                 if (!string.IsNullOrEmpty(genresText))
                 {
@@ -112,14 +145,19 @@ namespace Theater_Management_FE.Controllers
                     {
                         if (Enum.TryParse<MovieGenre>(g, true, out var genre))
                             genres.Add(genre);
-                    }
+                        else
+                        {
+                            MessageBox.Show($"Genre '{g}' is invalid.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
 
+                        }
+                    }
                     updatedMovie.Genres = genres;
                 }
 
                 _movieService.UpdateMovie(_movieId, updatedMovie);
                 MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                
+
                 var movie = _movieService.GetMovieById(_movieId);
                 _movieListController.UpdateMovie(movie);
                 _screenController.NavigateTo<MovieList>();
@@ -129,6 +167,7 @@ namespace Theater_Management_FE.Controllers
                 MessageBox.Show($"Failed to update movie: {ex.Message}\n\nStack: {ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         public void HandleDeleteButton()
         {

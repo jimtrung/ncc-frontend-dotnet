@@ -5,104 +5,100 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
-    <Grid Margin="20">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <!-- Title -->
-        <TextBlock Text="Add Movie" Style="{StaticResource title}" Grid.Row="0" />
+        <TextBlock Text="Add Movie" Style="{StaticResource title}" Grid.Row="0" HorizontalAlignment="Center"/>
+
         <!-- Main Content -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="200" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400"/> <!-- Left Column -->
+                <ColumnDefinition Width="30"/>  <!-- Spacer -->
+                <ColumnDefinition Width="400"/> <!-- Right Column -->
             </Grid.ColumnDefinitions>
 
-            <!-- Column 0: Movie Poster -->
-            <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                <TextBlock Text="Movie Poster" Style="{StaticResource form-label}" />
-                <Border BorderBrush="{StaticResource Border}" BorderThickness="1" CornerRadius="4" Height="250" Width="180" HorizontalAlignment="Left" Margin="0,0,0,10">
-                    <Image x:Name="moviePosterImage" Stretch="UniformToFill" />
-                </Border>
-                <Button x:Name="selectImageButton" Content="Select Image" Style="{StaticResource button-secondary}" HorizontalAlignment="Left" Width="180" />
-            </StackPanel>
-
-            <!-- Column 1: Movie Details -->
-            <StackPanel Grid.Column="1" Margin="0,0,20,0">
+            <!-- Left Column: Movie Info -->
+            <StackPanel Grid.Column="0">
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Enter movie name" Style="{StaticResource form-label}" />
-                    <TextBox x:Name="movieNameField" Style="{StaticResource form-input}" />
+                    <TextBlock Text="Enter movie name" Style="{StaticResource form-label}"/>
+                    <TextBox x:Name="movieNameField" Style="{StaticResource form-input}"/>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Select genre(s)" Style="{StaticResource form-label}" />
-                    <TextBox x:Name="searchGenreField" Style="{StaticResource form-input}" Margin="0,0,0,5" />
+                    <TextBlock Text="Select genre" Style="{StaticResource form-label}"/>
+                    <TextBox x:Name="searchGenreField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
                     <ListView x:Name="genreListView" Height="150" SelectionMode="Multiple" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding Item}" IsChecked="{Binding IsSelected}" Style="{StaticResource checkbox-dark}" />
+                                <CheckBox Content="{Binding Item}" IsChecked="{Binding IsSelected}" Style="{StaticResource checkbox-dark}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Enter movie description" Style="{StaticResource form-label}" />
-                    <TextBox x:Name="movieDescriptionField" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource form-input}" />
+                    <TextBlock Text="Enter movie description" Style="{StaticResource form-label}"/>
+                    <TextBox x:Name="movieDescriptionField" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource form-input}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
                     <StackPanel Margin="0,0,10,0">
-                        <TextBlock Text="Age limit" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="movieRatedField" Width="60" Style="{StaticResource form-input}" />
+                        <TextBlock Text="Age limit" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieRatedField" Width="60" Style="{StaticResource form-input}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,10,0">
-                        <TextBlock Text="Duration" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="movieDurationField" Width="60" Style="{StaticResource form-input}" />
+                        <TextBlock Text="Duration" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieDurationField" Width="60" Style="{StaticResource form-input}"/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock Text="Language" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="movieLanguageField" Width="120" Style="{StaticResource form-input}" />
+                        <TextBlock Text="Language" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="movieLanguageField" Width="120" Style="{StaticResource form-input}"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
 
-            <!-- Column 2: Directors and Actors -->
+            <!-- Right Column: Directors + Actors -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto"/> <!-- Director -->
+                    <RowDefinition Height="auto"/> <!-- Actors -->
                 </Grid.RowDefinitions>
+
                 <!-- Directors -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                    <TextBlock Text="Select director" Style="{StaticResource form-label}" />
-                    <TextBox x:Name="searchDirectorField" Style="{StaticResource form-input}" Margin="0,0,0,5" />
-                    <ListView x:Name="directorListView" Height="150" SelectionMode="Single" Style="{StaticResource list-view-dark}">
+                    <TextBlock Text="Select director" Style="{StaticResource form-label}"/>
+                    <TextBox x:Name="searchDirectorField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
+                    <ListView x:Name="directorListView" Height="185" SelectionMode="Single" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <RadioButton Content="{Binding Item.FullName}" GroupName="Directors" IsChecked="{Binding IsSelected}" Style="{StaticResource radio-dark}" />
+                                <RadioButton Content="{Binding Item.FullName}" GroupName="Directors" IsChecked="{Binding IsSelected}" Style="{StaticResource radio-dark}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
+
                 <!-- Actors -->
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="Select actor(s)" Style="{StaticResource form-label}" />
-                    <TextBox x:Name="searchActorField" Style="{StaticResource form-input}" Margin="0,0,0,5" />
-                    <ListView x:Name="actorListView" Height="150" SelectionMode="Multiple" Style="{StaticResource list-view-dark}">
+                    <TextBlock Text="Select actor" Style="{StaticResource form-label}"/>
+                    <TextBox x:Name="searchActorField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
+                    <ListView x:Name="actorListView" Height="185" SelectionMode="Multiple" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding Item.FullName}" IsChecked="{Binding IsSelected}" Style="{StaticResource checkbox-dark}" />
+                                <CheckBox Content="{Binding Item.FullName}" IsChecked="{Binding IsSelected}" Style="{StaticResource checkbox-dark}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
             </Grid>
         </Grid>
+
         <!-- Button Group -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" MinWidth="80" Margin="0,0,10,0" />
-            <Button x:Name="addMovieButton" Content="Add" Style="{StaticResource button-primary}" MinWidth="80" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="660,10,0,0">
+            <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" MinWidth="80" Margin="0,0,10,0"/>
+            <Button x:Name="addMovieButton" Content="Add" Style="{StaticResource button-primary}" MinWidth="80"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Input;
 using Theater_Management_FE.Controllers;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Services;
@@ -16,6 +17,16 @@ namespace Theater_Management_FE
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            // Register global window commands
+            CommandManager.RegisterClassCommandBinding(typeof(Window),
+                new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+            CommandManager.RegisterClassCommandBinding(typeof(Window),
+                new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+            CommandManager.RegisterClassCommandBinding(typeof(Window),
+                new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+            CommandManager.RegisterClassCommandBinding(typeof(Window),
+                new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
             // Set shutdown mode to close app when main window closes
             ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -89,7 +100,38 @@ namespace Theater_Management_FE
             sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
 
             // --- STARTUP MAIN WINDOW ---
+            // --- STARTUP MAIN WINDOW ---
             sc.NavigateTo<Home>();
+        }
+
+        private void OnCloseWindow(object target, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow((Window)target);
+        }
+
+        private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ((Window)sender).ResizeMode == ResizeMode.CanResize || ((Window)sender).ResizeMode == ResizeMode.CanResizeWithGrip;
+        }
+
+        private void OnCanMinimizeWindow(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ((Window)sender).ResizeMode != ResizeMode.NoResize;
+        }
+
+        private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MaximizeWindow((Window)target);
+        }
+
+        private void OnMinimizeWindow(object target, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow((Window)target);
+        }
+
+        private void OnRestoreWindow(object target, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.RestoreWindow((Window)target);
         }
     }
 }

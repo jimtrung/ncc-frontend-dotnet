@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add Movie"
         WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -15,20 +16,22 @@
         <!-- Main Content -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400" />
-                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" MinWidth="200" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!-- Left Column: Movie Info -->
-            <StackPanel Grid.Column="0">
-                <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Movie Poster" Style="{StaticResource form-label}" />
-                    <Border BorderBrush="{StaticResource Border}" BorderThickness="1" CornerRadius="4" Height="200" Width="150" HorizontalAlignment="Left" Margin="0,0,0,10">
-                        <Image x:Name="moviePosterImage" Stretch="UniformToFill" />
-                    </Border>
-                    <Button x:Name="selectImageButton" Content="Select Image" Style="{StaticResource button-secondary}" HorizontalAlignment="Left" Width="150" />
-                </StackPanel>
 
+            <!-- Column 0: Movie Poster -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <TextBlock Text="Movie Poster" Style="{StaticResource form-label}" />
+                <Border BorderBrush="{StaticResource Border}" BorderThickness="1" CornerRadius="4" Height="250" Width="180" HorizontalAlignment="Left" Margin="0,0,0,10">
+                    <Image x:Name="moviePosterImage" Stretch="UniformToFill" />
+                </Border>
+                <Button x:Name="selectImageButton" Content="Select Image" Style="{StaticResource button-secondary}" HorizontalAlignment="Left" Width="180" />
+            </StackPanel>
+
+            <!-- Column 1: Movie Details -->
+            <StackPanel Grid.Column="1" Margin="0,0,20,0">
                 <StackPanel Margin="0,0,0,15">
                     <TextBlock Text="Enter movie name" Style="{StaticResource form-label}" />
                     <TextBox x:Name="movieNameField" Style="{StaticResource form-input}" />
@@ -63,7 +66,8 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <!-- Right Column: Directors and Actors -->
+
+            <!-- Column 2: Directors and Actors -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

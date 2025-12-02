@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sign In - Theater Management"
         WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <Grid>
         <!-- Gradient Background -->

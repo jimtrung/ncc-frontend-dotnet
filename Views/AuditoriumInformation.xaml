@@ -1,14 +1,4 @@
-﻿<Window x:Class="Theater_Management_FE.Views.AuditoriumInformation"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowState="Maximized"
-        Background="{StaticResource PrimaryBackground}">
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Auditorium Information"
-                           Style="{StaticResource title}"/>
-                <Border Style="{StaticResource card}" Padding="32" Width="500">
+﻿                <Border Style="{StaticResource card}" Padding="32" Width="500">
                     <StackPanel>
                         <StackPanel Margin="0,0,0,16">
                             <TextBlock Text="Auditorium Name" Style="{StaticResource form-label}"/>

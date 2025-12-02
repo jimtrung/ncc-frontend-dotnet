@@ -7,6 +7,8 @@ using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Utils;
 using Theater_Management_FE.Views;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -219,14 +221,30 @@ namespace Theater_Management_FE.Controllers
                 {
                     try 
                     {
-                        var destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
+                        var destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
                         // Ensure directory exists
-                        var dir = System.IO.Path.GetDirectoryName(destPath);
-                        if (!System.IO.Directory.Exists(dir))
+                        var dir = Path.GetDirectoryName(destPath);
+                        if (!Directory.Exists(dir))
                         {
-                            System.IO.Directory.CreateDirectory(dir);
+                            Directory.CreateDirectory(dir);
                         }
-                        System.IO.File.Copy(_selectedImagePath, destPath, true);
+
+                        // Load and convert image
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(_selectedImagePath);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        var encoder = new JpegBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                        encoder.QualityLevel = 90;
+
+                        using (var stream = new FileStream(destPath, FileMode.Create))
+                        {
+                            encoder.Save(stream);
+                        }
+                        MessageBox.Show($"[DEBUG] Image successfully saved to: {destPath}", "Debug Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception ex)
                     {

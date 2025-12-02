@@ -18,6 +18,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="Resources\Images\cat.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="Services\" />
 	</ItemGroup>
 

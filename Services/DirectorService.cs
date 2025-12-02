@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Services
 {
@@ -50,6 +51,25 @@ namespace Theater_Management_FE.Services
 
             var directors = JsonSerializer.Deserialize<List<Director>>(body, JsonOptions) ?? new List<Director>();
             return directors;
+        }
+
+        public Director? GetDirectorById(Guid id)
+        {
+            var token = _tokenUtil.LoadAccessToken();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"director/{id}");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (!string.IsNullOrEmpty(token))
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = _http.Send(request);
+            var body = response.Content.ReadAsStringAsync().Result;
+
+            if (!response.IsSuccessStatusCode || string.IsNullOrWhiteSpace(body))
+                return null;
+
+            var director = JsonSerializer.Deserialize<Director>(body, JsonOptions);
+            return director;
         }
     }
 }

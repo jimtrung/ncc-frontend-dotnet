@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -70,26 +71,32 @@ namespace Theater_Management_FE.Controllers
         // === Add Auditorium ===
         public void HandleAddAuditorium()
         {
-            var addWindow = new Views.AddAuditorium();
-            var controller = addWindow.DataContext as AddAuditoriumController;
-            controller.SetScreenController(_screenController);
-            controller.SetAuditoriumService(_auditoriumService);
-            controller.SetAuthTokenUtil(_authTokenUtil);
-            controller.SetAuditoriumListController(this);
-            addWindow.ShowDialog();
+            // var addWindow = new Views.AddAuditorium();
+            // var controller = addWindow.DataContext as AddAuditoriumController;
+            // controller.SetScreenController(_screenController);
+            // controller.SetAuditoriumService(_auditoriumService);
+            // controller.SetAuthTokenUtil(_authTokenUtil);
+            // controller.SetAuditoriumListController(this);
+            // addWindow.ShowDialog();
+            _screenController.NavigateTo<AddAuditorium>();
         }
 
         // === Click Item ===
         public void HandleClickItem(Guid id)
         {
-            var infoWindow = new Views.AuditoriumInformation();
-            var controller = infoWindow.DataContext as AuditoriumInformationController;
-            controller.SetScreenController(_screenController);
-            controller.SetAuditoriumService(_auditoriumService);
-            controller.SetAuthTokenUtil(_authTokenUtil);
-            controller.SetAuditoriumListController(this);
-            controller.SetAuditoriumId(id);
-            infoWindow.ShowDialog();
+            try
+            {
+                var controller = _screenController.GetController<AuditoriumInformationController>();
+                if (controller != null)
+                {
+                    controller.SetAuditoriumId(id);
+                    _screenController.NavigateTo<AuditoriumInformation>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to navigate to movie details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // === Delete All ===
@@ -98,11 +105,11 @@ namespace Theater_Management_FE.Controllers
             var result = MessageBox.Show(
                 "Are you sure you want to delete all auditoriums?",
                 "Delete confirmation",
-                MessageBoxButton.OKCancel,
+                MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
             );
 
-            if (result == MessageBoxResult.OK)
+            if (result == MessageBoxResult.Yes)
             {
                 _auditoriumService.DeleteAllAuditoriums();
                 RefreshData();
@@ -136,5 +143,7 @@ namespace Theater_Management_FE.Controllers
                 AuditoriumList[idx] = updatedAuditorium;
             }
         }
+
+        
     }
 }

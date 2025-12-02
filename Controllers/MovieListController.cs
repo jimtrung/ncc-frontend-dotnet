@@ -5,6 +5,7 @@ using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -55,7 +56,7 @@ namespace Theater_Management_FE.Controllers
             }
 
             nameColumn.Binding = new System.Windows.Data.Binding("Name");
-            directorColumn.Binding = new System.Windows.Data.Binding("DirectorId") { Converter = new GuidToStringConverter() };
+            directorColumn.Binding = new System.Windows.Data.Binding("DirectorName");
             genresColumn.Binding = new System.Windows.Data.Binding("Genres") { Converter = new ListToStringConverter() };
             premiereColumn.Binding = new System.Windows.Data.Binding("Premiere") { Converter = new DateToStringConverter("dd/MM/yyyy") };
             durationColumn.Binding = new System.Windows.Data.Binding("Duration");
@@ -100,8 +101,8 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleDeleteAllMovie()
         {
-            var result = MessageBox.Show("Are you sure you want to delete all movies?", "Delete confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.OK)
+            var result = MessageBox.Show("Are you sure you want to delete all movies?", "Delete confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
             {
                 _movieService.DeleteAllMovies();
                 RefreshData();
@@ -119,7 +120,15 @@ namespace Theater_Management_FE.Controllers
                     var movies = _movieService.GetAllMovies();
                     MovieList.Clear();
                     foreach (var m in movies)
+                    {
+                        // Load Director object nếu chưa load
+                        if (m.DirectorId.HasValue && m.Director == null)
+                        {
+                            m.Director = _directorService.GetDirectorById(m.DirectorId.Value);
+                        }
+
                         MovieList.Add(m);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -127,6 +136,7 @@ namespace Theater_Management_FE.Controllers
                 }
             }
         }
+
 
         public void UpdateMovie(Movie updatedMovie)
         {

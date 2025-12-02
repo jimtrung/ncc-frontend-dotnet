@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
+using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Services
 {
@@ -74,6 +75,25 @@ namespace Theater_Management_FE.Services
                  throw new Exception($"Failed to get movies. Status: {response.StatusCode}");
             }
             var body = response.Content.ReadAsStringAsync().Result;
+
+            if (string.IsNullOrWhiteSpace(body))
+                return new List<Movie>();
+
+            return JsonSerializer.Deserialize<List<Movie>>(body, JsonOptions) ?? new List<Movie>();
+        }
+
+        public async Task<List<Movie>> GetAllMoviesAsync()
+        {
+            var token = _tokenUtil.LoadAccessToken();
+            var request = new HttpRequestMessage(HttpMethod.Get, "Movie");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _http.SendAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                 throw new Exception($"Failed to get movies. Status: {response.StatusCode}");
+            }
+            var body = await response.Content.ReadAsStringAsync();
 
             if (string.IsNullOrWhiteSpace(body))
                 return new List<Movie>();

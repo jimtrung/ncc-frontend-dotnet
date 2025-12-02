@@ -31,16 +31,16 @@ namespace Theater_Management_FE.Controllers
             var current = Application.Current.MainWindow ??
                           (Application.Current.Windows.Count > 0 ? Application.Current.Windows[Application.Current.Windows.Count - 1] : null);
 
+            newWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            newWindow.Show();
+            Application.Current.MainWindow = newWindow;
+            AttachEscapeHandler(newWindow);
+
             if (closeCurrent && current != null && current != newWindow)
             {
                 _history.Push(current);
                 current.Hide();
             }
-
-            newWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            newWindow.Show();
-            Application.Current.MainWindow = newWindow;
-            AttachEscapeHandler(newWindow);
 
             if (_controllers.TryGetValue(newWindow, out var controller))
             {

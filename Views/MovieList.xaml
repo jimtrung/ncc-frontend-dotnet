@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.MovieList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Movie List"
+        Title="National Cinema Center"
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
@@ -11,9 +11,9 @@
         <!-- Layout 1 cột để nút và bảng thẳng hàng -->
         <Grid Width="800"> <!-- chỉnh số này để khớp độ rộng bảng -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>   <!-- Close -->
-                <RowDefinition Height="Auto"/>      <!-- Table -->
-                <RowDefinition Height="Auto"/>   <!-- Buttons bottom -->
+                <RowDefinition Height="Auto"/>  
+                <RowDefinition Height="Auto"/>     
+                <RowDefinition Height="Auto"/> 
             </Grid.RowDefinitions>
 
             <!-- Close button -->

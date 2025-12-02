@@ -89,7 +89,6 @@ namespace Theater_Management_FE
             sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
 
             // --- STARTUP MAIN WINDOW ---
-            // Use ScreenController so that navigation & HandleOnOpen are consistent
             sc.NavigateTo<Home>();
         }
     }

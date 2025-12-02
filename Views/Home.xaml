@@ -1,12 +1,11 @@
 ﻿<Window x:Class="Theater_Management_FE.Views.Home"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Theater Management"
+        Title="National Cinema Center"
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <Grid>
-        <!-- Gradient Background -->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#0F1419" Offset="0"/>
@@ -54,12 +53,6 @@
                         Content="Sign Up"
                         Style="{StaticResource button-secondary}"
                         Margin="0,0,0,12"
-                        Padding="24,14"
-                        FontSize="16"/>
-                
-                <Button x:Name="settingsButton"
-                        Content="⚙️ Settings"
-                        Style="{StaticResource button-secondary}"
                         Padding="24,14"
                         FontSize="16"/>
             </StackPanel>

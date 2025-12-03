@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -43,7 +44,7 @@ namespace Theater_Management_FE.Controllers
             authTokenUtil = util;
         }
 
-        public void HandleOnOpen()
+        public async void HandleOnOpen()
         {
             try
             {
@@ -83,14 +84,24 @@ namespace Theater_Management_FE.Controllers
                 
                 UpdateUserUI(user);
 
-                // Clear movie list first
-                if (movieList != null) movieList.Children.Clear();
+                // Clear movie list and show loading
+                if (movieList != null) 
+                {
+                    movieList.Children.Clear();
+                    movieList.Children.Add(new TextBlock 
+                    { 
+                        Text = "Loading movies...", 
+                        Foreground = Brushes.White, 
+                        FontSize = 16,
+                        Margin = new Thickness(10)
+                    });
+                }
 
                 List<Movie> movies = null;
                 string errorMessage = null;
                 try
                 {
-                    movies = movieService.GetAllMovies();
+                    movies = await movieService.GetAllMoviesAsync();
                 }
                 catch (Exception ex)
                 {
@@ -98,6 +109,9 @@ namespace Theater_Management_FE.Controllers
                     errorMessage = "Unable to load movies. Please try again later.";
                     movies = new List<Movie>();
                 }
+
+                // Clear loading message
+                if (movieList != null) movieList.Children.Clear();
 
                 if (movies == null || movies.Count == 0)
                 {

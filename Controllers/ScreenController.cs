@@ -31,16 +31,15 @@ namespace Theater_Management_FE.Controllers
             var current = Application.Current.MainWindow ??
                           (Application.Current.Windows.Count > 0 ? Application.Current.Windows[Application.Current.Windows.Count - 1] : null);
 
+            newWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            newWindow.Show();
+            Application.Current.MainWindow = newWindow;
+
             if (closeCurrent && current != null && current != newWindow)
             {
                 _history.Push(current);
                 current.Hide();
             }
-
-            newWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            newWindow.Show();
-            Application.Current.MainWindow = newWindow;
-            AttachEscapeHandler(newWindow);
 
             if (_controllers.TryGetValue(newWindow, out var controller))
             {
@@ -68,26 +67,11 @@ namespace Theater_Management_FE.Controllers
             var previous = _history.Pop();
             previous.Show();
             Application.Current.MainWindow = previous;
-            AttachEscapeHandler(previous);
 
             if (_controllers.TryGetValue(previous, out var controller))
             {
                 var method = controller.GetType().GetMethod("HandleOnOpen");
                 method?.Invoke(controller, null);
-            }
-        }
-
-        private void AttachEscapeHandler(Window window)
-        {
-            window.PreviewKeyDown -= HandleEscapeKey;
-            window.PreviewKeyDown += HandleEscapeKey;
-        }
-
-        private void HandleEscapeKey(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-            {
-                Application.Current.Shutdown();
             }
         }
     }

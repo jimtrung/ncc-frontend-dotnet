@@ -1,16 +1,18 @@
-﻿<Window x:Class="Theater_Management_FE.Views.AuditoriumList"
+<Window x:Class="Theater_Management_FE.Views.AuditoriumList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="National Cinema Center"
         WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <!-- Layout 1 cột để nút và bảng thẳng hàng -->
-        <Grid Width="450"> <!-- điều chỉnh độ rộng bảng -->
+        <Grid Width="450">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>   <!-- Close button -->
-                <RowDefinition Height="Auto"/>      <!-- DataGrid -->
-                <RowDefinition Height="Auto"/>   <!-- Bottom buttons -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Close button -->
@@ -39,7 +41,6 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <!-- Bottom buttons aligned with DataGrid -->
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"

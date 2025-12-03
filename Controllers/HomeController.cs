@@ -58,7 +58,6 @@ namespace Theater_Management_FE.Controllers
                 if (user.Role == UserRole.administrator)
                     _screenController.NavigateTo<HomePageManager>();
             }
-            // If user could not be fetched, just stay on Home without auto-login
         }
 
         public void HandleSignUpButton(object sender, RoutedEventArgs e)
@@ -71,21 +70,14 @@ namespace Theater_Management_FE.Controllers
             _screenController.NavigateTo<SignIn>();
         }
 
-        public void HandleSettingsButton(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Settings not implemented yet.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        public void BindUIControls(TextBlock titleLabel, Button signupButton, Button signinButton, Button settingsButton)
+        public void BindUIControls(TextBlock titleLabel, Button signupButton, Button signinButton) 
         {
             this.titleLabel = titleLabel;
             this.signupButton = signupButton;
             this.signinButton = signinButton;
-            this.settingsButton = settingsButton;
 
             this.signupButton.Click += HandleSignUpButton;
             this.signinButton.Click += HandleSignInButton;
-            this.settingsButton.Click += HandleSettingsButton;
         }
     }
 }

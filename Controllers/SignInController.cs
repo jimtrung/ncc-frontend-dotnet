@@ -32,6 +32,8 @@ namespace Theater_Management_FE.Controllers
 
         public TextBox usernameField;
         public PasswordBox passwordField;
+        public TextBox visiblePasswordField;
+        public CheckBox showPasswordCheckBox;
         public Button signInButton;
         public Button backButton;
         public Hyperlink forgotPasswordLink;
@@ -55,6 +57,11 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleSignInButton(object sender, RoutedEventArgs e)
         {
+            if (showPasswordCheckBox.IsChecked == true)
+            {
+                passwordField.Password = visiblePasswordField.Text;
+            }
+
             var user = new User
             {
                 Username = usernameField.Text,
@@ -78,6 +85,8 @@ namespace Theater_Management_FE.Controllers
                 // Clear fields
                 usernameField.Clear();
                 passwordField.Clear();
+                visiblePasswordField.Clear();
+                showPasswordCheckBox.IsChecked = false;
             }
             catch (Exception ex)
             {
@@ -91,10 +100,28 @@ namespace Theater_Management_FE.Controllers
         {
         }
 
-        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, Button signInButton, Button backButton, Hyperlink forgotPasswordLink)
+        private void TogglePasswordVisibility(object sender, RoutedEventArgs e)
+        {
+            if (showPasswordCheckBox.IsChecked == true)
+            {
+                visiblePasswordField.Text = passwordField.Password;
+                visiblePasswordField.Visibility = Visibility.Visible;
+                passwordField.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                passwordField.Password = visiblePasswordField.Text;
+                visiblePasswordField.Visibility = Visibility.Collapsed;
+                passwordField.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton, Hyperlink forgotPasswordLink)
         {
             this.usernameField = usernameField;
             this.passwordField = passwordField;
+            this.visiblePasswordField = visiblePasswordField;
+            this.showPasswordCheckBox = showPasswordCheckBox;
             this.signInButton = signInButton;
             this.backButton = backButton;
             this.forgotPasswordLink = forgotPasswordLink;
@@ -102,6 +129,7 @@ namespace Theater_Management_FE.Controllers
             this.signInButton.Click += HandleSignInButton;
             this.backButton.Click += HandleBackButton;
             this.forgotPasswordLink.Click += HandleForgotPassword;
+            this.showPasswordCheckBox.Click += TogglePasswordVisibility;
         }
     }
 }

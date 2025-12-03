@@ -1,7 +1,9 @@
-﻿<Window x:Class="Theater_Management_FE.Views.AddAuditorium"
+<Window x:Class="Theater_Management_FE.Views.AddAuditorium"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="National Cinema Center"
         WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center">

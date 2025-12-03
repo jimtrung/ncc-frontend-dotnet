@@ -15,6 +15,7 @@ namespace Theater_Management_FE.Controllers
         public Button profileButton;
         public Button auditoriumButton;
         public Button logOutButton;
+        public Button showtimeButton;
 
         private bool _isInitialized = false;
 
@@ -36,6 +37,8 @@ namespace Theater_Management_FE.Controllers
                 if (auditoriumButton != null) auditoriumButton.Click += HandleAuditoriumButton;
                 if (profileButton != null) profileButton.Click += HandleProfileButton;
                 if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
+                if (showtimeButton != null) showtimeButton.Click += HandleShowtimeButton;
+
                 _isInitialized = true;
             }
         }
@@ -60,6 +63,11 @@ namespace Theater_Management_FE.Controllers
             _authTokenUtil.ClearRefreshToken();
             _authTokenUtil.ClearAccessToken();
             _screenController.NavigateTo<Home>();
+        }
+
+        private void HandleShowtimeButton(object sender, RoutedEventArgs e)
+        {
+            _screenController.NavigateTo<ShowtimeList>();
         }
     }
 }

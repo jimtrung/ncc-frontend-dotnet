@@ -8,6 +8,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button x:Name="movieButton" Content="Movie" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
                 <Button x:Name="auditoriumButton" Content="Auditorium" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="showtimeButton" Content="Showtime" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
                 <Button x:Name="profileButton" Content="Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
                 <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}"/>
             </StackPanel>

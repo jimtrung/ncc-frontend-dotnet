@@ -38,6 +38,7 @@ namespace Theater_Management_FE
             services.AddSingleton<MovieActorService>();
             services.AddSingleton<DirectorService>();
             services.AddSingleton<ActorService>();
+            services.AddSingleton<ShowtimeService>();
 
             // === Controllers ===
             services.AddTransient<SignInController>();
@@ -53,6 +54,9 @@ namespace Theater_Management_FE
             services.AddTransient<MovieInformationController>();
             services.AddTransient<AuditoriumInformationController>();
 
+            services.AddTransient<ShowtimeListController>();
+            services.AddTransient<AddShowtimeController>();
+
             // === Windows ===
             services.AddTransient<SignIn>();
             services.AddTransient<SignUp>();
@@ -66,6 +70,9 @@ namespace Theater_Management_FE
             services.AddTransient<AddAuditorium>();
             services.AddTransient<MovieInformation>();
             services.AddTransient<AuditoriumInformation>();
+
+            services.AddTransient<ShowtimeList>();
+            services.AddTransient<AddShowtime>();
 
             // ScreenController
             services.AddSingleton<ScreenController>();
@@ -87,6 +94,9 @@ namespace Theater_Management_FE
             sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
             sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
             sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
+
+            sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
+            sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
 
             // --- STARTUP MAIN WINDOW ---
             // Use ScreenController so that navigation & HandleOnOpen are consistent

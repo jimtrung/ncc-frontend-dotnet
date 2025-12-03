@@ -1,67 +1,108 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Theater_Management_FE.Models
 {
     public class Showtime : INotifyPropertyChanged
     {
+        // --- Fields ---
         private Guid _id;
         private Guid _movieId;
-        private Movie _movie;
         private Guid _auditoriumId;
-        private Auditorium _auditorium;
         private DateTime _startTime;
         private DateTime _endTime;
+        private DateTime _showDate;
         private DateTime _createdAt;
         private DateTime _updatedAt;
+        private string _movieName;
+        private string _auditoriumName;
+        private string _quantity;
+
+        // --- Properties ---
         public Guid Id
         {
             get => _id;
-            set { _id = value; OnPropertyChanged(nameof(Id)); }
+            set => SetField(ref _id, value, nameof(Id));
         }
+
         public Guid MovieId
         {
             get => _movieId;
-            set { _movieId = value; OnPropertyChanged(nameof(MovieId)); }
+            set => SetField(ref _movieId, value, nameof(MovieId));
         }
-        public Movie Movie
-        {
-            get => _movie;
-            set { _movie = value; OnPropertyChanged(nameof(Movie)); }
-        }
+
         public Guid AuditoriumId
         {
             get => _auditoriumId;
-            set { _auditoriumId = value; OnPropertyChanged(nameof(AuditoriumId)); }
+            set => SetField(ref _auditoriumId, value, nameof(AuditoriumId));
         }
-        public Auditorium Auditorium
-        {
-            get => _auditorium;
-            set { _auditorium = value; OnPropertyChanged(nameof(Auditorium)); }
-        }
+
         public DateTime StartTime
         {
             get => _startTime;
-            set { _startTime = value; OnPropertyChanged(nameof(StartTime)); }
+            set => SetField(ref _startTime, value, nameof(StartTime));
         }
+
         public DateTime EndTime
         {
             get => _endTime;
-            set { _endTime = value; OnPropertyChanged(nameof(EndTime)); }
+            set => SetField(ref _endTime, value, nameof(EndTime));
         }
+
+        public DateTime ShowDate
+        {
+            get => _showDate;
+            set => SetField(ref _showDate, value, nameof(ShowDate));
+        }
+
         public DateTime CreatedAt
         {
             get => _createdAt;
-            set { _createdAt = value; OnPropertyChanged(nameof(CreatedAt)); }
+            set => SetField(ref _createdAt, value, nameof(CreatedAt));
         }
+
         public DateTime UpdatedAt
         {
             get => _updatedAt;
-            set { _updatedAt = value; OnPropertyChanged(nameof(UpdatedAt)); }
+            set => SetField(ref _updatedAt, value, nameof(UpdatedAt));
         }
+
+        public string MovieName
+        {
+            get => _movieName;
+            set => SetField(ref _movieName, value, nameof(MovieName));
+        }
+
+        public string AuditoriumName
+        {
+            get => _auditoriumName;
+            set => SetField(ref _auditoriumName, value, nameof(AuditoriumName));
+        }
+
+        public string Quantity
+        {
+            get => _quantity;
+            set => SetField(ref _quantity, value, nameof(Quantity));
+        }
+
+        // --- Readonly string properties for display ---
+        public string StartTimeString => StartTime.ToUniversalTime().ToString("HH:mm");
+        public string EndTimeString => EndTime.ToUniversalTime().ToString("HH:mm");
+        public string ShowDateString => ShowDate.ToString("yyyy-MM-dd");
+
+        // --- INotifyPropertyChanged ---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        // --- Helper method ---
+        private void SetField<T>(ref T field, T value, string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (!Equals(field, value))
+            {
+                field = value;
+                OnPropertyChanged(propertyName);
+            }
         }
     }
 }

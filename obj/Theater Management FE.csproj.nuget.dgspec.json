@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\ncc-frontend-dotnet\\Theater Management FE.csproj": {}
+    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\ncc-frontend-dotnet\\Theater Management FE.csproj": {
+    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+        "projectUniqueName": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
         "projectName": "Theater Management FE",
-        "projectPath": "C:\\Users\\DELL\\ncc-frontend-dotnet\\Theater Management FE.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\ncc-frontend-dotnet\\obj\\",
+        "projectPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
+        "packagesPath": "C:\\Users\\HAI TRUNG\\.nuget\\packages\\",
+        "outputPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\HAI TRUNG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

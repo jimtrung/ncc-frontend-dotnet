@@ -34,15 +34,16 @@ namespace Theater_Management_FE.Controllers
         }
 
         // ========================= BIND UI =========================
-        public void BindUIControls(WrapPanel newsWrapPanel, Button btnPrev, Button btnNext, Button btnBackHome)
+        // Parameter names MUST match XAML x:Name attributes exactly (case-sensitive) for ControllerBinder to work
+        public void BindUIControls(WrapPanel NewsWrapPanel, Button BtnPrev, Button BtnNext, Button btnBackHome)
         {
-            this.newsWrapPanel = newsWrapPanel;
-            this.btnPrev = btnPrev;
-            this.btnNext = btnNext;
-            this.btnBackHome=btnBackHome;
-            btnBackHome.Click +=HandleBackToHome;
-            btnPrev.Click += HandlePrev;
-            btnNext.Click += HandleNext;
+            this.newsWrapPanel = NewsWrapPanel;
+            this.btnPrev = BtnPrev;
+            this.btnNext = BtnNext;
+            this.btnBackHome = btnBackHome;
+            btnBackHome.Click += HandleBackToHome;
+            BtnPrev.Click += HandlePrev;
+            BtnNext.Click += HandleNext;
 
             LoadData();
             ShowPage(currentPage);
@@ -150,11 +151,6 @@ namespace Theater_Management_FE.Controllers
 
             card.Child = panel;
             return card;
-        }
-
-        internal void BindUIControls(object newsWrapPanel, object btnPrev, object btnNext, object btnBackHome)
-        {
-            throw new NotImplementedException();
         }
 
         // ========================= MODEL =========================

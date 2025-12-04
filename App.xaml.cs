@@ -51,7 +51,7 @@ namespace Theater_Management_FE
             services.AddTransient<AddAuditoriumController>();
             services.AddTransient<MovieInformationController>();
             services.AddTransient<AuditoriumInformationController>();
-
+            services.AddTransient<TinTucController>();
             // === Windows ===
             services.AddTransient<SignIn>();
             services.AddTransient<SignUp>();
@@ -65,7 +65,7 @@ namespace Theater_Management_FE
             services.AddTransient<AddAuditorium>();
             services.AddTransient<MovieInformation>();
             services.AddTransient<AuditoriumInformation>();
-
+            services.AddTransient<Tintuc>();
             // ScreenController
             services.AddSingleton<ScreenController>();
 
@@ -86,10 +86,11 @@ namespace Theater_Management_FE
             sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
             sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
             sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
-
+            sc.AutoRegister<Tintuc, TinTucController>(Services);
             // --- STARTUP MAIN WINDOW ---
             // Use ScreenController so that navigation & HandleOnOpen are consistent
-            sc.NavigateTo<Home>();
+            sc.NavigateTo<Tintuc>();
+
         }
     }
 }

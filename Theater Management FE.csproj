@@ -35,5 +35,14 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.*" />
 	</ItemGroup>
-
+<ItemGroup>
+		 <Resource Include="Resources\Images\card1.jpg" />
+		  <Resource Include="Resources\Images\card2.jpg" />
+		   <Resource Include="Resources\Images\card3.jpg" />
+		    <Resource Include="Resources\Images\card4.jpg" />
+			 <Resource Include="Resources\Images\card5.jpg" />
+			  <Resource Include="Resources\Images\card6.jpg" />
+			   <Resource Include="Resources\Images\card7.jpg" />
+			    <Resource Include="Resources\Images\card8.jpg" />
+    </ItemGroup>
 </Project>

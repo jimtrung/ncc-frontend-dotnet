@@ -19,6 +19,7 @@ namespace Theater_Management_FE.Controllers
         public WrapPanel movieList;
         public Button logoutButton;
         public TextBlock usernameText;
+        public Button newsButton;
 
         private bool _isInitialized = false;
 
@@ -49,6 +50,7 @@ namespace Theater_Management_FE.Controllers
                 if (!_isInitialized)
                 {
                     if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
+                     if (newsButton != null) newsButton.Click += HandleNewsButton;
                     _isInitialized = true;
                 }
 
@@ -113,6 +115,10 @@ namespace Theater_Management_FE.Controllers
                 MessageBox.Show($"An error occurred in HomePageUser: {ex.Message}\n\nStack: {ex.StackTrace}", "Critical Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        public void HandleNewsButton(object sender, RoutedEventArgs e)
+{
+    screenController.NavigateTo<Tintuc>();
+}
 
         public void HandleSignUpButton(object sender, RoutedEventArgs e)
         {

@@ -5,23 +5,15 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#0F1419" Offset="0"/>
-                <GradientStop Color="#1A1F2E" Offset="0.5"/>
-                <GradientStop Color="#0F1419" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Background="#0F1419">
 
-        <!-- Main Content -->
         <Border Style="{StaticResource card}"
                 Width="450"
                 Padding="48,40"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
             <StackPanel>
-                <!-- Title -->
+                <!-- Tiêu đề -->
                 <TextBlock Text="Tạo Tài Khoản"
                            Style="{StaticResource title}"
                            FontSize="28"
@@ -33,7 +25,6 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,32"/>
 
-                <!-- Username Field -->
                 <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Tên đăng nhập"
                                Style="{StaticResource form-label}"/>
@@ -41,7 +32,6 @@
                              Style="{StaticResource form-input}"/>
                 </StackPanel>
 
-                <!-- Email Field -->
                 <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Email"
                                Style="{StaticResource form-label}"/>
@@ -49,8 +39,6 @@
                              Style="{StaticResource form-input}"/>
                 </StackPanel>
 
-
-                <!-- Password Field -->
                 <StackPanel Margin="0,0,0,12">
                     <TextBlock Text="Mật khẩu"
                                Style="{StaticResource form-label}"/>
@@ -68,7 +56,6 @@
                           Style="{StaticResource checkbox-dark}"
                           Margin="0,0,0,28"/>
 
-                <!-- Buttons -->
                 <Button x:Name="signUpButton"
                         Content="Đăng Ký"
                         Style="{StaticResource button-primary}"

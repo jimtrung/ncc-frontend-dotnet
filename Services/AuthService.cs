@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using Theater_Management_FE.DTOs;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
+using Theater_Management_FE.Utils;
 
 public class AuthService
 {
@@ -40,12 +41,27 @@ public class AuthService
             password = user.Password
         };
 
-        var response = _httpClient.PostAsJsonAsync("auth/signup", body, JsonOptions).Result;
+        HttpResponseMessage response;
+        try
+        {
+            response = _httpClient.PostAsJsonAsync("auth/signup", body, JsonOptions).Result;
+        }
+        catch (Exception ex)
+        {
+            return new ErrorResponse(DateTime.UtcNow, 500, "SignUp request failed", ex.Message, "/auth/signup");
+        }
 
         if (!response.IsSuccessStatusCode)
         {
-            var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
-            return error!;
+            try
+            {
+                var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
+                if (error != null) return error;
+            }
+            catch { }
+
+            var raw = response.Content.ReadAsStringAsync().Result ?? "";
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignUp failed", raw, "/auth/signup");
         }
 
         return response.Content.ReadAsStringAsync().Result;
@@ -78,14 +94,22 @@ public class AuthService
             try
             {
                 var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
-                if (error != null) return error;
+                if (error != null)
+                {
+                    // Ensure we have a message to display
+                    if (string.IsNullOrWhiteSpace(error.Message))
+                    {
+                        return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Unknown error occurred" };
+                    }
+                    return error;
+                }
             }
             catch
             {
                 // ignore and fall through
             }
 
-            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignIn failed", raw, "/auth/signin");
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignIn failed", !string.IsNullOrWhiteSpace(raw) ? raw : "Unknown server error", "/auth/signin");
         }
 
         try

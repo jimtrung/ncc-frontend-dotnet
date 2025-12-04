@@ -5,7 +5,10 @@ using System.Linq;
 using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
+using Theater_Management_FE.Utils;
 using Theater_Management_FE.Views;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -33,22 +36,25 @@ namespace Theater_Management_FE.Controllers
         public TextBox movieLanguageField;
         public TextBox movieDurationField;
         public TextBox movieRatedField;
-        
+
         public ListView genreListView;
         public ListView directorListView;
         public ListView actorListView;
-        
+
         public TextBox searchGenreField;
         public TextBox searchDirectorField;
         public TextBox searchActorField;
 
         public Button backButton;
         public Button addMovieButton;
+        public Button selectImageButton;
+        public Image moviePosterImage;
 
         // Data
         private List<SelectableItem<string>> _allGenres = new();
         private List<SelectableItem<Director>> _allDirectors = new();
         private List<SelectableItem<Actor>> _allActors = new();
+        private string _selectedImagePath;
 
         private bool _isInitialized = false;
 
@@ -58,6 +64,7 @@ namespace Theater_Management_FE.Controllers
             {
                 if (backButton != null) backButton.Click += (s, e) => HandleBackButton();
                 if (addMovieButton != null) addMovieButton.Click += (s, e) => HandleAddMovieButtonClick();
+                if (selectImageButton != null) selectImageButton.Click += (s, e) => HandleSelectImageButton();
 
                 if (searchGenreField != null) searchGenreField.TextChanged += (s, e) => FilterGenres();
                 if (searchDirectorField != null) searchDirectorField.TextChanged += (s, e) => FilterDirectors();
@@ -68,6 +75,8 @@ namespace Theater_Management_FE.Controllers
 
             LoadData();
         }
+
+        // ... (LoadData and Filter methods remain same) ...
 
         private void LoadData()
         {
@@ -118,8 +127,8 @@ namespace Theater_Management_FE.Controllers
         {
             if (genreListView == null) return;
             var query = searchGenreField?.Text?.Trim().ToLower() ?? "";
-            genreListView.ItemsSource = string.IsNullOrEmpty(query) 
-                ? _allGenres 
+            genreListView.ItemsSource = string.IsNullOrEmpty(query)
+                ? _allGenres
                 : _allGenres.Where(i => i.Item.ToLower().Contains(query)).ToList();
         }
 
@@ -139,6 +148,23 @@ namespace Theater_Management_FE.Controllers
             actorListView.ItemsSource = string.IsNullOrEmpty(query)
                 ? _allActors
                 : _allActors.Where(i => (i.Item.FirstName + " " + i.Item.LastName).ToLower().Contains(query)).ToList();
+        }
+
+        public void HandleSelectImageButton()
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _selectedImagePath = openFileDialog.FileName;
+                if (moviePosterImage != null)
+                {
+                    moviePosterImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(_selectedImagePath));
+                }
+            }
         }
 
         public void HandleAddMovieButtonClick()
@@ -166,13 +192,13 @@ namespace Theater_Management_FE.Controllers
 
             var selectedGenres = _allGenres.Where(i => i.IsSelected).Select(i => Enum.Parse<MovieGenre>(i.Item)).ToList();
             var selectedDirectorItem = _allDirectors.FirstOrDefault(i => i.IsSelected);
-            
+
             if (selectedDirectorItem == null || selectedDirectorItem.Item == null)
             {
                 MessageBox.Show("Please select a director", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             var movie = new Movie
             {
                 Id = Guid.NewGuid(),
@@ -190,6 +216,42 @@ namespace Theater_Management_FE.Controllers
 
             try
             {
+                // Save Image
+                if (!string.IsNullOrEmpty(_selectedImagePath))
+                {
+                    try
+                    {
+                        var destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
+                        // Ensure directory exists
+                        var dir = Path.GetDirectoryName(destPath);
+                        if (!Directory.Exists(dir))
+                        {
+                            Directory.CreateDirectory(dir);
+                        }
+
+                        // Load and convert image
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(_selectedImagePath);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        var encoder = new JpegBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                        encoder.QualityLevel = 90;
+
+                        using (var stream = new FileStream(destPath, FileMode.Create))
+                        {
+                            encoder.Save(stream);
+                        }
+                        MessageBox.Show($"[DEBUG] Image successfully saved to: {destPath}", "Debug Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to save image: {ex.Message}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
                 _movieService.InsertMovie(movie);
 
                 // Insert movie actors using the movie ID we generated
@@ -200,7 +262,12 @@ namespace Theater_Management_FE.Controllers
                 }
 
                 _movieListController.RefreshData();
+                MessageBox.Show("Movie added successfully!",
+                "Success",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
                 _screenController.NavigateTo<MovieList>();
+
             }
             catch (Exception ex)
             {

@@ -1,41 +1,46 @@
 <Window x:Class="Theater_Management_FE.Views.Profile"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowState="Maximized">
+        Title="National Cinema Center"
+        WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
+        Background="{StaticResource PrimaryBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel HorizontalAlignment="Center">
-            <Label Content="User Profile" HorizontalAlignment="Center"/>
-            <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="User Profile" Style="{StaticResource title}" />
+            <Border Style="{StaticResource card}" Padding="20" Margin="0,20,0,0">
                 <StackPanel>
-                    <Label Content="Username"/>
-                    <TextBox x:Name="usernameField" IsReadOnly="True"/>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Username" Style="{StaticResource form-label}" />
+                        <TextBox x:Name="usernameField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Email" Style="{StaticResource form-label}" />
+                        <TextBox x:Name="emailField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Password" Style="{StaticResource form-label}" />
+                        <PasswordBox x:Name="passwordField" IsEnabled="False" Style="{StaticResource form-password}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Phone Number" Style="{StaticResource form-label}" />
+                        <TextBox x:Name="phoneNumberField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Verified" Style="{StaticResource form-label}" />
+                        <TextBox x:Name="verifiedField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,20">
+                        <TextBlock Text="Created Date" Style="{StaticResource form-label}" />
+                        <TextBox x:Name="createdAtField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" Margin="0,0,10,0" />
+                        <Button x:Name="editButton" Content="Edit Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0" />
+                        <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}" />
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel>
-                    <Label Content="Email"/>
-                    <TextBox x:Name="emailField" IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Password"/>
-                    <PasswordBox x:Name="passwordField" IsEnabled="False"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Phone Number"/>
-                    <TextBox x:Name="phoneNumberField" IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Verified"/>
-                    <TextBox x:Name="verifiedField" IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel>
-                    <Label Content="Created Date"/>
-                    <TextBox x:Name="createdAtField" IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="backButton" Content="Back"/>
-                    <Button x:Name="editButton" Content="Edit Profile"/>
-                    <Button x:Name="logOutButton" Content="Log Out"/>
-                </StackPanel>
-            </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Window>

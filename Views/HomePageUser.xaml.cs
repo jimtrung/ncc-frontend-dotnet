@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Theater_Management_FE.Helpers;
 
 namespace Theater_Management_FE.Views
 {
@@ -7,6 +8,7 @@ namespace Theater_Management_FE.Views
         public HomePageUser()
         {
             InitializeComponent();
+            WindowHelper.InitializeWindow(this);
         }
     }
 }

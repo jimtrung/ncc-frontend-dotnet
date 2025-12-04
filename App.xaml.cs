@@ -90,7 +90,7 @@ namespace Theater_Management_FE
             sc.AutoRegister<Tintuc, TinTucController>(Services);
             // --- STARTUP MAIN WINDOW ---
             // Use ScreenController so that navigation & HandleOnOpen are consistent
-            sc.NavigateTo<Tintuc>();
+            sc.NavigateTo<Home>();
 
         }
     }

@@ -33,6 +33,9 @@ namespace Theater_Management_FE.Helpers
             // bind UI controls
             ControllerBinder.BindControls(window, controller);
 
+            var initMethod = typeof(TWindow).GetMethod("Initialize");
+            initMethod?.Invoke(window, new object[] { controller });
+
             // register
             sc.Register(window, controller);
         }

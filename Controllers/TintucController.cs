@@ -152,6 +152,11 @@ namespace Theater_Management_FE.Controllers
             return card;
         }
 
+        internal void BindUIControls(object newsWrapPanel, object btnPrev, object btnNext, object btnBackHome)
+        {
+            throw new NotImplementedException();
+        }
+
         // ========================= MODEL =========================
         private class NewsItem
         {

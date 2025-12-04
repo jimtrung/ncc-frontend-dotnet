@@ -1,8 +1,9 @@
 <Window x:Class="Theater_Management_FE.Views.ShowtimeList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Movie List"
+        Title="National Cinema Center"
         WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center"> 
@@ -10,13 +11,13 @@
         <!-- Layout 1 cột để nút và bảng thẳng hàng -->
         <Grid Width="600"> <!-- chỉnh số này để khớp độ rộng bảng -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>   <!-- Close -->
-                <RowDefinition Height="Auto"/>      <!-- Table -->
-                <RowDefinition Height="Auto"/>   <!-- Buttons bottom -->
+                <RowDefinition Height="Auto"/>  
+                <RowDefinition Height="Auto"/>     
+                <RowDefinition Height="Auto"/>   
             </Grid.RowDefinitions>
 
             <!-- Close button -->
-            <Button Content="Close"
+            <Button Content="Đóng"
                     x:Name="closeBtn"
                     Style="{StaticResource button-secondary}"
                     HorizontalAlignment="Right"
@@ -46,12 +47,12 @@
                         HorizontalAlignment="Right"
                         Margin="0,20,0,20">
                 
-                <Button Content="Delete All"
+                <Button Content="Xóa Tất Cả"
                         x:Name="deleteAllBtn"
                         Style="{StaticResource button-danger}"
                         Margin="0,0,10,0"/>
                 
-                <Button Content="Add Showtime"
+                <Button Content="Thêm Lịch Chiếu"
                         x:Name="addShowtimeBtn"
                         Style="{StaticResource button-primary}" />
             </StackPanel>

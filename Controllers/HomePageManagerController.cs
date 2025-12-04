@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
 using Theater_Management_FE.Utils;
+using Theater_Management_FE.Models;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -29,8 +30,38 @@ namespace Theater_Management_FE.Controllers
             _authTokenUtil = authTokenUtil;
         }
 
+        private AuthService _authService;
+
+        public void SetAuthService(AuthService authService)
+        {
+            _authService = authService;
+        }
+
         public void HandleOnOpen()
         {
+            // Security Check
+            var token = _authTokenUtil.LoadAccessToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                _screenController.NavigateTo<Home>();
+                return;
+            }
+
+            try
+            {
+                var user = (User)_authService.GetUser();
+                if (user.Role != UserRole.administrator)
+                {
+                    _screenController.NavigateTo<HomePageUser>();
+                    return;
+                }
+            }
+            catch
+            {
+                _screenController.NavigateTo<Home>();
+                return;
+            }
+
             if (!_isInitialized)
             {
                 if (movieButton != null) movieButton.Click += HandleMovieButton;

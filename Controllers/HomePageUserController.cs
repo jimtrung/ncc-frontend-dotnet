@@ -19,6 +19,7 @@ namespace Theater_Management_FE.Controllers
         private AuthTokenUtil authTokenUtil;
 
         public WrapPanel movieList;
+        public Button profileButton;
         public Button logoutButton;
         public TextBlock usernameText;
 
@@ -50,6 +51,7 @@ namespace Theater_Management_FE.Controllers
             {
                 if (!_isInitialized)
                 {
+                    if (profileButton != null) profileButton.Click += HandleProfileButton;
                     if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
                     _isInitialized = true;
                 }
@@ -151,6 +153,11 @@ namespace Theater_Management_FE.Controllers
             screenController.NavigateTo<SignIn>();
         }
 
+        public void HandleProfileButton(object sender, RoutedEventArgs e)
+        {
+            screenController.NavigateTo<Profile>();
+        }
+
         public void HandleLogOutButton(object sender, RoutedEventArgs e)
         {
             authTokenUtil.ClearRefreshToken();
@@ -161,7 +168,7 @@ namespace Theater_Management_FE.Controllers
 
         private void UpdateUserUI(User user)
         {
-            if (usernameText == null || logoutButton == null)
+            if (usernameText == null)
             {
                 return;
             }
@@ -169,12 +176,14 @@ namespace Theater_Management_FE.Controllers
             if (user == null)
             {
                 usernameText.Text = "Khách";
-                logoutButton.Visibility = Visibility.Collapsed;
+                if (logoutButton != null) logoutButton.Visibility = Visibility.Collapsed;
+                if (profileButton != null) profileButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 usernameText.Text = user.Username ?? "Người dùng";
-                logoutButton.Visibility = Visibility.Visible;
+                if (logoutButton != null) logoutButton.Visibility = Visibility.Visible;
+                if (profileButton != null) profileButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -227,7 +236,7 @@ namespace Theater_Management_FE.Controllers
             // Genres
             var genresText = new TextBlock
             {
-                Text = string.Join(", ", movie.Genres),
+                Text = movie.VietnameseGenres,
                 FontSize = 12,
                 Foreground = Brushes.LightGray,
                 TextTrimming = TextTrimming.CharacterEllipsis,
@@ -261,11 +270,18 @@ namespace Theater_Management_FE.Controllers
             return card;
         }
 
-        public void BindUIControls(WrapPanel movieList, Button logoutButton, TextBlock usernameText)
+        public void BindUIControls(WrapPanel movieList, Button profileButton, Button logoutButton, TextBlock usernameText)
         {
             this.movieList = movieList;
+            this.profileButton = profileButton;
             this.logoutButton = logoutButton;
             this.usernameText = usernameText;
+
+            if (this.profileButton != null)
+            {
+                this.profileButton.Click -= HandleProfileButton;
+                this.profileButton.Click += HandleProfileButton;
+            }
 
             if (this.logoutButton != null)
             {

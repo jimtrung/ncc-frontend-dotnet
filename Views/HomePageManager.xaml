@@ -8,11 +8,11 @@
     <DockPanel>
         <Border DockPanel.Dock="Top" Background="{StaticResource SecondaryBackground}" BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1" Padding="16">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button x:Name="movieButton" Content="Movie" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="auditoriumButton" Content="Auditorium" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="showtimeButton" Content="Showtime" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="profileButton" Content="Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}"/>
+                <Button x:Name="movieButton" Content="Phim" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="auditoriumButton" Content="Phòng Chiếu" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="showtimeButton" Content="Lịch Chiếu" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="profileButton" Content="Hồ Sơ" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="logOutButton" Content="Đăng Xuất" Style="{StaticResource button-danger}"/>
             </StackPanel>
         </Border>
         <Grid x:Name="contentGrid" Margin="20"/>

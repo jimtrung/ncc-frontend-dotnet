@@ -46,7 +46,39 @@ namespace Theater_Management_FE.Models
         public List<MovieGenre> Genres
         {
             get => _genres;
-            set { _genres = value; OnPropertyChanged(nameof(Genres)); }
+            set { _genres = value; OnPropertyChanged(nameof(Genres)); OnPropertyChanged(nameof(VietnameseGenres)); }
+        }
+
+        public string VietnameseGenres
+        {
+            get
+            {
+                if (Genres == null || !Genres.Any()) return "Chưa cập nhật";
+                var vietnameseGenres = Genres.Select(g => TranslateGenre(g.ToString())).ToList();
+                return string.Join(", ", vietnameseGenres);
+            }
+        }
+
+        private string TranslateGenre(string genre)
+        {
+            return genre?.ToLower() switch
+            {
+                "action" => "Hành động",
+                "adventure" => "Phiêu lưu",
+                "comedy" => "Hài",
+                "drama" => "Chính kịch",
+                "horror" => "Kinh dị",
+                "romance" => "Lãng mạn",
+                "sci-fi" => "Khoa học viễn tưởng",
+                "thriller" => "Giật gân",
+                "animation" => "Hoạt hình",
+                "fantasy" => "Giả tưởng",
+                "documentary" => "Tài liệu",
+                "family" => "Gia đình",
+                "crime" => "Tội phạm",
+                "mystery" => "Bí ẩn",
+                _ => genre // Return original if no translation found
+            };
         }
         public DateTime? Premiere
         {

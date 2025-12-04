@@ -22,12 +22,12 @@
                 HorizontalAlignment="Center">
             <StackPanel>
                 <!-- Title -->
-                <TextBlock Text="Welcome Back"
+                <TextBlock Text="Chào Mừng Trở Lại"
                            Style="{StaticResource title}"
                            FontSize="28"
                            Margin="0,0,0,8"/>
                 
-                <TextBlock Text="Sign in to your account"
+                <TextBlock Text="Đăng nhập vào tài khoản của bạn"
                            Foreground="{StaticResource SecondaryText}"
                            FontSize="14"
                            HorizontalAlignment="Center"
@@ -35,7 +35,7 @@
 
                 <!-- Username Field -->
                 <StackPanel Margin="0,0,0,20">
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Tên đăng nhập"
                                Style="{StaticResource form-label}"/>
                     <TextBox x:Name="usernameField"
                              Style="{StaticResource form-input}"
@@ -44,7 +44,7 @@
 
                 <!-- Password Field -->
                 <StackPanel Margin="0,0,0,12">
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Mật khẩu"
                                Style="{StaticResource form-label}"/>
                     <Grid>
                         <PasswordBox x:Name="passwordField"
@@ -58,7 +58,7 @@
                 </StackPanel>
 
                 <CheckBox x:Name="showPasswordCheckBox"
-                          Content="Show Password"
+                          Content="Hiển thị mật khẩu"
                           Style="{StaticResource checkbox-dark}"
                           Margin="0,0,0,24"/>
 
@@ -74,14 +74,14 @@
 
                 <!-- Buttons -->
                 <Button x:Name="signInButton"
-                        Content="Sign In"
+                        Content="Đăng Nhập"
                         Style="{StaticResource button-primary}"
                         Margin="0,0,0,12"
                         Padding="24,14"
                         FontSize="16"/>
                 
                 <Button x:Name="backButton"
-                        Content="Back"
+                        Content="Quay Lại"
                         Style="{StaticResource button-secondary}"
                         Padding="24,14"
                         FontSize="16"/>

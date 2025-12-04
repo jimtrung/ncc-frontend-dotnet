@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title -->
-        <TextBlock Text="Add Movie" Style="{StaticResource title}" Grid.Row="0" HorizontalAlignment="Center"/>
+        <TextBlock Text="Thêm Phim" Style="{StaticResource title}" Grid.Row="0" HorizontalAlignment="Center"/>
 
         <!-- Main Content -->
         <Grid Grid.Row="1" HorizontalAlignment="Center">
@@ -26,12 +26,12 @@
             <!-- Left Column -->
             <StackPanel Grid.Column="0">
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Enter movie name" Style="{StaticResource form-label}"/>
+                    <TextBlock Text="Nhập tên phim" Style="{StaticResource form-label}"/>
                     <TextBox x:Name="movieNameField" Style="{StaticResource form-input}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Select genre" Style="{StaticResource form-label}"/>
+                    <TextBlock Text="Chọn thể loại" Style="{StaticResource form-label}"/>
                     <TextBox x:Name="searchGenreField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
                     <ListView x:Name="genreListView" Height="150" SelectionMode="Multiple" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
@@ -43,20 +43,20 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,15">
-                    <TextBlock Text="Enter movie description" Style="{StaticResource form-label}"/>
+                    <TextBlock Text="Nhập mô tả phim" Style="{StaticResource form-label}"/>
                     <TextBox x:Name="movieDescriptionField" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource form-input}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
                     <StackPanel Margin="0,0,10,0">
-                        <TextBlock Text="Age limit" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Giới hạn tuổi" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="movieRatedField" Width="60" Style="{StaticResource form-input}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,10,0">
-                        <TextBlock Text="Duration" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Thời lượng" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="movieDurationField" Width="60" Style="{StaticResource form-input}"/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock Text="Language" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Ngôn ngữ" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="movieLanguageField" Width="120" Style="{StaticResource form-input}"/>
                     </StackPanel>
                 </StackPanel>
@@ -71,7 +71,7 @@
 
                 <!-- Directors -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                    <TextBlock Text="Select director" Style="{StaticResource form-label}"/>
+                    <TextBlock Text="Chọn đạo diễn" Style="{StaticResource form-label}"/>
                     <TextBox x:Name="searchDirectorField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
                     <ListView x:Name="directorListView" Height="185" SelectionMode="Single" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
@@ -84,7 +84,7 @@
 
                 <!-- Actors -->
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="Select actor" Style="{StaticResource form-label}"/>
+                    <TextBlock Text="Chọn diễn viên" Style="{StaticResource form-label}"/>
                     <TextBox x:Name="searchActorField" Style="{StaticResource form-input}" Margin="0,0,0,5"/>
                     <ListView x:Name="actorListView" Height="185" SelectionMode="Multiple" Style="{StaticResource list-view-dark}">
                         <ListView.ItemTemplate>
@@ -99,8 +99,8 @@
 
         <!-- Button Group -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="660,10,0,0">
-            <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" MinWidth="80" Margin="0,0,10,0"/>
-            <Button x:Name="addMovieButton" Content="Add" Style="{StaticResource button-primary}" MinWidth="80"/>
+            <Button x:Name="backButton" Content="Quay Lại" Style="{StaticResource button-secondary}" MinWidth="80" Margin="0,0,10,0"/>
+            <Button x:Name="addMovieButton" Content="Thêm" Style="{StaticResource button-primary}" MinWidth="80"/>
         </StackPanel>
     </Grid>
 </Window>

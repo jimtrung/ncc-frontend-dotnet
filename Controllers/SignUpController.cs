@@ -25,7 +25,6 @@ namespace Theater_Management_FE.Controllers
 
         public TextBox usernameField;
         public TextBox emailField;
-        public TextBox phoneNumberField;
         public PasswordBox passwordField;
         public TextBox visiblePasswordField;
         public CheckBox showPasswordCheckBox;
@@ -34,6 +33,7 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleOnOpen()
         {
+            // Check if user is already logged in
             User user = null;
             try { user = (User)_authService.GetUser(); } catch { }
 
@@ -41,6 +41,29 @@ namespace Theater_Management_FE.Controllers
             {
                 if (user.Role == UserRole.user) _screenController.NavigateTo<HomePageUser>();
                 if (user.Role == UserRole.administrator) _screenController.NavigateTo<HomePageManager>();
+                return;
+            }
+
+            // Reset all fields when page opens
+            if (usernameField != null) 
+            {
+                usernameField.Clear();
+                usernameField.Focus();
+            }
+            if (emailField != null) emailField.Clear();
+            if (passwordField != null)
+            {
+                passwordField.Clear();
+                passwordField.Visibility = Visibility.Visible;
+            }
+            if (visiblePasswordField != null)
+            {
+                visiblePasswordField.Clear();
+                visiblePasswordField.Visibility = Visibility.Collapsed;
+            }
+            if (showPasswordCheckBox != null)
+            {
+                showPasswordCheckBox.IsChecked = false;
             }
         }
 
@@ -50,6 +73,11 @@ namespace Theater_Management_FE.Controllers
         }
 
         public void HandleSignUpButton(object sender, RoutedEventArgs e)
+        {
+            PerformSignUp();
+        }
+
+        private void PerformSignUp()
         {
             // Ensure password is up to date from visible field if checked
             if (showPasswordCheckBox.IsChecked == true)
@@ -61,7 +89,6 @@ namespace Theater_Management_FE.Controllers
             {
                 Username = usernameField.Text,
                 Email = emailField.Text,
-                PhoneNumber = phoneNumberField.Text,
                 Password = passwordField.Password
             };
 
@@ -84,7 +111,6 @@ namespace Theater_Management_FE.Controllers
             // Clear fields
             usernameField.Clear();
             emailField.Clear();
-            phoneNumberField.Clear();
             passwordField.Clear();
             visiblePasswordField.Clear();
             showPasswordCheckBox.IsChecked = false;
@@ -96,23 +122,34 @@ namespace Theater_Management_FE.Controllers
         {
             if (showPasswordCheckBox.IsChecked == true)
             {
+                // Show password
                 visiblePasswordField.Text = passwordField.Password;
                 visiblePasswordField.Visibility = Visibility.Visible;
                 passwordField.Visibility = Visibility.Collapsed;
+                visiblePasswordField.Focus();
             }
             else
             {
+                // Hide password
                 passwordField.Password = visiblePasswordField.Text;
                 visiblePasswordField.Visibility = Visibility.Collapsed;
                 passwordField.Visibility = Visibility.Visible;
+                passwordField.Focus();
             }
         }
 
-        public void BindUIControls(TextBox usernameField, TextBox emailField, TextBox phoneNumberField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signUpButton, Button backButton)
+        private void HandleKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformSignUp();
+            }
+        }
+
+        public void BindUIControls(TextBox usernameField, TextBox emailField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signUpButton, Button backButton)
         {
             this.usernameField = usernameField;
             this.emailField = emailField;
-            this.phoneNumberField = phoneNumberField;
             this.passwordField = passwordField;
             this.visiblePasswordField = visiblePasswordField;
             this.showPasswordCheckBox = showPasswordCheckBox;
@@ -122,6 +159,12 @@ namespace Theater_Management_FE.Controllers
             this.signUpButton.Click += HandleSignUpButton;
             this.backButton.Click += HandleBackButton;
             this.showPasswordCheckBox.Click += TogglePasswordVisibility;
+            
+            // Add Enter key support
+            this.usernameField.KeyDown += HandleKeyDown;
+            this.emailField.KeyDown += HandleKeyDown;
+            this.passwordField.KeyDown += HandleKeyDown;
+            this.visiblePasswordField.KeyDown += HandleKeyDown;
         }
     }
 }

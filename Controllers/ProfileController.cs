@@ -13,16 +13,14 @@ namespace Theater_Management_FE.Controllers
         private AuthService _authService;
         private AuthTokenUtil _authTokenUtil;
 
-        // Fields must match XAML x:Name attributes (camelCase)
         public TextBox usernameField;
         public TextBox emailField;
-        public TextBox phoneNumberField;
-        public PasswordBox passwordField;
-        public TextBox verifiedField;
+        public TextBlock verifiedField;
+        public System.Windows.Controls.Border verifiedBadge;
         public TextBox createdAtField;
+        public TextBlock roleText;
 
         public Button backButton;
-        public Button editButton;
         public Button logOutButton;
 
         private bool _isInitialized = false;
@@ -36,12 +34,10 @@ namespace Theater_Management_FE.Controllers
             if (!_isInitialized)
             {
                 if (backButton != null) backButton.Click += HandleBackButton;
-                if (editButton != null) editButton.Click += HandleEditButton;
                 if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
                 _isInitialized = true;
             }
 
-            // If there's no token, user is not logged in → go back to Home silently
             var token = _authTokenUtil.LoadAccessToken();
             if (string.IsNullOrEmpty(token))
             {
@@ -55,7 +51,7 @@ namespace Theater_Management_FE.Controllers
                 userInfo = (User)_authService.GetUser();
             }
             catch (Exception ex) {
-                MessageBox.Show($"Failed to fetch user info: {ex.Message}", "Fetch error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể tải thông tin người dùng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 _screenController.NavigateTo<Home>();
                 return;
             }
@@ -64,14 +60,32 @@ namespace Theater_Management_FE.Controllers
             {
                 if (usernameField != null) usernameField.Text = userInfo.Username;
                 if (emailField != null) emailField.Text = userInfo.Email;
-                if (phoneNumberField != null) phoneNumberField.Text = userInfo.PhoneNumber;
-                if (passwordField != null) passwordField.Password = userInfo.Password;
-                if (verifiedField != null) verifiedField.Text = userInfo.Verified.ToString();
-                if (createdAtField != null) createdAtField.Text = userInfo.CreatedAt.ToString();
+                if (createdAtField != null) createdAtField.Text = userInfo.CreatedAt.ToString("dd/MM/yyyy HH:mm");
+
+                if (roleText != null)
+                {
+                    roleText.Text = userInfo.Role == UserRole.administrator ? "Quản Trị Viên" : "Người Dùng";
+                }
+
+                if (verifiedField != null && verifiedBadge != null)
+                {
+                    if (userInfo.Verified)
+                    {
+                        verifiedField.Text = "Đã xác thực";
+                        verifiedBadge.Background = new System.Windows.Media.SolidColorBrush(
+                            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#4CAF50"));
+                    }
+                    else
+                    {
+                        verifiedField.Text = "Chưa xác thực";
+                        verifiedBadge.Background = new System.Windows.Media.SolidColorBrush(
+                            (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF9800"));
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("Failed to fetch user info", "Fetch error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Không thể tải thông tin người dùng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 _screenController.NavigateTo<Home>();
             }
         }
@@ -79,11 +93,6 @@ namespace Theater_Management_FE.Controllers
         public void HandleBackButton(object sender, RoutedEventArgs e)
         {
             _screenController.NavigateTo<Home>();
-        }
-
-        public void HandleEditButton(object sender, RoutedEventArgs e)
-        {
-            // TODO: implement edit profile functionality
         }
 
         public void HandleLogOutButton(object sender, RoutedEventArgs e)

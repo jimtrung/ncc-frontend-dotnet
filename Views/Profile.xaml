@@ -6,41 +6,132 @@
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="User Profile" Style="{StaticResource title}" />
-            <Border Style="{StaticResource card}" Padding="20" Margin="0,20,0,0">
-                <StackPanel>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="Username" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="usernameField" IsReadOnly="True" Style="{StaticResource form-input}" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                <TextBlock Text="Hồ Sơ Cá Nhân" 
+                          Style="{StaticResource title}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,10"/>
+                <TextBlock x:Name="roleText"
+                          Text="Người dùng"
+                          FontSize="16"
+                          Foreground="{StaticResource SecondaryText}"
+                          HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Main Content -->
+            <Grid Grid.Row="1" MaxWidth="900">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column - Account Info -->
+                <Border Grid.Column="0" 
+                       Style="{StaticResource card}" 
+                       Padding="30">
+                    <StackPanel>
+                        <TextBlock Text="Thông Tin Tài Khoản" 
+                                  FontSize="20" 
+                                  FontWeight="SemiBold"
+                                  Foreground="{StaticResource PrimaryText}"
+                                  Margin="0,0,0,20"/>
+
+                        <!-- Username -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Tên Đăng Nhập" 
+                                      Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="usernameField" 
+                                    IsReadOnly="True" 
+                                    Style="{StaticResource form-input}"
+                                    FontSize="16"
+                                    Padding="15,12"/>
+                        </StackPanel>
+
+                        <!-- Email -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Email" 
+                                      Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="emailField" 
+                                    IsReadOnly="True" 
+                                    Style="{StaticResource form-input}"
+                                    FontSize="16"
+                                    Padding="15,12"/>
+                        </StackPanel>
+
+
                     </StackPanel>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="Email" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="emailField" IsReadOnly="True" Style="{StaticResource form-input}" />
+                </Border>
+
+                <!-- Right Column - Personal Info -->
+                <Border Grid.Column="2" 
+                       Style="{StaticResource card}" 
+                       Padding="30">
+                    <StackPanel>
+                        <TextBlock Text="Thông Tin Cá Nhân" 
+                                  FontSize="20" 
+                                  FontWeight="SemiBold"
+                                  Foreground="{StaticResource PrimaryText}"
+                                  Margin="0,0,0,20"/>
+
+                        <!-- Verified Status -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Trạng Thái Xác Thực" 
+                                      Style="{StaticResource form-label}"/>
+                            <Border x:Name="verifiedBadge"
+                                   Background="#4CAF50"
+                                   CornerRadius="6"
+                                   Padding="15,12"
+                                   HorizontalAlignment="Left">
+                                <TextBlock x:Name="verifiedField"
+                                          Text="Đã xác thực"
+                                          Foreground="White"
+                                          FontSize="14"
+                                          FontWeight="SemiBold"/>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Created Date -->
+                        <StackPanel Margin="0,0,0,0">
+                            <TextBlock Text="Ngày Tạo Tài Khoản" 
+                                      Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="createdAtField" 
+                                    IsReadOnly="True" 
+                                    Style="{StaticResource form-input}"
+                                    FontSize="16"
+                                    Padding="15,12"/>
+                        </StackPanel>
+
                     </StackPanel>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="Password" Style="{StaticResource form-label}" />
-                        <PasswordBox x:Name="passwordField" IsEnabled="False" Style="{StaticResource form-password}" />
-                    </StackPanel>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="Phone Number" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="phoneNumberField" IsReadOnly="True" Style="{StaticResource form-input}" />
-                    </StackPanel>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="Verified" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="verifiedField" IsReadOnly="True" Style="{StaticResource form-input}" />
-                    </StackPanel>
-                    <StackPanel Margin="0,0,0,20">
-                        <TextBlock Text="Created Date" Style="{StaticResource form-label}" />
-                        <TextBox x:Name="createdAtField" IsReadOnly="True" Style="{StaticResource form-input}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                        <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" Margin="0,0,10,0" />
-                        <Button x:Name="editButton" Content="Edit Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0" />
-                        <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Action Buttons at Bottom -->
+            <StackPanel Grid.Row="1" 
+                       Orientation="Horizontal" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,100,0,0"
+                       VerticalAlignment="Bottom">
+                <Button x:Name="backButton" 
+                       Content="Quay Lại" 
+                       Style="{StaticResource button-secondary}" 
+                       Margin="0,0,15,0"
+                       Padding="30,12"
+                       FontSize="16"/>
+                <Button x:Name="logOutButton" 
+                       Content="Đăng Xuất" 
+                       Style="{StaticResource button-danger}"
+                       Padding="30,12"
+                       FontSize="16"/>
+            </StackPanel>
+
+        </Grid>
     </ScrollViewer>
 </Window>

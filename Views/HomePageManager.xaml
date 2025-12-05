@@ -5,17 +5,70 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
+    
     <DockPanel>
-        <Border DockPanel.Dock="Top" Background="{StaticResource SecondaryBackground}" BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1" Padding="16">
+        <!-- Top Menu -->
+        <Border DockPanel.Dock="Top" Background="{StaticResource SecondaryBackground}" 
+                BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1" Padding="16">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button x:Name="movieButton" Content="Movie" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="auditoriumButton" Content="Auditorium" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="showtimeButton" Content="Showtime" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="profileButton" Content="Profile" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
-                <Button x:Name="logOutButton" Content="Log Out" Style="{StaticResource button-danger}"/>
+                <Button x:Name="movieButton" Content="Phim" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="auditoriumButton" Content="Phòng Chiếu" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="showtimeButton" Content="Lịch Chiếu" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="profileButton" Content="Hồ Sơ" Style="{StaticResource button-primary}" Margin="0,0,10,0"/>
+                <Button x:Name="logOutButton" Content="Đăng Xuất" Style="{StaticResource button-danger}"/>
             </StackPanel>
         </Border>
-        <Grid x:Name="contentGrid" Margin="20"/>
 
+        <!-- Main Content -->
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/> <!-- Left: info + chart -->
+                <ColumnDefinition Width="2*"/> <!-- Right: trống -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Left column: thông tin + chart -->
+            <Border Padding="10" CornerRadius="10, 10, 0, 10" Grid.Column="1">
+            <StackPanel Grid.Column="1" Background="#1A1F2E" Margin="0,0,20,0">
+                <!-- Thông tin -->
+                <TextBlock Text="Thống kê số lượng từng hạng mục" FontSize="30" Foreground="White" FontWeight="Bold" Margin="0,0,0,20" Padding="20, 10, 10, 0"/>
+                <TextBlock Text="- Người dùng: " FontSize="18" Foreground="White" Margin="0,0,0,5" Padding="30, 0, 10, 0" x:Name="userCountText"/>
+                <TextBlock Text="- Phim: " FontSize="18" Foreground="White" Margin="0,0,0,5" Padding="30, 0, 10, 0" x:Name="movieCountText"/>
+                <TextBlock Text="- Phòng: " FontSize="18" Foreground="White" Margin="0,0,0,5" Padding="30, 0, 10, 0" x:Name="auditoriumCountText"/>
+                <TextBlock Text="- Suất chiếu: " FontSize="18" Foreground="White" Margin="0,0,0,5" Padding="30, 0, 10, 0" x:Name="showtimeCountText"/>
+                <TextBlock Text="- Vé: " FontSize="18" Foreground="White" Margin="0,0,0,5" Padding="30, 0, 10, 0" x:Name="ticketCountText"/>
+                <TextBlock Text="- Tổng doanh thu dự kiến: " FontSize="18" Foreground="White" Margin="0,0,0,20" Padding="30, 0, 10, 0" x:Name="revenueText"/>
+
+                <!-- Biểu đồ cột -->
+                <Grid x:Name="chartGrid" Width="450" Height="450" Background="#2A2F3E" Margin="0,30,0,0" HorizontalAlignment="Center"/>
+
+            </StackPanel>
+            </Border>
+
+<StackPanel Grid.Column="0" Background="#1A1F2E" Margin="10,10,10,10">
+    <!-- Ảnh giới thiệu -->
+    <Border Height="400" CornerRadius="10" Margin="0,0,0,20">
+        <Image x:Name="cinemaImage" Stretch="UniformToFill" 
+               Source="pack://application:,,,/Resources/Images/logo1.webp" Margin="20"/> <!-- Thêm link ảnh ở đây sau -->
+    </Border>
+
+    <!-- Tiêu đề -->
+    <TextBlock Text="Rạp Chiếu Phim Quốc Gia" 
+               FontSize="24" 
+               FontWeight="Bold" 
+               Foreground="White" 
+               Margin="20,0,0,15"/>
+
+    <!-- Giới thiệu -->
+    <TextBlock Text="Rạp Chiếu Phim Quốc Gia là trung tâm điện ảnh lớn nhất tại Việt Nam, nơi trình chiếu các bộ phim quốc tế và trong nước chất lượng cao. Với trang thiết bị hiện đại, âm thanh và hình ảnh sống động, rạp mang đến trải nghiệm điện ảnh đỉnh cao cho khán giả mọi lứa tuổi."
+               TextWrapping="Wrap"
+               FontSize="16"
+               Foreground="LightGray"
+               Margin="35, 0, 20, 0"/>
+
+    <!-- Thêm khoảng trống phía dưới cho cân bằng bố cục -->
+    <Rectangle Height="20" Fill="Transparent"/>
+</StackPanel>
+
+        </Grid>
     </DockPanel>
 </Window>

@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <!-- Close button -->
-            <Button Content="Close"
+            <Button Content="Đóng"
                     x:Name="closeBtn"
                     Style="{StaticResource button-secondary}"
                     HorizontalAlignment="Right"
@@ -48,12 +48,12 @@
                         HorizontalAlignment="Right"
                         Margin="0,20,0,20">
                 
-                <Button Content="Delete All"
+                <Button Content="Xóa Tất Cả"
                         x:Name="deleteAllBtn"
                         Style="{StaticResource button-danger}"
                         Margin="0,0,10,0"/>
                 
-                <Button Content="Add Movie"
+                <Button Content="Thêm Phim"
                         x:Name="addMovieBtn"
                         Style="{StaticResource button-primary}" />
             </StackPanel>

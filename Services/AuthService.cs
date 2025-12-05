@@ -37,7 +37,6 @@ public class AuthService
         {
             username = user.Username,
             email = user.Email,
-            phone_number = user.PhoneNumber,
             password = user.Password
         };
 
@@ -154,7 +153,7 @@ public class AuthService
         return user ?? new User();
     }
 
-    public string Refresh()
+    public string? Refresh()
     {
         var body = new
         {
@@ -162,6 +161,8 @@ public class AuthService
         };
 
         var response = _httpClient.PostAsJsonAsync("auth/refresh", body, JsonOptions).Result;
+        if (!response.IsSuccessStatusCode) return null;
+        
         return response.Content.ReadAsStringAsync().Result;
     }
 }

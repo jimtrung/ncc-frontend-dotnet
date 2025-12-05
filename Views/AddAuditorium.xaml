@@ -12,7 +12,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Add Auditorium"
+            <TextBlock Text="Thêm Phòng Chiếu"
                        Style="{StaticResource title}"
                        Grid.Row="0"
                        HorizontalAlignment="Center"
@@ -21,28 +21,28 @@
             <Border Style="{StaticResource card}" Padding="24" MinWidth="400" MaxWidth="600" Grid.Row="1">
                 <StackPanel>
                     <StackPanel Margin="0,0,0,12">
-                        <TextBlock Text="Auditorium Name" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Tên phòng chiếu" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="auditoriumNameField" Style="{StaticResource form-input}" Foreground="White"/>
                     </StackPanel>
 
                     <StackPanel Margin="0,0,0,12">
-                        <TextBlock Text="Auditorium Type" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Loại phòng" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="auditoriumTypeField" Style="{StaticResource form-input}" Foreground="White"/>
                     </StackPanel>
 
                     <StackPanel Margin="0,0,0,12">
-                        <TextBlock Text="Capacity" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Sức chứa" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="auditoriumCapacityField" Style="{StaticResource form-input}" Foreground="White"/>
                     </StackPanel>
 
                     <StackPanel Margin="0,0,0,20">
-                        <TextBlock Text="Note" Style="{StaticResource form-label}"/>
+                        <TextBlock Text="Ghi chú" Style="{StaticResource form-label}"/>
                         <TextBox x:Name="auditoriumNoteField" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Style="{StaticResource form-input}" Foreground="White"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Back" x:Name="backButton" Style="{StaticResource button-secondary}" Margin="0,0,12,0"/>
-                        <Button Content="Add Auditorium" x:Name="addAuditoriumButton" Style="{StaticResource button-primary}"/>
+                        <Button Content="Quay Lại" x:Name="backButton" Style="{StaticResource button-secondary}" Margin="0,0,12,0"/>
+                        <Button Content="Thêm Phòng" x:Name="addAuditoriumButton" Style="{StaticResource button-primary}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>

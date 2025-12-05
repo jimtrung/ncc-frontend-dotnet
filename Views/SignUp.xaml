@@ -7,10 +7,14 @@
         Background="{StaticResource PrimaryBackground}">
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#0F1419" Offset="0"/>
-                <GradientStop Color="#1A1F2E" Offset="0.5"/>
-                <GradientStop Color="#0F1419" Offset="1"/>
+            <LinearGradientBrush StartPoint="0,0"
+                    EndPoint="1,1">
+                <GradientStop Color="#0F1419"
+                        Offset="0"/>
+                <GradientStop Color="#1A1F2E"
+                        Offset="0.5"/>
+                <GradientStop Color="#0F1419"
+                        Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -22,12 +26,12 @@
                 HorizontalAlignment="Center">
             <StackPanel>
                 <!-- Title -->
-                <TextBlock Text="Create Account"
+                <TextBlock Text="Tạo Tài Khoản"
                            Style="{StaticResource title}"
                            FontSize="28"
                            Margin="0,0,0,8"/>
-                
-                <TextBlock Text="Join the National Cinema Center"
+
+                <TextBlock Text="Tham gia Rạp Chiếu Phim Quốc Gia"
                            Foreground="{StaticResource SecondaryText}"
                            FontSize="14"
                            HorizontalAlignment="Center"
@@ -35,7 +39,7 @@
 
                 <!-- Username Field -->
                 <StackPanel Margin="0,0,0,16">
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Tên đăng nhập"
                                Style="{StaticResource form-label}"/>
                     <TextBox x:Name="usernameField"
                              Style="{StaticResource form-input}"/>
@@ -49,17 +53,10 @@
                              Style="{StaticResource form-input}"/>
                 </StackPanel>
 
-                <!-- Phone Number Field -->
-                <StackPanel Margin="0,0,0,16">
-                    <TextBlock Text="Phone Number"
-                               Style="{StaticResource form-label}"/>
-                    <TextBox x:Name="phoneNumberField"
-                             Style="{StaticResource form-input}"/>
-                </StackPanel>
 
                 <!-- Password Field -->
                 <StackPanel Margin="0,0,0,12">
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Mật khẩu"
                                Style="{StaticResource form-label}"/>
                     <Grid>
                         <PasswordBox x:Name="passwordField"
@@ -70,21 +67,35 @@
                     </Grid>
                 </StackPanel>
 
+                <!-- Confirm Password Field -->
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Xác nhận mật khẩu"
+                               Style="{StaticResource form-label}"/>
+                    <Grid>
+                        <PasswordBox x:Name="confirmPasswordField"
+                                     Style="{StaticResource form-password}"/>
+                        <TextBox x:Name="visibleConfirmPasswordField"
+                                 Style="{StaticResource form-input}"
+                                 Visibility="Collapsed"/>
+                    </Grid>
+                </StackPanel>
+
+
                 <CheckBox x:Name="showPasswordCheckBox"
-                          Content="Show Password"
+                          Content="Hiển thị mật khẩu"
                           Style="{StaticResource checkbox-dark}"
                           Margin="0,0,0,28"/>
 
                 <!-- Buttons -->
                 <Button x:Name="signUpButton"
-                        Content="Sign Up"
+                        Content="Đăng Ký"
                         Style="{StaticResource button-primary}"
                         Margin="0,0,0,12"
                         Padding="24,14"
                         FontSize="16"/>
-                
+
                 <Button x:Name="backButton"
-                        Content="Back"
+                        Content="Quay Lại"
                         Style="{StaticResource button-secondary}"
                         Padding="24,14"
                         FontSize="16"/>

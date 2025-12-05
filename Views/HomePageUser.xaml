@@ -56,7 +56,7 @@
                 <!-- Logo / Title -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
                     <StackPanel>
-                        <TextBlock Text="TRUNG TÂU CHIẾU PHIM QUỐC GIA" Foreground="{StaticResource PrimaryText}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" />
+                        <TextBlock Text="TRUNG TÂM CHIẾU PHIM QUỐC GIA" Foreground="{StaticResource PrimaryText}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" />
                         <TextBlock Text="National Cinema Center" Foreground="{StaticResource SecondaryText}" FontSize="14" />
                     </StackPanel>
                 </StackPanel>
@@ -70,13 +70,17 @@
                     <Button x:Name="priceButton" Style="{StaticResource NavButtonStyle}" Content="Giá vé" />
                     <Button x:Name="aboutButton" Style="{StaticResource NavButtonStyle}" Content="Giới thiệu" />
                 </StackPanel>
-                <!-- User Greeting / Logout -->
-                <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
-                    <StackPanel Margin="0,0,12,0">
+                <!-- User Greeting / Dropdown -->
+                <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel Margin="0,0,12,0" VerticalAlignment="Center">
                         <TextBlock Text="Xin chào," Foreground="{StaticResource SecondaryText}" FontSize="12" HorizontalAlignment="Right" />
                         <TextBlock x:Name="usernameText" Text="Khách" Foreground="{StaticResource PrimaryText}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Right" />
                     </StackPanel>
-                    <Button x:Name="logoutButton" Content="Đăng xuất" Padding="16,8" Background="{StaticResource Danger}" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Visibility="Collapsed" Cursor="Hand" Margin="0,0,10,0"/>
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="profileButton" Content="Hồ sơ" Style="{StaticResource NavButtonStyle}" Margin="0,0,8,0" Visibility="Collapsed"/>
+                        <Button x:Name="logoutButton" Content="Đăng xuất" Style="{StaticResource NavButtonStyle}" Foreground="{StaticResource Danger}" Visibility="Collapsed"/>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Border>

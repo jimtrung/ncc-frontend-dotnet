@@ -29,13 +29,13 @@
                         Foreground="White"/>
 
                 
-                <TextBlock Text="Theater Management"
+                <TextBlock Text="Quản Lý Rạp Chiếu Phim"
                            x:Name="titleLabel"
                            Style="{StaticResource title}"
                            FontSize="28"
                            Margin="0,0,0,8"/>
                 
-                <TextBlock Text="Welcome to the National Cinema Center"
+                <TextBlock Text="Chào mừng đến với Trung Tâm Chiếu Phim Quốc Gia"
                            Foreground="{StaticResource SecondaryText}"
                            FontSize="14"
                            HorizontalAlignment="Center"
@@ -43,14 +43,14 @@
 
                 <!-- Action Buttons -->
                 <Button x:Name="signinButton"
-                        Content="Sign In"
+                        Content="Đăng Nhập"
                         Style="{StaticResource button-primary}"
                         Margin="0,0,0,12"
                         Padding="24,14"
                         FontSize="16"/>
                 
                 <Button x:Name="signupButton"
-                        Content="Sign Up"
+                        Content="Đăng Ký"
                         Style="{StaticResource button-secondary}"
                         Margin="0,0,0,12"
                         Padding="24,14"

@@ -17,116 +17,130 @@ namespace Theater_Management_FE
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
-            // Bật các nút đóng, zoom nhỏ/zoom to, đóng Window
-            CommandManager.RegisterClassCommandBinding(typeof(Window),
-                new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
-            CommandManager.RegisterClassCommandBinding(typeof(Window),
-                new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
-            CommandManager.RegisterClassCommandBinding(typeof(Window),
-                new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
-            CommandManager.RegisterClassCommandBinding(typeof(Window),
-                new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
-
-            // Khi app đóng thì đóng tất cả các window
-            ShutdownMode = ShutdownMode.OnMainWindowClose;
-
-            var services = new ServiceCollection();
-
-            // HttpClient Factory
-            services.AddHttpClient();
-
-            // === Services ===
-            services.AddSingleton<AuthTokenUtil>();
-            services.AddSingleton<AuthService>(sp =>
+            try
             {
-                var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient();
-                var tokenUtil = sp.GetRequiredService<AuthTokenUtil>();
-                return new AuthService(httpClient, tokenUtil);
-            });
-            services.AddSingleton<MovieService>();
-            services.AddSingleton<AuditoriumService>();
-            services.AddSingleton<MovieActorService>();
-            services.AddSingleton<DirectorService>();
-            services.AddSingleton<ActorService>();
-            services.AddSingleton<ShowtimeService>();
-            services.AddSingleton<TicketService>();
-            services.AddSingleton<UserService>();
+                base.OnStartup(e);
 
-            // === Controllers ===
-            services.AddTransient<SignInController>();
-            services.AddTransient<SignUpController>();
-            services.AddTransient<HomePageUserController>();
-            services.AddTransient<HomePageManagerController>();
-            services.AddTransient<HomeController>();
-            services.AddTransient<MovieListController>();
-            services.AddTransient<AuditoriumListController>();
-            services.AddTransient<ProfileController>();
-            services.AddTransient<AddMovieController>();
-            services.AddTransient<AddAuditoriumController>();
-            services.AddTransient<MovieInformationController>();
-            services.AddTransient<AuditoriumInformationController>();
-            services.AddTransient<ShowtimeListController>();
-            services.AddTransient<AddShowtimeController>();
-            services.AddTransient<ShowtimeInformationController>();
-            services.AddTransient<ShowtimePageController>();
-            services.AddTransient<BookTicketController>();
-            services.AddTransient<BookedTicketController>();
-            services.AddTransient<PayPageController>();
+                // Bật các nút đóng, zoom nhỏ/zoom to, đóng Window
+                CommandManager.RegisterClassCommandBinding(typeof(Window),
+                    new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+                CommandManager.RegisterClassCommandBinding(typeof(Window),
+                    new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+                CommandManager.RegisterClassCommandBinding(typeof(Window),
+                    new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+                CommandManager.RegisterClassCommandBinding(typeof(Window),
+                    new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
-            // === Windows ===
-            services.AddTransient<SignIn>();
-            services.AddTransient<SignUp>();
-            services.AddTransient<HomePageUser>();
-            services.AddTransient<HomePageManager>();
-            services.AddTransient<Home>();
-            services.AddTransient<MovieList>();
-            services.AddTransient<AuditoriumList>();
-            services.AddTransient<Profile>();
-            services.AddTransient<AddMovie>();
-            services.AddTransient<AddAuditorium>();
-            services.AddTransient<MovieInformation>();
-            services.AddTransient<AuditoriumInformation>();
-            services.AddTransient<ShowtimeList>();
-            services.AddTransient<AddShowtime>();
-            services.AddTransient<ShowtimeInformation>();
-            services.AddTransient<ShowtimePage>();
-            services.AddTransient<BookTicket>();
-            services.AddTransient<BookedTicket>();
-            services.AddTransient<PayPage>();
+                // Khi app đóng thì đóng tất cả các window
+                ShutdownMode = ShutdownMode.OnMainWindowClose;
 
-            // ScreenController
-            services.AddSingleton<ScreenController>();
+                var services = new ServiceCollection();
 
-            Services = services.BuildServiceProvider();
+                // HttpClient Factory
+                services.AddHttpClient();
 
-            var sc = Services.GetRequiredService<ScreenController>();
+                // === Services ===
+                services.AddSingleton<AuthTokenUtil>();
+                services.AddSingleton<AuthService>(sp =>
+                {
+                    var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient();
+                    var tokenUtil = sp.GetRequiredService<AuthTokenUtil>();
+                    return new AuthService(httpClient, tokenUtil);
+                });
+                services.AddSingleton<MovieService>();
+                services.AddSingleton<AuditoriumService>();
+                services.AddSingleton<MovieActorService>();
+                services.AddSingleton<DirectorService>();
+                services.AddSingleton<ActorService>();
+                services.AddSingleton<ShowtimeService>();
+                services.AddSingleton<TicketService>();
+                services.AddSingleton<UserService>();
 
-            // --- REGISTER ALL WINDOWS + CONTROLLERS ---
-            sc.AutoRegister<Home, HomeController>(Services);
-            sc.AutoRegister<SignIn, SignInController>(Services);
-            sc.AutoRegister<SignUp, SignUpController>(Services);
-            sc.AutoRegister<HomePageUser, HomePageUserController>(Services);
-            sc.AutoRegister<HomePageManager, HomePageManagerController>(Services);
-            sc.AutoRegister<MovieList, MovieListController>(Services);
-            sc.AutoRegister<AuditoriumList, AuditoriumListController>(Services);
-            sc.AutoRegister<Profile, ProfileController>(Services);
-            sc.AutoRegister<AddMovie, AddMovieController>(Services);
-            sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
-            sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
-            sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
+                // === Controllers ===
+                services.AddTransient<SignInController>();
+                services.AddTransient<SignUpController>();
+                services.AddTransient<HomePageUserController>();
+                services.AddTransient<HomePageManagerController>();
+                services.AddTransient<HomeController>();
+                services.AddTransient<MovieListController>();
+                services.AddTransient<AuditoriumListController>();
+                services.AddTransient<ProfileController>();
+                services.AddTransient<AddMovieController>();
+                services.AddTransient<AddAuditoriumController>();
+                services.AddTransient<MovieInformationController>();
+                services.AddTransient<AuditoriumInformationController>();
+                services.AddTransient<ShowtimeListController>();
+                services.AddTransient<AddShowtimeController>();
+                services.AddTransient<ShowtimeInformationController>();
+                services.AddTransient<ShowtimePageController>();
+                services.AddTransient<BookTicketController>();
+                services.AddTransient<BookedTicketController>();
+                services.AddTransient<PayPageController>();
+                services.AddTransient<TinTucController>();
+                services.AddTransient<EventListController>();
 
-            sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
-            sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
-            sc.AutoRegister<ShowtimeInformation, ShowtimeInformationController>(Services);
-            sc.AutoRegister<ShowtimePage, ShowtimePageController>(Services);
-            sc.AutoRegister<BookTicket, BookTicketController>(Services);
-            sc.AutoRegister<BookedTicket, BookedTicketController>(Services);
-            sc.AutoRegister<PayPage, PayPageController>(Services);
+                // === Windows ===
+                services.AddTransient<SignIn>();
+                services.AddTransient<SignUp>();
+                services.AddTransient<HomePageUser>();
+                services.AddTransient<HomePageManager>();
+                services.AddTransient<Home>();
+                services.AddTransient<MovieList>();
+                services.AddTransient<AuditoriumList>();
+                services.AddTransient<Profile>();
+                services.AddTransient<AddMovie>();
+                services.AddTransient<AddAuditorium>();
+                services.AddTransient<MovieInformation>();
+                services.AddTransient<AuditoriumInformation>();
+                services.AddTransient<ShowtimeList>();
+                services.AddTransient<AddShowtime>();
+                services.AddTransient<ShowtimeInformation>();
+                services.AddTransient<ShowtimePage>();
+                services.AddTransient<BookTicket>();
+                services.AddTransient<BookedTicket>();
+                services.AddTransient<PayPage>();
+                services.AddTransient<EventList>();
+                services.AddTransient<TinTuc>(); 
 
-            // --- STARTUP MAIN WINDOW ---
-            sc.NavigateTo<Home>();
+                // ScreenController
+                services.AddSingleton<ScreenController>();
+
+                Services = services.BuildServiceProvider();
+
+                var sc = Services.GetRequiredService<ScreenController>();
+
+                // --- REGISTER ALL WINDOWS + CONTROLLERS ---
+                sc.AutoRegister<Home, HomeController>(Services);
+                sc.AutoRegister<SignIn, SignInController>(Services);
+                sc.AutoRegister<SignUp, SignUpController>(Services);
+                sc.AutoRegister<HomePageUser, HomePageUserController>(Services);
+                sc.AutoRegister<HomePageManager, HomePageManagerController>(Services);
+                sc.AutoRegister<MovieList, MovieListController>(Services);
+                sc.AutoRegister<AuditoriumList, AuditoriumListController>(Services);
+                sc.AutoRegister<Profile, ProfileController>(Services);
+                sc.AutoRegister<AddMovie, AddMovieController>(Services);
+                sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
+                sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
+                sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
+
+                sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
+                sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
+                sc.AutoRegister<ShowtimeInformation, ShowtimeInformationController>(Services);
+                sc.AutoRegister<ShowtimePage, ShowtimePageController>(Services);
+                sc.AutoRegister<BookTicket, BookTicketController>(Services);
+                sc.AutoRegister<BookedTicket, BookedTicketController>(Services);
+                sc.AutoRegister<PayPage, PayPageController>(Services);
+                sc.AutoRegister<TinTuc, TinTucController>(Services);
+                sc.AutoRegister<EventList, EventListController>(Services);
+
+                // --- STARTUP MAIN WINDOW ---
+                sc.NavigateTo<EventList>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Shutdown();
+            }
         }
 
         private void OnCloseWindow(object target, ExecutedRoutedEventArgs e)

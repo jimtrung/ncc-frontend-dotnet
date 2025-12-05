@@ -1,0 +1,118 @@
+<Window x:Class="Theater_Management_FE.Views.EventList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Danh Sách Sự Kiện" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA"> 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#1A202C" Padding="20">
+            <StackPanel HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,5">
+                    <TextBlock Text="Ưu Đãi &amp; Khuyến Mãi"
+                               Foreground="White"
+                               FontSize="28" FontWeight="Bold" />
+                    </StackPanel>
+                <Rectangle Height="2" Width="200" Fill="#4CAF50" Margin="0,5,0,0"/> 
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,15">
+            <TextBlock Text="Lọc theo:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="#333333"/>
+            
+            <ComboBox SelectedIndex="0" Width="150" Margin="0,0,10,0">
+                <ComboBoxItem Content="Tất cả"/>
+                <ComboBoxItem Content="Phim"/>
+                <ComboBoxItem Content="Âm nhạc"/>
+                <ComboBoxItem Content="Du lịch"/>
+                <ComboBoxItem Content="Khác"/>
+            </ComboBox>
+
+            <TextBlock Text="Sắp xếp:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="#333333"/>
+            <ComboBox SelectedIndex="0" Width="150">
+                <ComboBoxItem Content="Ngày kết thúc (sớm nhất)"/>
+                <ComboBoxItem Content="Ngày kết thúc (muộn nhất)"/>
+                <ComboBoxItem Content="Mới nhất"/>
+            </ComboBox>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20">
+                <ItemsControl ItemsSource="{Binding Events}" x:Name="eventItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+                                    Background="White" Cursor="Hand">
+                                
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
+                                </Border.Effect>
+
+                                <StackPanel>
+                                    <Grid Height="200">
+                                        <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                                            <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
+                                        </Border>
+                                        
+                                        <Border Background="#FF4500" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                                Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+                                            <TextBlock Text="HOT" FontWeight="Bold" Foreground="White" FontSize="13"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <StackPanel Margin="15,10,15,15" >
+                                        <TextBlock Text="{Binding Title}" FontWeight="ExtraBold" FontSize="17" 
+                                                   Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                            <TextBlock Text="{Binding EndDate, StringFormat='Kết thúc: {0:dd/MM}'}" 
+                                                       FontSize="12" Foreground="#666666"/>
+                                        </StackPanel>
+                                        
+                                        <Button Content="Xem chi tiết" 
+                                                HorizontalAlignment="Right" Margin="0,15,0,0" />
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#F0F5F9"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderBrush" Value="#007ACC"/>
+                                                <Setter Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <TranslateTransform Y="-3"/> </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

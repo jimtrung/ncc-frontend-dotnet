@@ -1,0 +1,174 @@
+<Window x:Class="Theater_Management_FE.Views.PayPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowState="Maximized"
+        Title="Thông tin vé"
+        Style="{StaticResource CustomWindowStyle}"
+        Background="{StaticResource PrimaryBackground}">
+
+    <Border Style="{StaticResource card}"
+            Width="650"
+            Height="370"
+            Padding="20"
+            Margin="12"
+            CornerRadius="10"
+            Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left side: Ticket information -->
+            <!-- Left side: Ticket information -->
+            <Grid Grid.Column="0"
+                    Margin="10,10,16,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Nút Back -->
+                </Grid.RowDefinitions>
+
+                <!-- Thông tin vé, font size đồng bộ, chữ đen -->
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Tên phim:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketMovieName"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Phòng:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketAuditoriumName"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="2"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Giờ bắt đầu:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketStartTime"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="3"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Giờ kết thúc:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketEndTime"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="4"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Ngày chiếu:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketShowDate"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="5"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Số ghế:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketSeatName"
+                            FontSize="22"
+                            Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        Grid.Row="6"
+                        Margin="0,0,0,12">
+                    <TextBlock Text="Giá vé:"
+                            FontWeight="Bold"
+                            Width="140"
+                            FontSize="22"
+                            Foreground="Black"/>
+                    <TextBlock x:Name="ticketPrice"
+                            Foreground="DarkRed"
+                            FontWeight="Bold"
+                            FontSize="22"/>
+                </StackPanel>
+            </Grid>
+
+
+            <!-- Right side: QR Code và nút Trở lại -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- QR code chiếm phần lớn -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Nút Trở lại -->
+                </Grid.RowDefinitions>
+
+                <!-- QR Code -->
+                <Border Grid.Row="0"
+                        Background="#F0F0F0"
+                        CornerRadius="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Padding="0">
+                    <Image x:Name="ticketQRCode"
+                            Width="250"
+                            Height="250"
+                            Stretch="UniformToFill"
+                            Source="pack://application:,,,/Resources/Images/QR.jpg"/>
+                </Border>
+
+                <!-- Nút Trở lại -->
+                <Button Grid.Row="1"
+                        x:Name="back"
+                        Content="Trở lại"
+                        Width="100"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,0,0"
+                        Background="#FFDD4B39"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="20"/>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>

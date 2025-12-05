@@ -1,0 +1,80 @@
+<Window x:Class="Theater_Management_FE.Views.ShowtimeInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="National Cinema Center"
+        WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
+        Background="{StaticResource PrimaryBackground}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <TextBlock Text="Showtime Information" Style="{StaticResource title}"/>
+
+            <Border Style="{StaticResource card}" Padding="32" Width="600">
+                <StackPanel>
+
+                    <!-- Movie Name -->
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Movie Name" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="showtimeMovieNameField"
+                                 Style="{StaticResource form-input}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <!-- Auditorium -->
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Auditorium" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="showtimeAuditoriumNameField"
+                                 Style="{StaticResource form-input}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <!-- Quantity -->
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Quantity" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="showtimeQuantityField"
+                                 Style="{StaticResource form-input}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <!-- Show Date -->
+                    <StackPanel Margin="0,0,0,16">
+                        <TextBlock Text="Show Date" Style="{StaticResource form-label}"/>
+                        <TextBox x:Name="showtimeDateField"
+                                 Style="{StaticResource form-input}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <!-- Start + End Time (same row) -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                        <StackPanel Margin="0,0,16,0">
+                            <TextBlock Text="Start Time" Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="showtimeStartTimeField"
+                                     Width="120"
+                                     Style="{StaticResource form-input}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="End Time" Style="{StaticResource form-label}"/>
+                            <TextBox x:Name="showtimeEndTimeField"
+                                     Width="120"
+                                     Style="{StaticResource form-input}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Buttons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="backButton" Content="Back" Style="{StaticResource button-secondary}" Margin="0,0,12,0"/>
+                        <Button x:Name="deleteButton" Content="Delete" Style="{StaticResource button-danger}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>

@@ -61,8 +61,35 @@ namespace Theater_Management_FE.Controllers
             quantityColumn.Binding = new System.Windows.Data.Binding("Quantity");
 
             showtimeTable.ItemsSource = ShowtimeList;
+
+            showtimeTable.SelectionChanged += (s, e) =>
+            {
+                if (showtimeTable.SelectedItem is Showtime selectedShowtime)
+                {
+                    _uuid = selectedShowtime.Id;
+                    HandleClickItem(_uuid);
+
+                }
+            };
             // Sau đó load dữ liệu
             LoadShowtimes();
+        }
+
+        public void HandleClickItem(Guid id)
+        {
+            try
+            {
+                var showtimeInfoController = _screenController.GetController<ShowtimeInformationController>();
+                if (showtimeInfoController != null)
+                {
+                    showtimeInfoController.SetShowtimeId(id);
+                    _screenController.NavigateTo<ShowtimeInformation>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to navigate to showtime details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void HandleAddShowtime()
@@ -115,7 +142,7 @@ namespace Theater_Management_FE.Controllers
                     // Có thể dùng các property tạm để binding tên phim, phòng
                     MovieName = movie?.Name ?? "Unknown",
                     AuditoriumName = auditorium?.Name ?? "Unknown",
-                    Quantity = auditorium != null ? auditorium.Capacity.ToString() : "0" // gán capacity
+                    Quantity = auditorium != null ? auditorium.Capacity : 0 // gán capacity
                 };
 
                 ShowtimeList.Add(showtimeItem);

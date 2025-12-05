@@ -16,7 +16,7 @@ namespace Theater_Management_FE.Models
         private DateTime _updatedAt;
         private string _movieName;
         private string _auditoriumName;
-        private string _quantity;
+        private int _quantity;
 
         // --- Properties ---
         public Guid Id
@@ -79,7 +79,7 @@ namespace Theater_Management_FE.Models
             set => SetField(ref _auditoriumName, value, nameof(AuditoriumName));
         }
 
-        public string Quantity
+        public int Quantity
         {
             get => _quantity;
             set => SetField(ref _quantity, value, nameof(Quantity));

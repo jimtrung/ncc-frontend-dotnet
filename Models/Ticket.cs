@@ -6,48 +6,31 @@ namespace Theater_Management_FE.Models
     {
         private Guid _id;
         private Guid _userId;
-        private User _user;
         private Guid _showtimeId;
-        private Showtime _showtime;
-        private Guid _seatId;
-        private Seat _seat;
+        private string _seatName;
         private int _price;
         private DateTime _createdAt;
         private DateTime _updatedAt;
+
+        public string Seatname
+        {
+            get => _seatName;
+            set { _seatName = value; OnPropertyChanged(nameof(Seatname)); }
+        }
         public Guid Id
         {
             get => _id;
             set { _id = value; OnPropertyChanged(nameof(Id)); }
         }
-        public Guid UserId
+        public Guid Userid
         {
             get => _userId;
-            set { _userId = value; OnPropertyChanged(nameof(UserId)); }
+            set { _userId = value; OnPropertyChanged(nameof(Userid)); }
         }
-        public User User
-        {
-            get => _user;
-            set { _user = value; OnPropertyChanged(nameof(User)); }
-        }
-        public Guid ShowtimeId
+        public Guid Showtimeid
         {
             get => _showtimeId;
-            set { _showtimeId = value; OnPropertyChanged(nameof(ShowtimeId)); }
-        }
-        public Showtime Showtime
-        {
-            get => _showtime;
-            set { _showtime = value; OnPropertyChanged(nameof(Showtime)); }
-        }
-        public Guid SeatId
-        {
-            get => _seatId;
-            set { _seatId = value; OnPropertyChanged(nameof(SeatId)); }
-        }
-        public Seat Seat
-        {
-            get => _seat;
-            set { _seat = value; OnPropertyChanged(nameof(Seat)); }
+            set { _showtimeId = value; OnPropertyChanged(nameof(Showtimeid)); }
         }
         public int Price
         {

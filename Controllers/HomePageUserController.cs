@@ -63,7 +63,7 @@ namespace Theater_Management_FE.Controllers
                 // Check if required services are available
                 if (authService == null || movieService == null || screenController == null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Required services not initialized");
+                    MessageBox.Show("Các dịch vụ yêu cầu chưa được khởi tạo", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -76,7 +76,7 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Failed to get user: {ex.Message}");
+                    MessageBox.Show($"Không thể lấy thông tin người dùng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     // Treat as guest or navigate to Home if strict
                     screenController.NavigateTo<Home>();
                     return;
@@ -111,7 +111,7 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Failed to load movies: {ex.Message}");
+                    MessageBox.Show($"Không thể tải danh sách phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     errorMessage = "Unable to load movies. Please try again later.";
                     movies = new List<Movie>();
                 }
@@ -123,7 +123,7 @@ namespace Theater_Management_FE.Controllers
                 {
                     if (movieList != null)
                     {
-                        var msg = errorMessage ?? "No movies available 🎬";
+                        var msg = errorMessage ?? "Không có phim nào 🎬";
                         var color = errorMessage != null ? Brushes.Red : Brushes.White;
                         movieList.Children.Add(new TextBlock 
                         { 
@@ -136,6 +136,8 @@ namespace Theater_Management_FE.Controllers
                     return;
                 }
 
+                MessageBox.Show($"Đã tải {movies.Count} phim.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 foreach (var movie in movies)
                 {
                     if (movieList != null) movieList.Children.Add(CreateMovieCard(movie));
@@ -143,7 +145,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"An error occurred in HomePageUser: {ex.Message}");
+                MessageBox.Show($"Lỗi trong HomePageUserController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -211,18 +213,25 @@ namespace Theater_Management_FE.Controllers
                 Background = System.Windows.Media.Brushes.LightGray
             };
 
-            var imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
-            var imageUri = System.IO.File.Exists(imagePath) 
-                ? new Uri(imagePath) 
-                : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
-
+            // Try to load movie poster, fallback to not_found.png if it doesn't exist
+            var imageUri = new Uri($"pack://application:,,,/Resources/Images/Movies/{movie.Id}.jpg");
+            
             var poster = new Image
             {
                 Width = 204,
                 Height = 280,
-                Stretch = System.Windows.Media.Stretch.UniformToFill,
-                Source = new BitmapImage(imageUri)
+                Stretch = System.Windows.Media.Stretch.UniformToFill
             };
+
+            try
+            {
+                poster.Source = new BitmapImage(imageUri);
+            }
+            catch
+            {
+                // If movie poster doesn't exist, use not_found.png
+                poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Movies/not_found.png"));
+            }
             posterBorder.Child = poster;
 
             var title = new TextBlock

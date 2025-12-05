@@ -90,6 +90,9 @@ namespace Theater_Management_FE.Controllers
                     _isInitialized = true;
                     if (backButton != null) backButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (bookTicketButton != null) bookTicketButton.Click += (s, e) => HandleBookTicketButton();
+                    
+                    // Debug logs
+                    MessageBox.Show($"[BookTicketController] Initialized. bookTicketButton is {(bookTicketButton == null ? "NULL" : "OK")}");
                 }
 
                 // Gọi API lấy showtime
@@ -106,10 +109,14 @@ namespace Theater_Management_FE.Controllers
                     // Giá đã set từ SetPrice()
                     ticketPrice.Text = $"{_price}.000 đ";
                 }
+                else
+                {
+                    MessageBox.Show($"Lỗi: Không tìm thấy suất chiếu với ID: {_uuid}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in BookTicketController: {ex.Message}");
+                MessageBox.Show($"Lỗi trong BookTicketController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -135,10 +142,10 @@ namespace Theater_Management_FE.Controllers
                     return;
                 }
 
-                if (ticketSeatSelector == null) MessageBox.Show("ticketSeatSelector is null");
-                if (authTokenUtil == null) MessageBox.Show("authTokenUtil is null");
-                if (ticketService == null) MessageBox.Show("ticketService is null");
-                if (screenController == null) MessageBox.Show("screenController is null");
+                if (ticketSeatSelector == null) MessageBox.Show("Lỗi: ticketSeatSelector bị null", "Lỗi");
+                if (authTokenUtil == null) MessageBox.Show("Lỗi: authTokenUtil bị null", "Lỗi");
+                if (ticketService == null) MessageBox.Show("Lỗi: ticketService bị null", "Lỗi");
+                if (screenController == null) MessageBox.Show("Lỗi: screenController bị null", "Lỗi");
 
 
                 // 3. Tạo object Ticket

@@ -74,7 +74,7 @@ namespace Theater_Management_FE.Controllers
                 // Check if required services are available
                 if (authService == null || movieService == null || screenController == null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Required services not initialized");
+                    MessageBox.Show("Các dịch vụ yêu cầu chưa được khởi tạo", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -87,7 +87,7 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Failed to get user: {ex.Message}");
+                    MessageBox.Show($"Không thể lấy thông tin người dùng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     // Treat as guest or navigate to Home if strict
                     screenController.NavigateTo<Home>();
                     return;
@@ -158,7 +158,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"An error occurred in HomePageUser: {ex.Message}");
+                MessageBox.Show($"Lỗi trong ShowtimePageController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -218,24 +218,25 @@ namespace Theater_Management_FE.Controllers
                 Background = Brushes.LightGray
             };
 
-            var imagePath = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Resources",
-                "Images",
-                $"{showtime.MovieId}.jpg"
-            );
-
-            var imageUri = System.IO.File.Exists(imagePath)
-                ? new Uri(imagePath)
-                : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
+            // Try to load movie poster, fallback to not_found.png if it doesn't exist
+            var imageUri = new Uri($"pack://application:,,,/Resources/Images/Movies/{showtime.MovieId}.jpg");
 
             var poster = new Image
             {
                 Width = 220,
                 Height = 280,
-                Stretch = Stretch.UniformToFill,
-                Source = new BitmapImage(imageUri)
+                Stretch = Stretch.UniformToFill
             };
+
+            try
+            {
+                poster.Source = new BitmapImage(imageUri);
+            }
+            catch
+            {
+                // If movie poster doesn't exist, use not_found.png
+                poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Movies/not_found.png"));
+            }
 
             posterBorder.Child = poster;
 

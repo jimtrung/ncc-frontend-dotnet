@@ -18,8 +18,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="Resources\Images\cat.jpg" />
-		<Resource Include="Resources\Images\QR.jpg" />
+		<Resource Include="Resources\Images\**\*.jpg" />
+		<Resource Include="Resources\Images\Movies\**\*.jpg" />
+		<Resource Include="Resources\Images\Movies\**\*.png" />
 	</ItemGroup>
 
 	<ItemGroup>

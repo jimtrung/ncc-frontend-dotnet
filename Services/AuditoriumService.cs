@@ -29,10 +29,18 @@ namespace Theater_Management_FE.Services
 
         public void InsertAuditorium(Auditorium auditorium)
         {
+            var token = _tokenUtil.LoadAccessToken();
             var content = JsonContent.Create(auditorium, options: JsonOptions);
             var request = new HttpRequestMessage(HttpMethod.Post, "auditorium") { Content = content };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
             var response = _http.Send(request);
-            var body = response.Content.ReadAsStringAsync().Result;
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                var body = response.Content.ReadAsStringAsync().Result;
+                throw new Exception($"Failed to insert auditorium. Status: {response.StatusCode}, Body: {body}");
+            }
         }
 
         public List<Auditorium> GetAllAuditoriums()
@@ -70,13 +78,27 @@ namespace Theater_Management_FE.Services
             var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Delete, $"auditorium/{id}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            _http.Send(request);
+            
+            var response = _http.Send(request);
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Failed to delete auditorium. Status: {response.StatusCode}");
+            }
         }
 
         public void DeleteAllAuditoriums()
         {
+            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Delete, "auditorium");
-            _http.Send(request);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
+            var response = _http.Send(request);
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Failed to delete all auditoriums. Status: {response.StatusCode}");
+            }
         }
 
         public void UpdateAuditorium(Guid id, Auditorium auditorium)

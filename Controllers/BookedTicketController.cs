@@ -28,7 +28,7 @@ namespace Theater_Management_FE.Controllers
         public Button logoutButton;
         public Button homeButton;
         public Button bookedTicketButton;
-        private Button showTimesButton;
+        public Button showTimesButton;
         public TextBlock usernameText;
         public Button deleteAllButton;
 
@@ -83,7 +83,7 @@ namespace Theater_Management_FE.Controllers
                 // Check if required services are available
                 if (authService == null || movieService == null || screenController == null || ticketService == null || authTokenUtil == null || showtimeService == null || auditoriumService == null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Required services not initialized");
+                    MessageBox.Show("Các dịch vụ yêu cầu chưa được khởi tạo", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -96,7 +96,7 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Failed to get user: {ex.Message}");
+                    MessageBox.Show($"Không thể lấy thông tin người dùng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     // Treat as guest or navigate to Home if strict
                     screenController.NavigateTo<Home>();
                     return;
@@ -114,42 +114,42 @@ namespace Theater_Management_FE.Controllers
                 if (bookedTicketList != null)
                 {
                     bookedTicketList.Children.Clear();
-                    bookedTicketList.Children.Add(new TextBlock
-                    {
-                        Text = "Loading booked ticket...",
-                        Foreground = Brushes.White,
-                        FontSize = 16,
-                        Margin = new Thickness(10)
-                    });
-                }
-                var token = authTokenUtil.LoadAccessToken();
-                var userId = JwtUtil.GetUserIdFromToken(token);
-
-                List<Ticket> tickets = null;
-                string errorMessage = null;
-                // MessageBox.Show($"User ID: {userId}");
-                tickets = ticketService.GetTicketsByUserId(userId.Value);
-
-
-                // Clear loading message
-                if (bookedTicketList != null) bookedTicketList.Children.Clear();
-
-                if (tickets == null || tickets.Count == 0)
-                {
-                    if (bookedTicketList != null)
-                    {
-                        var msg = errorMessage ?? "Bạn chưa có vé đã đặt !";
-                        var color = errorMessage != null ? Brushes.Red : Brushes.White;
                         bookedTicketList.Children.Add(new TextBlock
                         {
-                            Text = msg,
-                            Foreground = color,
+                            Text = "Đang tải vé đã đặt...",
+                            Foreground = Brushes.White,
                             FontSize = 16,
                             Margin = new Thickness(10)
                         });
                     }
-                    return;
-                }
+                    var token = authTokenUtil.LoadAccessToken();
+                    var userId = JwtUtil.GetUserIdFromToken(token);
+
+                    List<Ticket> tickets = null;
+                    string errorMessage = null;
+                    // MessageBox.Show($"User ID: {userId}");
+                    tickets = ticketService.GetTicketsByUserId(userId.Value);
+
+
+                    // Clear loading message
+                    if (bookedTicketList != null) bookedTicketList.Children.Clear();
+
+                    if (tickets == null || tickets.Count == 0)
+                    {
+                        if (bookedTicketList != null)
+                        {
+                            var msg = errorMessage ?? "Bạn chưa có vé đã đặt !";
+                            var color = errorMessage != null ? Brushes.Red : Brushes.White;
+                            bookedTicketList.Children.Add(new TextBlock
+                            {
+                                Text = msg,
+                                Foreground = color,
+                                FontSize = 16,
+                                Margin = new Thickness(10)
+                            });
+                        }
+                        return;
+                    }
 
                 foreach (var ticket in tickets)
                 {
@@ -158,7 +158,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"An error occurred in HomePageUser: {ex.Message}");
+                MessageBox.Show($"Lỗi trong BookedTicketController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -223,24 +223,25 @@ namespace Theater_Management_FE.Controllers
             var movie = movieService.GetMovieById(showtime.MovieId);
             var auditorium = auditoriumService.GetAuditoriumById(showtime.AuditoriumId);
 
-            var imagePath = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Resources",
-                "Images",
-                $"{showtime.MovieId}.jpg"
-            );
-
-            var imageUri = System.IO.File.Exists(imagePath)
-                ? new Uri(imagePath)
-                : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
+            // Try to load movie poster, fallback to not_found.png if it doesn't exist
+            var imageUri = new Uri($"pack://application:,,,/Resources/Images/Movies/{showtime.MovieId}.jpg");
 
             var poster = new Image
             {
                 Width = 220,
                 Height = 280,
-                Stretch = Stretch.UniformToFill,
-                Source = new BitmapImage(imageUri)
+                Stretch = Stretch.UniformToFill
             };
+
+            try
+            {
+                poster.Source = new BitmapImage(imageUri);
+            }
+            catch
+            {
+                // If movie poster doesn't exist, use not_found.png
+                poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Movies/not_found.png"));
+            }
 
             posterBorder.Child = poster;
 
@@ -423,11 +424,16 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
-        public void BindUIControls(WrapPanel bookedTicketList, Button logoutButton, TextBlock usernameText)
+        public void BindUIControls(WrapPanel bookedTicketList, Button logoutButton, TextBlock usernameText, 
+            Button homeButton, Button showTimesButton, Button bookedTicketButton, Button deleteAllButton)
         {
             this.bookedTicketList = bookedTicketList;
             this.logoutButton = logoutButton;
             this.usernameText = usernameText;
+            this.homeButton = homeButton;
+            this.showTimesButton = showTimesButton;
+            this.bookedTicketButton = bookedTicketButton;
+            this.deleteAllButton = deleteAllButton;
 
             if (this.logoutButton != null)
             {

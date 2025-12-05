@@ -221,7 +221,7 @@ namespace Theater_Management_FE.Controllers
                 {
                     try
                     {
-                        var destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
+                        var destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", "Movies", $"{movie.Id}.jpg");
                         // Ensure directory exists
                         var dir = Path.GetDirectoryName(destPath);
                         if (!Directory.Exists(dir))

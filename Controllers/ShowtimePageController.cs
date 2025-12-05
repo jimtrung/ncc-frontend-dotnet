@@ -236,6 +236,11 @@ namespace Theater_Management_FE.Controllers
             {
                 // If movie poster doesn't exist, use not_found.png
                 poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Movies/not_found.png"));
+                poster.Stretch = Stretch.Uniform;
+                poster.Width = 64;
+                poster.Height = 64;
+                poster.HorizontalAlignment = HorizontalAlignment.Center;
+                poster.VerticalAlignment = VerticalAlignment.Center;
             }
 
             posterBorder.Child = poster;

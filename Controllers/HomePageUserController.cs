@@ -123,7 +123,7 @@ namespace Theater_Management_FE.Controllers
                 {
                     if (movieList != null)
                     {
-                        var msg = errorMessage ?? "Không có phim nào 🎬";
+                        var msg = errorMessage ?? "Không có phim nào";
                         var color = errorMessage != null ? Brushes.Red : Brushes.White;
                         movieList.Children.Add(new TextBlock 
                         { 
@@ -211,9 +211,6 @@ namespace Theater_Management_FE.Controllers
                 Background = System.Windows.Media.Brushes.LightGray
             };
 
-            // Try to load movie poster, fallback to not_found.png if it doesn't exist
-            var imageUri = new Uri($"pack://application:,,,/Resources/Images/Movies/{movie.Id}.jpg");
-            
             var poster = new Image
             {
                 Width = 204,
@@ -223,12 +220,16 @@ namespace Theater_Management_FE.Controllers
 
             try
             {
-                poster.Source = new BitmapImage(imageUri);
+                poster.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/Images/Movies/{movie.Id}.jpg"));
             }
             catch
             {
-                // If movie poster doesn't exist, use not_found.png
                 poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Movies/not_found.png"));
+                poster.Stretch = Stretch.Uniform;
+                poster.Width = 64;
+                poster.Height = 64;
+                poster.HorizontalAlignment = HorizontalAlignment.Center;
+                poster.VerticalAlignment = VerticalAlignment.Center;
             }
             posterBorder.Child = poster;
 
@@ -259,7 +260,7 @@ namespace Theater_Management_FE.Controllers
                 Foreground = Brushes.LightGray,
                 Margin = new Thickness(0, 0, 0, 4)
             };
-            infoText.Inlines.Add(new Run { Text = $"Giới hạn độ tuổi: {movie.Rated}+ • " });
+            infoText.Inlines.Add(new Run { Text = $"Giới hạn độ tuổi: {movie.Rated}+ | " });
             infoText.Inlines.Add(new Run { Text = $"{movie.Duration} phút" });
 
             var languageText = new TextBlock
@@ -287,13 +288,11 @@ namespace Theater_Management_FE.Controllers
 
             if (this.profileButton != null)
             {
-                this.profileButton.Click -= HandleProfileButton;
                 this.profileButton.Click += HandleProfileButton;
             }
 
             if (this.logoutButton != null)
             {
-                this.logoutButton.Click -= HandleLogOutButton;
                 this.logoutButton.Click += HandleLogOutButton;
             }
         }

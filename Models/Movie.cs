@@ -69,7 +69,7 @@ namespace Theater_Management_FE.Models
                 "drama" => "Chính kịch",
                 "horror" => "Kinh dị",
                 "romance" => "Lãng mạn",
-                "sci-fi" => "Khoa học viễn tưởng",
+                "science_fiction" => "Khoa học viễn tưởng",
                 "thriller" => "Giật gân",
                 "animation" => "Hoạt hình",
                 "fantasy" => "Giả tưởng",
@@ -77,7 +77,7 @@ namespace Theater_Management_FE.Models
                 "family" => "Gia đình",
                 "crime" => "Tội phạm",
                 "mystery" => "Bí ẩn",
-                _ => genre // Return original if no translation found
+                _ => genre 
             };
         }
         public DateTime? Premiere

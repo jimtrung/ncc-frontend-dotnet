@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 		<Resource Include="Resources\Images\cat.jpg" />
+		<Resource Include="Resources\Images\QR.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,7 +38,10 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.15.0" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.*" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
 	</ItemGroup>
 
 </Project>

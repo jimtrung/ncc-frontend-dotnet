@@ -30,10 +30,9 @@ namespace Theater_Management_FE.Services
 
         public object GetAllDirectors()
         {
-            var token = _tokenUtil.LoadAccessToken();
-
             var request = new HttpRequestMessage(HttpMethod.Get, "director/all");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -55,10 +54,9 @@ namespace Theater_Management_FE.Services
 
         public Director? GetDirectorById(Guid id)
         {
-            var token = _tokenUtil.LoadAccessToken();
-
             var request = new HttpRequestMessage(HttpMethod.Get, $"director/{id}");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 

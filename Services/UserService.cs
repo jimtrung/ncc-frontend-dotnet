@@ -33,8 +33,8 @@ namespace Theater_Management_FE.Services
 
         public int GetAllUsers()
         {
-            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Get, "user/all");
+            var token = _tokenUtil.LoadAccessToken();
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = _http.Send(request);

@@ -17,7 +17,6 @@ namespace Theater_Management_FE.Models
         public string AuditoriumName { get; set; }
         public int Quantity { get; set; }
 
-        // --- Readonly string properties for display ---
         public string StartTimeString => StartTime.ToUniversalTime().ToString("HH:mm");
         public string EndTimeString => EndTime.ToUniversalTime().ToString("HH:mm");
         public string ShowDateString => ShowDate.ToString("yyyy-MM-dd");

@@ -31,10 +31,9 @@ namespace Theater_Management_FE.Services
 
         public object GetAllActors()
         {
-            var token = _tokenUtil.LoadAccessToken();
-
             var request = new HttpRequestMessage(HttpMethod.Get, "actor/all");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 

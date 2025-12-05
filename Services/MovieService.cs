@@ -32,6 +32,7 @@ namespace Theater_Management_FE.Services
         {
             var content = JsonContent.Create(movie, options: JsonOptions);
             var request = new HttpRequestMessage(HttpMethod.Post, "Movie") { Content = content };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
             var response = _http.Send(request);
             
             if (!response.IsSuccessStatusCode)
@@ -43,9 +44,8 @@ namespace Theater_Management_FE.Services
 
         public void DeleteMovieById(Guid id)
         {
-            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Delete, $"Movie/{id}");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
             var response = _http.Send(request);
              if (!response.IsSuccessStatusCode)
             {
@@ -56,6 +56,7 @@ namespace Theater_Management_FE.Services
         public void DeleteAllMovies()
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "Movie");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
             var response = _http.Send(request);
              if (!response.IsSuccessStatusCode)
             {
@@ -65,9 +66,8 @@ namespace Theater_Management_FE.Services
 
         public List<Movie> GetAllMovies()
         {
-            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Get, "Movie");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
 
             var response = _http.Send(request);
             if (!response.IsSuccessStatusCode)
@@ -84,9 +84,8 @@ namespace Theater_Management_FE.Services
 
         public async Task<List<Movie>> GetAllMoviesAsync()
         {
-            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Get, "Movie");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
 
             var response = await _http.SendAsync(request);
             if (!response.IsSuccessStatusCode)
@@ -103,9 +102,8 @@ namespace Theater_Management_FE.Services
 
         public Movie? GetMovieById(Guid id)
         {
-            var token = _tokenUtil.LoadAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Get, $"Movie/{id}");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenUtil.LoadAccessToken());
 
             var response = _http.Send(request);
             if (!response.IsSuccessStatusCode)

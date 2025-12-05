@@ -1,4 +1,5 @@
-﻿
+﻿using System.Text.Json.Serialization;
+
 namespace Theater_Management_FE.Models
 {
     public class Movie
@@ -7,11 +8,14 @@ namespace Theater_Management_FE.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid? DirectorId { get; set; }
+        [JsonIgnore]
         public Director Director { get; set; }
 
+        [JsonIgnore]
         public string DirectorName => Director?.FullName ?? "";
         public List<MovieGenre> Genres { get; set; }
 
+        [JsonIgnore]
         public string VietnameseGenres
         {
             get
@@ -40,6 +44,12 @@ namespace Theater_Management_FE.Models
                 "family" => "Gia đình",
                 "crime" => "Tội phạm",
                 "mystery" => "Bí ẩn",
+                "musical" => "Nhạc kịch",
+                "war" => "Chiến tranh",
+                "western" => "Miền Tây",
+                "historical" => "Lịch sử",
+                "sports" => "Thể thao",
+                "biography" => "Tiểu sử",
                 _ => genre 
             };
         }

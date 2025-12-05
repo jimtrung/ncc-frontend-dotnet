@@ -1,5 +1,4 @@
-﻿
-namespace Theater_Management_FE.Models
+﻿namespace Theater_Management_FE.Models
 {
     public class Auditorium
     {

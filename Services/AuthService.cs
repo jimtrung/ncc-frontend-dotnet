@@ -19,7 +19,6 @@ public class AuthService
         PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
         Converters = { new JsonStringEnumConverter() }
     };
-
     public AuthService(HttpClient httpClient, AuthTokenUtil authTokenUtil)
     {
         _httpClient = httpClient;
@@ -81,7 +80,6 @@ public class AuthService
         }
         catch (Exception ex)
         {
-            // Wrap low-level HTTP/serialization issues into an ErrorResponse
             return new ErrorResponse(DateTime.UtcNow, 500, "Yêu cầu đăng nhập thất bại", ex.Message, "/auth/signin");
         }
 
@@ -89,7 +87,6 @@ public class AuthService
 
         if (!response.IsSuccessStatusCode)
         {
-            // Try parse backend error, otherwise surface raw body for debugging
             try
             {
                 var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
@@ -103,10 +100,7 @@ public class AuthService
                     return error;
                 }
             }
-            catch
-            {
-                // ignore and fall through
-            }
+            catch {}
 
             return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "Đăng nhập thất bại", !string.IsNullOrWhiteSpace(raw) ? raw : "Lỗi máy chủ không xác định", "/auth/signin");
         }
@@ -123,16 +117,14 @@ public class AuthService
         }
         catch (Exception ex)
         {
-            // Most likely a JSON shape mismatch between backend and TokenPair
-            return new ErrorResponse(DateTime.UtcNow, 500, "Không thể xử lý phản hồi token",
-                $"Không thể đọc dữ liệu token: {ex.Message}. Raw response: {raw}", "/auth/signin");
+            return new ErrorResponse(DateTime.UtcNow, 500, "Không thể đọc dữ liệu token", $"Không thể đọc dữ liệu token: {ex.Message}. Raw response: {raw}", "/auth/signin");
         }
     }
 
     public object GetUser()
     {
         var token = _authTokenUtil.LoadAccessToken();
-        
+
         if (string.IsNullOrEmpty(token))
         {
             return new ErrorResponse(DateTime.UtcNow, 401, "Không được phép", "Không có token truy cập", "/user/");

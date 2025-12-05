@@ -19,7 +19,7 @@ namespace Theater_Management_FE
         {
             base.OnStartup(e);
 
-            // Register global window commands
+            // Bật các nút đóng, zoom nhỏ/zoom to, đóng Window
             CommandManager.RegisterClassCommandBinding(typeof(Window),
                 new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
             CommandManager.RegisterClassCommandBinding(typeof(Window),
@@ -67,7 +67,6 @@ namespace Theater_Management_FE
             services.AddTransient<AddAuditoriumController>();
             services.AddTransient<MovieInformationController>();
             services.AddTransient<AuditoriumInformationController>();
-
             services.AddTransient<ShowtimeListController>();
             services.AddTransient<AddShowtimeController>();
             services.AddTransient<ShowtimeInformationController>();
@@ -89,7 +88,6 @@ namespace Theater_Management_FE
             services.AddTransient<AddAuditorium>();
             services.AddTransient<MovieInformation>();
             services.AddTransient<AuditoriumInformation>();
-
             services.AddTransient<ShowtimeList>();
             services.AddTransient<AddShowtime>();
             services.AddTransient<ShowtimeInformation>();

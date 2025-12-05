@@ -40,6 +40,7 @@ namespace Theater_Management_FE.Services
                 Content = content
             };
 
+
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -59,6 +60,7 @@ namespace Theater_Management_FE.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"ticket/user/{userId}");
 
+
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -73,7 +75,6 @@ namespace Theater_Management_FE.Services
 
             var body = response.Content.ReadAsStringAsync().Result;
 
-            // Nếu body rỗng hoặc trả về object thay vì array, trả về danh sách rỗng
             if (string.IsNullOrWhiteSpace(body) || body.TrimStart().StartsWith("{"))
                 return new List<Ticket>();
 
@@ -83,6 +84,7 @@ namespace Theater_Management_FE.Services
         public List<Ticket> GetAllTickets()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "ticket");
+
 
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
@@ -119,6 +121,7 @@ namespace Theater_Management_FE.Services
             // Gọi API xóa vé
             var request = new HttpRequestMessage(HttpMethod.Delete, $"ticket/{ticketId}");
 
+
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -135,6 +138,7 @@ namespace Theater_Management_FE.Services
         public void DeleteAllTickets()
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "ticket");
+
 
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
@@ -153,6 +157,7 @@ namespace Theater_Management_FE.Services
             var request = new HttpRequestMessage(HttpMethod.Get, $"ticket/{ticketId}");
 
             // Thêm header Authorization nếu có token
+
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {

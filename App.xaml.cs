@@ -134,7 +134,7 @@ namespace Theater_Management_FE
                 sc.AutoRegister<EventList, EventListController>(Services);
 
                 // --- STARTUP MAIN WINDOW ---
-                sc.NavigateTo<EventList>();
+                sc.NavigateTo<Home>();
             }
             catch (Exception ex)
             {

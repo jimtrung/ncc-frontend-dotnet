@@ -7,46 +7,129 @@ using Theater_Management_FE.Views;
 using Theater_Management_FE.Services;
 using System.Windows.Media;
 
+using Theater_Management_FE.Models;
+using Theater_Management_FE.Utils;
+
 namespace Theater_Management_FE.Controllers
 {
     public class TinTucController
     {
         private ScreenController _screenController;
 
-        // UI elements
-        private WrapPanel newsWrapPanel;
-        private Button btnPrev;
-        private Button btnNext;
-
-        private Button btnBackHome;
+        // UI elements - Public for ControllerBinder matching HomePageUser
+        public WrapPanel NewsWrapPanel;
+        public Button BtnPrev;
+        public Button BtnNext;
+        
+        // Navigation Buttons
+        public Button homeButton;
+        public Button showTimeButton;
+        public Button newsButton;
+        public Button promotionButton;
+        public Button priceButton;
+        public Button aboutButton;
+        
+        // Header UI
+        public Button profileButton;
+        public Button logoutButton;
+        public Button bookTicketButton; 
+        public TextBlock usernameText;
 
         private List<NewsItem> newsList = new();
         private int currentPage = 0;
         private readonly int itemsPerPage = 8;
+        private bool _isInitialized = false;
 
         public void SetScreenController(ScreenController screenController)
         {
             _screenController = screenController;
         }
-        public void HandleBackToHome(object sender, RoutedEventArgs e)
+
+        private AuthService authService;
+        private AuthTokenUtil authTokenUtil;
+
+        public void SetAuthService(AuthService service)
         {
-            _screenController.NavigateTo<HomePageUser>();
+            authService = service;
         }
 
-        // ========================= BIND UI =========================
-        // Parameter names MUST match XAML x:Name attributes exactly (case-sensitive) for ControllerBinder to work
-        public void BindUIControls(WrapPanel NewsWrapPanel, Button BtnPrev, Button BtnNext, Button btnBackHome)
+        public void SetAuthTokenUtil(AuthTokenUtil util)
         {
-            this.newsWrapPanel = NewsWrapPanel;
-            this.btnPrev = BtnPrev;
-            this.btnNext = BtnNext;
-            this.btnBackHome = btnBackHome;
-            btnBackHome.Click += HandleBackToHome;
-            BtnPrev.Click += HandlePrev;
-            BtnNext.Click += HandleNext;
+            authTokenUtil = util;
+        }
 
-            LoadData();
-            ShowPage(currentPage);
+        public void HandleOnOpen()
+        {
+            try
+            {
+                if (!_isInitialized)
+                {
+                    if (BtnPrev != null) BtnPrev.Click += HandlePrev;
+                    if (BtnNext != null) BtnNext.Click += HandleNext;
+                    
+                    if (homeButton != null) homeButton.Click += (s, e) => _screenController.NavigateTo<HomePageUser>();
+                    if (showTimeButton != null) showTimeButton.Click += (s, e) => _screenController.NavigateTo<ShowtimePage>();
+                    if (promotionButton != null) promotionButton.Click += (s, e) => _screenController.NavigateTo<EventList>();
+                    if (bookTicketButton != null) bookTicketButton.Click += (s, e) => _screenController.NavigateTo<BookedTicket>();
+                    
+                    if (profileButton != null) profileButton.Click += HandleProfileButton;
+                    if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
+
+                    LoadData();
+                    _isInitialized = true;
+                }
+
+                CheckUserStatus();
+                ShowPage(currentPage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tin tức: {ex.Message}");
+            }
+        }
+
+        private void CheckUserStatus()
+        {
+            // Check xem đã đăng nhập chưa
+            User user = null;
+            try
+            {
+                var result = authService.GetUser();
+                user = result as User;
+            }
+            catch { }
+            UpdateUserUI(user);
+        }
+
+        public void HandleProfileButton(object sender, RoutedEventArgs e)
+        {
+             _screenController.NavigateTo<Profile>(); 
+        }
+
+        public void HandleLogOutButton(object sender, RoutedEventArgs e)
+        {
+            authTokenUtil.ClearRefreshToken();
+            authTokenUtil.ClearAccessToken();
+            UpdateUserUI(null);
+            _screenController.NavigateTo<Home>();
+        }
+
+        private void UpdateUserUI(User user)
+        {
+            if (usernameText == null) return;
+
+            if (user == null)
+            {
+                usernameText.Text = "Khách";
+                if (logoutButton != null) logoutButton.Visibility = Visibility.Collapsed;
+                if (profileButton != null) profileButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                usernameText.Text = user.Username ?? "Người dùng";
+                if (logoutButton != null) logoutButton.Visibility = Visibility.Visible;
+                if (profileButton != null) profileButton.Visibility = Visibility.Visible;
+            }
         }
 
         // ========================= LOAD DATA =========================
@@ -93,7 +176,7 @@ namespace Theater_Management_FE.Controllers
 
         private void ShowPage(int page)
         {
-            newsWrapPanel.Children.Clear();
+            NewsWrapPanel.Children.Clear();
 
             int start = page * itemsPerPage;
             int end = Math.Min(start + itemsPerPage, newsList.Count);
@@ -101,7 +184,7 @@ namespace Theater_Management_FE.Controllers
             for (int i = start; i < end; i++)
             {
                 var item = newsList[i];
-                newsWrapPanel.Children.Add(CreateNewsCard(item));
+                NewsWrapPanel.Children.Add(CreateNewsCard(item));
             }
         }
 
@@ -112,52 +195,53 @@ namespace Theater_Management_FE.Controllers
             {
                 Width = 300,
                 CornerRadius = new CornerRadius(10),
-                Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#1c1e24"),
+                Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#1E2433"), // CardBackground
                 Margin = new Thickness(10),
                 Padding = new Thickness(10),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
 
+            // Add Shadow Effect
+            var shadow = new System.Windows.Media.Effects.DropShadowEffect
+            {
+                Color = Colors.Black,
+                Opacity = 0.4,
+                BlurRadius = 10,
+                ShadowDepth = 3
+            };
+            card.Effect = shadow;
+
             var panel = new StackPanel();
 
             var img = new Image
-{
-    Height = 180,
-    Width = 300,
-    Stretch = Stretch.UniformToFill
-};
+            {
+                Height = 180,
+                Width = 300,
+                Stretch = Stretch.UniformToFill
+            };
 
-BitmapImage bitmap = new BitmapImage();
-try
-{
-    bitmap.BeginInit();
-    bitmap.UriSource = new Uri($"pack://application:,,,/Resources/Images/{item.ImageUrl}", UriKind.Absolute);
-    bitmap.EndInit();
-}
-catch
-{
-    try
-    {
-        bitmap = new BitmapImage();
-        bitmap.BeginInit();
-        bitmap.UriSource = new Uri("pack://application:,,,/Resources/Images/default.jpg", UriKind.Absolute);
-        bitmap.EndInit();
-    }
-    catch
-    {
-        // Nếu default cũng không tìm thấy, tạo ảnh trắng tạm
-        bitmap = new BitmapImage();
-    }
-}
+            BitmapImage bitmap = new BitmapImage();
+            try
+            {
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri($"pack://application:,,,/Resources/Images/{item.ImageUrl}", UriKind.Absolute);
+                bitmap.EndInit();
+            }
+            catch
+            {
+                 // Fallback logic
+                 bitmap = new BitmapImage();
+                 bitmap.BeginInit();
+                 bitmap.UriSource = new Uri("pack://application:,,,/Resources/Images/default.jpg", UriKind.Absolute);
+                 bitmap.EndInit();
+            }
 
-img.Source = bitmap;
-
-
+            img.Source = bitmap;
 
             var date = new TextBlock
             {
                 Text = item.Date,
-                Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#aaaaaa"),
+                Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#A0AEC0"), // SecondaryText
                 FontSize = 12,
                 Margin = new Thickness(0, 5, 0, 0)
             };
@@ -166,7 +250,7 @@ img.Source = bitmap;
             {
                 Text = item.Title,
                 TextWrapping = TextWrapping.Wrap,
-                Foreground = System.Windows.Media.Brushes.White,
+                Foreground = System.Windows.Media.Brushes.White, // PrimaryText
                 FontSize = 14,
                 Margin = new Thickness(0, 5, 0, 0)
             };

@@ -6,37 +6,95 @@
         mc:Ignorable="d"
         Title="Danh Sách Sự Kiện" Height="700" Width="1000"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F7FA"> 
+        Background="#F5F7FA">
+    <Window.Resources>
+        <!-- Navbar Buttons -->
+        <Style x:Key="NavBtn" TargetType="Button">
+            <Setter Property="Foreground" Value="#ccc"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NavBtnActive" TargetType="Button" BasedOn="{StaticResource NavBtn}">
+            <Setter Property="Foreground" Value="#c0392b"/>
+            <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
+        </Style>
+    </Window.Resources> 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/> <!-- Navbar -->
+            <RowDefinition Height="Auto"/> <!-- Header -->
+            <RowDefinition Height="Auto"/> <!-- Filter -->
+            <RowDefinition Height="*"/>    <!-- Content -->
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="#1A202C" Padding="20">
+        <!-- NAVBAR -->
+        <Grid Background="#0e1015" Height="70" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Logo -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0">
+                <Image Source="pack://application:,,,/Resources/Images/logo.png" Height="45" Margin="0,0,10,0"/>
+                <TextBlock Text="NATIONAL CINEMA CENTER" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Menu -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Style="{StaticResource NavBtn}" Content="Trang chủ" Margin="12,0" x:Name="btnBackHome"/>
+                <Button Style="{StaticResource NavBtn}" Content="Lịch chiếu" Margin="12,0" x:Name="btnShowTime"/>
+                <Button Style="{StaticResource NavBtn}" Content="Tin tức" Margin="12,0" x:Name="btnNews"/>
+                <Button Style="{StaticResource NavBtnActive}" Content="Khuyến mãi" Margin="12,0" x:Name="btnPromotion"/>
+                <Button Style="{StaticResource NavBtn}" Content="Giá vé" Margin="12,0" x:Name="btnPrice"/>
+                <Button Style="{StaticResource NavBtn}" Content="Liên hoan phim" Margin="12,0" x:Name="btnCinema"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1" Background="#1A202C" Padding="20">
             <StackPanel HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,5">
                     <TextBlock Text="Ưu Đãi &amp; Khuyến Mãi"
-                               Foreground="White"
+  
+                             Foreground="White"
                                FontSize="28" FontWeight="Bold" />
                     </StackPanel>
-                <Rectangle Height="2" Width="200" Fill="#4CAF50" Margin="0,5,0,0"/> 
+                <Rectangle Height="2" 
+Width="200" Fill="#4CAF50" Margin="0,5,0,0"/> 
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,15">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,15">
             <TextBlock Text="Lọc theo:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="#333333"/>
             
             <ComboBox SelectedIndex="0" Width="150" Margin="0,0,10,0">
                 <ComboBoxItem Content="Tất cả"/>
-                <ComboBoxItem Content="Phim"/>
+ 
+               <ComboBoxItem Content="Phim"/>
                 <ComboBoxItem Content="Âm nhạc"/>
                 <ComboBoxItem Content="Du lịch"/>
                 <ComboBoxItem Content="Khác"/>
             </ComboBox>
 
-            <TextBlock Text="Sắp xếp:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="#333333"/>
+            <TextBlock Text="Sắp xếp:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="14" FontWeight="SemiBold" 
+Foreground="#333333"/>
             <ComboBox SelectedIndex="0" Width="150">
                 <ComboBoxItem Content="Ngày kết thúc (sớm nhất)"/>
                 <ComboBoxItem Content="Ngày kết thúc (muộn nhất)"/>
@@ -44,71 +102,289 @@
             </ComboBox>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+      
+  <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
-                <ItemsControl ItemsSource="{Binding Events}" x:Name="eventItemsControl">
+                
+                <ItemsControl>
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="2" HorizontalAlignment="Center" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    
+                    <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+                            Background="White" Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Grid Height="200">
+                                <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                                    <Image Source="https://picsum.photos/450/200?random=1" Stretch="UniformToFill"/>
+                                </Border>
+                                <Border Background="#FF4500" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                        Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+                                    <TextBlock Text="HOT" FontWeight="Bold" Foreground="White" FontSize="13"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Margin="15,10,15,15" >
+                                <TextBlock Text="Combo Bỏng Nước Siêu To Khổng Lồ Giảm 30%!!!" FontWeight="ExtraBold" FontSize="17" 
+                                           Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Text="Kết thúc: 31/12" FontSize="12" Foreground="#666666"/>
+                                </StackPanel>
+                                <Button Content="Xem chi tiết" HorizontalAlignment="Right" Margin="0,15,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F0F5F9"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform Y="-3"/> </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+
+                    <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+                            Background="White" Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Grid Height="200">
+                                <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                                    <Image Source="https://picsum.photos/450/200?random=2" Stretch="UniformToFill"/>
+                                </Border>
+                                <Border Background="#1E90FF" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                        Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+                                    <TextBlock Text="MỚI" FontWeight="Bold" Foreground="White" FontSize="13"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Margin="15,10,15,15" >
+                                <TextBlock Text="Ưu Đãi Đặc Biệt: Đồng Giá Vé 45K Cho Học Sinh Sinh Viên" FontWeight="ExtraBold" FontSize="17" 
+                                           Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Text="Kết thúc: 30/11" FontSize="12" Foreground="#666666"/>
+                                </StackPanel>
+                                <Button Content="Xem chi tiết" HorizontalAlignment="Right" Margin="0,15,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F0F5F9"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform Y="-3"/> </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    
+                    <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+                            Background="White" Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Grid Height="200">
+                                <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                                    <Image Source="https://picsum.photos/450/200?random=3" Stretch="UniformToFill"/>
+                                </Border>
+                                <Border Background="#4CAF50" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                        Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+                                    <TextBlock Text="SỐC" FontWeight="Bold" Foreground="White" FontSize="13"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Margin="15,10,15,15" >
+                                <TextBlock Text="Thứ Hai Vui Vẻ: Giảm 25% Tất Cả Các Loại Vé Trong Ngày" FontWeight="ExtraBold" FontSize="17" 
+                                           Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Text="Kết thúc: 31/10" FontSize="12" Foreground="#666666"/>
+                                </StackPanel>
+                                <Button Content="Xem chi tiết" HorizontalAlignment="Right" Margin="0,15,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F0F5F9"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform Y="-3"/> </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    
+                    <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+                            Background="White" Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Grid Height="200">
+                                <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                                    <Image Source="https://picsum.photos/450/200?random=4" Stretch="UniformToFill"/>
+                                </Border>
+                                <Border Background="#FFA500" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                        Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+                                    <TextBlock Text="ĐỘC QUYỀN" FontWeight="Bold" Foreground="White" FontSize="13"/>
+                                </Border>
+                            </Grid>
+                            <StackPanel Margin="15,10,15,15" >
+                                <TextBlock Text="Đăng Ký Thành Viên Mới: Tặng Voucher 100K Xem Phim Bất Kỳ" FontWeight="ExtraBold" FontSize="17" 
+                                           Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Text="Kết thúc: 01/01/2026" FontSize="12" Foreground="#666666"/>
+                                </StackPanel>
+                                <Button Content="Xem chi tiết" HorizontalAlignment="Right" Margin="0,15,0,0" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F0F5F9"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform Y="-3"/> </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding Events}" x:Name="eventItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                    
+        <UniformGrid Columns="2" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
+ 
+                           <Border BorderThickness="0" CornerRadius="10" Margin="10" Width="450" 
                                     Background="White" Cursor="Hand">
-                                
+                               
+ 
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="3" Direction="270" Color="#DDDDDD" Opacity="0.6" BlurRadius="8"/>
-                                </Border.Effect>
+                          
+      </Border.Effect>
 
                                 <StackPanel>
                                     <Grid Height="200">
-                                        <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
+                         
+               <Border CornerRadius="10,10,0,0" Background="Transparent" ClipToBounds="True">
                                             <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
-                                        </Border>
+                                   
+     </Border>
                                         
                                         <Border Background="#FF4500" HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                                Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
+           
+                                     Margin="0, 15, 15, 0" Padding="10,5" CornerRadius="5">
                                             <TextBlock Text="HOT" FontWeight="Bold" Foreground="White" FontSize="13"/>
-                                        </Border>
+          
+                              </Border>
                                     </Grid>
 
-                                    <StackPanel Margin="15,10,15,15" >
+                                  
+  <StackPanel Margin="15,10,15,15" >
                                         <TextBlock Text="{Binding Title}" FontWeight="ExtraBold" FontSize="17" 
-                                                   Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                                   
+Foreground="#333333" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock Text="{Binding EndDate, StringFormat='Kết thúc: {0:dd/MM}'}" 
-                                                       FontSize="12" Foreground="#666666"/>
+      
+                                                 FontSize="12" Foreground="#666666"/>
                                         </StackPanel>
-                                        
+          
+                              
                                         <Button Content="Xem chi tiết" 
-                                                HorizontalAlignment="Right" Margin="0,15,0,0" />
+                          
+                      HorizontalAlignment="Right" Margin="0,15,0,0" />
                                     </StackPanel>
                                 </StackPanel>
-                                
+        
+                        
                                 <Border.Style>
                                     <Style TargetType="Border">
-                                        <Style.Triggers>
+       
+                                 <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#F0F5F9"/>
+                     
+                           <Setter Property="Background" Value="#F0F5F9"/>
                                                 <Setter Property="BorderThickness" Value="1"/>
-                                                <Setter Property="BorderBrush" Value="#007ACC"/>
+                     
+                           <Setter Property="BorderBrush" Value="#007ACC"/>
                                                 <Setter Property="RenderTransform">
-                                                    <Setter.Value>
+                      
+                              <Setter.Value>
                                                         <TranslateTransform Y="-3"/> </Setter.Value>
-                                                </Setter>
+            
+                                    </Setter>
                                                 <Setter Property="Effect">
-                                                    <Setter.Value>
+               
+                                     <Setter.Value>
                                                         <DropShadowEffect ShadowDepth="5" Direction="270" Color="#BBBBBB" Opacity="0.8" BlurRadius="12"/>
-                                                    </Setter.Value>
+  
+                                                  </Setter.Value>
                                                 </Setter>
-                                            </Trigger>
+  
+                                          </Trigger>
                                         </Style.Triggers>
-                                    </Style>
+                  
+                  </Style>
                                 </Border.Style>
                                 
-                            </Border>
+                  
+          </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

@@ -23,6 +23,12 @@ namespace Theater_Management_FE.Controllers
         public Button logoutButton;
         public Button showTimeButton;
         public Button bookTicketButton;
+        public Button newsButton;
+        public Button promotionButton;
+        public Button homeButton;
+        public Button priceButton;
+        public Button aboutButton;
+
         public TextBlock usernameText;
 
         private bool _isInitialized = false;
@@ -57,6 +63,11 @@ namespace Theater_Management_FE.Controllers
                     if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
                     if (showTimeButton != null) showTimeButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (bookTicketButton != null) bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
+                    if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
+                    if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
+                    // Home button already on Home, maybe reload or nothing? 
+                    if (homeButton != null) homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>(); 
+
                     _isInitialized = true;
                 }
 

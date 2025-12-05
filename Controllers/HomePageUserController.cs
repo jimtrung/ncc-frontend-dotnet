@@ -136,8 +136,6 @@ namespace Theater_Management_FE.Controllers
                     return;
                 }
 
-                MessageBox.Show($"Đã tải {movies.Count} phim.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 foreach (var movie in movies)
                 {
                     if (movieList != null) movieList.Children.Add(CreateMovieCard(movie));

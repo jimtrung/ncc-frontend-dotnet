@@ -184,7 +184,6 @@ namespace Theater_Management_FE.Controllers
         }
 
         public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
-        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
         {
             this.usernameField = usernameField;
             this.passwordField = passwordField;

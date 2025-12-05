@@ -90,9 +90,6 @@ namespace Theater_Management_FE.Controllers
                     _isInitialized = true;
                     if (backButton != null) backButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (bookTicketButton != null) bookTicketButton.Click += (s, e) => HandleBookTicketButton();
-                    
-                    // Debug logs
-                    MessageBox.Show($"[BookTicketController] Initialized. bookTicketButton is {(bookTicketButton == null ? "NULL" : "OK")}");
                 }
 
                 // Gọi API lấy showtime

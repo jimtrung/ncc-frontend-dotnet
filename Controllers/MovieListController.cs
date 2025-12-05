@@ -121,10 +121,14 @@ namespace Theater_Management_FE.Controllers
                     MovieList.Clear();
                     foreach (var m in movies)
                     {
-                        // Load Director object nếu chưa load
-                        if (m.DirectorId.HasValue && m.Director == null)
+                        // Load Director name for UI display
+                        if (m.DirectorId.HasValue && string.IsNullOrEmpty(m.DirectorName))
                         {
-                            m.Director = _directorService.GetDirectorById(m.DirectorId.Value);
+                            var director = _directorService.GetDirectorById(m.DirectorId.Value);
+                            if (director != null)
+                            {
+                                m.DirectorName = director.FullName;
+                            }
                         }
 
                         MovieList.Add(m);

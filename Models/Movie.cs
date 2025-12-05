@@ -8,7 +8,6 @@ namespace Theater_Management_FE.Models
         private string _name;
         private string _description;
         private Guid? _directorId;
-        private Director _director;
         private List<MovieGenre> _genres;
         private DateTime? _premiere;
         private int? _duration;
@@ -36,13 +35,17 @@ namespace Theater_Management_FE.Models
             get => _directorId;
             set { _directorId = value; OnPropertyChanged(nameof(DirectorId)); }
         }
-        public Director Director
+
+        // DirectorName for UI display only - not sent to backend
+        [System.Text.Json.Serialization.JsonIgnore]
+        private string _directorName;
+        [System.Text.Json.Serialization.JsonIgnore]
+        public string DirectorName
         {
-            get => _director;
-            set { _director = value; OnPropertyChanged(nameof(Director)); OnPropertyChanged(nameof(DirectorName)); }
+            get => _directorName ?? "";
+            set { _directorName = value; OnPropertyChanged(nameof(DirectorName)); }
         }
 
-        public string DirectorName => Director?.FullName ?? "";
         public List<MovieGenre> Genres
         {
             get => _genres;

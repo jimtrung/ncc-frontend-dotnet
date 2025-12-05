@@ -30,13 +30,28 @@ namespace Theater_Management_FE.Services
 
         public void InsertMovie(Movie movie)
         {
+            var token = _tokenUtil.LoadAccessToken();
+            
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new Exception("Not logged in. Please log in and try again.");
+            }
+            
             var content = JsonContent.Create(movie, options: JsonOptions);
             var request = new HttpRequestMessage(HttpMethod.Post, "Movie") { Content = content };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
             var response = _http.Send(request);
             
             if (!response.IsSuccessStatusCode)
             {
                 var errorBody = response.Content.ReadAsStringAsync().Result;
+                
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    throw new Exception($"Unauthorized: You need administrator privileges to insert movies. Status: {response.StatusCode}, Details: {errorBody}");
+                }
+                
                 throw new Exception($"Failed to insert movie. Status: {response.StatusCode}, Body: {errorBody}");
             }
         }

@@ -52,24 +52,24 @@ namespace Theater_Management_FE.Controllers
         // ========================= LOAD DATA =========================
         private void LoadData()
         {
-            newsList.Add(new NewsItem("24/10/2025", "Gian hàng Trung tâm Chiếu phim Quốc gia chính thức góp mặt tại Hội chợ Mùa Thu 2025.", "Images/card1.jpg"));
-            newsList.Add(new NewsItem("13/10/2025", "CINETOUR 'Tay Anh Giữ Một Vì Sao' tại Trung tâm Chiếu phim Quốc gia ngày 10/10/2025.", "Images/card2.jpg"));
-            newsList.Add(new NewsItem("10/10/2025", "Cinetour 'Tay Anh Giữ Một Vì Sao' tại NCC ngày 9/10/2025.", "Images/card3.jpg"));
-            newsList.Add(new NewsItem("06/10/2025", "Đại hội Đại biểu Đảng bộ chính phủ lần thứ I, nhiệm kỳ 2025-2030", "Images/card4.jpg"));
-            newsList.Add(new NewsItem("02/10/2025", "TRUNG THU NÀY ĐẾN TRUNG TÂM CHIẾU PHIM QUỐC GIA NHẬN QUÀ CHO BÉ", "Images/card5.jpg"));
-            newsList.Add(new NewsItem("30/09/2025", "Úm ba la… dàn trai đẹp của Tử Chiến Trên Không đã chính thức “đổ bộ” tại Trung tâm Chiếu phim Quốc gia", "Images/card6.jpg"));
-            newsList.Add(new NewsItem("29/09/2025", "HOẠT ĐỘNG GIÁO DỤC – TRẢI NGHIỆM…", "Images/card7.jpg"));
-            newsList.Add(new NewsItem("24/09/2025", "Buổi ra mắt và họp báo bộ phim…", "Images/card8.jpg"));
+            newsList.Add(new NewsItem("24/10/2025", "Gian hàng Trung tâm Chiếu phim Quốc gia chính thức góp mặt tại Hội chợ Mùa Thu 2025.", "card1.jpg"));
+            newsList.Add(new NewsItem("13/10/2025", "CINETOUR 'Tay Anh Giữ Một Vì Sao' tại Trung tâm Chiếu phim Quốc gia ngày 10/10/2025.", "card2.jpg"));
+            newsList.Add(new NewsItem("10/10/2025", "Cinetour 'Tay Anh Giữ Một Vì Sao' tại NCC ngày 9/10/2025.", "card3.jpg"));
+            newsList.Add(new NewsItem("06/10/2025", "Đại hội Đại biểu Đảng bộ chính phủ lần thứ I, nhiệm kỳ 2025-2030", "card4.jpg"));
+            newsList.Add(new NewsItem("02/10/2025", "TRUNG THU NÀY ĐẾN TRUNG TÂM CHIẾU PHIM QUỐC GIA NHẬN QUÀ CHO BÉ", "card5.jpg"));
+            newsList.Add(new NewsItem("30/09/2025", "Úm ba la… dàn trai đẹp của Tử Chiến Trên Không đã chính thức “đổ bộ” tại Trung tâm Chiếu phim Quốc gia", "card6.jpg"));
+            newsList.Add(new NewsItem("29/09/2025", "HOẠT ĐỘNG GIÁO DỤC – TRẢI NGHIỆM…", "card7.jpg"));
+            newsList.Add(new NewsItem("24/09/2025", "Buổi ra mắt và họp báo bộ phim…", "card8.jpg"));
 
             // Trang 2
-            // newsList.Add(new NewsItem("24/10/2025", "Gian hàng NCC…", "Images/card9.jpg"));
-            // newsList.Add(new NewsItem("13/10/2025", "CINETOUR…", "Images/card10.jpg"));
-            // newsList.Add(new NewsItem("10/10/2025", "Cinetour NCC…", "Images/card11.jpg"));
-            // newsList.Add(new NewsItem("06/10/2025", "Đại hội Đảng…", "Images/card12.jpg"));
-            // newsList.Add(new NewsItem("02/10/2025", "TRUNG THU…", "Images/card13.jpg"));
-            // newsList.Add(new NewsItem("30/09/2025", "Úm ba la…", "Images/card14.jpg"));
-            // newsList.Add(new NewsItem("29/09/2025", "Trải nghiệm…", "Images/card15.jpg"));
-            // newsList.Add(new NewsItem("24/09/2025", "Họp báo…", "Images/card16.jpg"));
+             newsList.Add(new NewsItem("24/10/2025", "Gian hàng NCC…", "card9.jpg"));
+             newsList.Add(new NewsItem("13/10/2025", "CINETOUR…", "card10.jpg"));
+             newsList.Add(new NewsItem("10/10/2025", "Cinetour NCC…", "card11.jpg"));
+             newsList.Add(new NewsItem("06/10/2025", "Đại hội Đảng…", "card12.jpg"));
+             newsList.Add(new NewsItem("02/10/2025", "TRUNG THU…", "card13.jpg"));
+             newsList.Add(new NewsItem("30/09/2025", "Úm ba la…", "card14.jpg"));
+             newsList.Add(new NewsItem("29/09/2025", "Trải nghiệm…", "card15.jpg"));
+             newsList.Add(new NewsItem("24/09/2025", "Họp báo…", "card16.jpg"));
         }
 
         // ========================= PAGINATION =========================
@@ -121,12 +121,38 @@ namespace Theater_Management_FE.Controllers
             var panel = new StackPanel();
 
             var img = new Image
-            {
-                Height = 180,
-                Width = 300,
-                Stretch = System.Windows.Media.Stretch.UniformToFill,
-                Source = new BitmapImage(new Uri(item.ImageUrl, UriKind.Relative))
-            };
+{
+    Height = 180,
+    Width = 300,
+    Stretch = Stretch.UniformToFill
+};
+
+BitmapImage bitmap = new BitmapImage();
+try
+{
+    bitmap.BeginInit();
+    bitmap.UriSource = new Uri($"pack://application:,,,/Resources/Images/{item.ImageUrl}", UriKind.Absolute);
+    bitmap.EndInit();
+}
+catch
+{
+    try
+    {
+        bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri("pack://application:,,,/Resources/Images/default.jpg", UriKind.Absolute);
+        bitmap.EndInit();
+    }
+    catch
+    {
+        // Nếu default cũng không tìm thấy, tạo ảnh trắng tạm
+        bitmap = new BitmapImage();
+    }
+}
+
+img.Source = bitmap;
+
+
 
             var date = new TextBlock
             {

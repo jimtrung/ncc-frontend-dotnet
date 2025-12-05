@@ -241,6 +241,72 @@
                         <TextBlock Style="{StaticResource NewsTitle}" Text="Buổi ra mắt và họp báo bộ phim…"/>
                     </StackPanel>
                 </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card9.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="Gian hàng NCC…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card10.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="CINETOUR…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card11.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="Cinetour NCC…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card12.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="Đại hội Đảng…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card13.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="TRUNG THU…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card14.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="Úm ba la…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card15.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="GTrải nghiệm…"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource NewsCard}">
+                    <StackPanel>
+                        <Image Height="180" Width="300" Source="pack://application:,,,/Resources/Images/card16.jpg"/>
+                        <TextBlock Text="13/10/2025" Style="{StaticResource NewsDate}"/>
+                        <TextBlock Style="{StaticResource NewsTitle}" Text="Họp báo…"/>
+                    </StackPanel>
+                </Border>
+
+                
             </WrapPanel>
 
             <!-- PAGE BUTTON -->

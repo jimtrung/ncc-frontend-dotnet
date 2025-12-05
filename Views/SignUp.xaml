@@ -18,7 +18,7 @@
                            Style="{StaticResource title}"
                            FontSize="28"
                            Margin="0,0,0,8"/>
-                
+
                 <TextBlock Text="Tham gia Rạp Chiếu Phim Quốc Gia"
                            Foreground="{StaticResource SecondaryText}"
                            FontSize="14"
@@ -51,6 +51,20 @@
                     </Grid>
                 </StackPanel>
 
+                <!-- Confirm Password Field -->
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Xác nhận mật khẩu"
+                               Style="{StaticResource form-label}"/>
+                    <Grid>
+                        <PasswordBox x:Name="confirmPasswordField"
+                                     Style="{StaticResource form-password}"/>
+                        <TextBox x:Name="visibleConfirmPasswordField"
+                                 Style="{StaticResource form-input}"
+                                 Visibility="Collapsed"/>
+                    </Grid>
+                </StackPanel>
+
+
                 <CheckBox x:Name="showPasswordCheckBox"
                           Content="Hiển thị mật khẩu"
                           Style="{StaticResource checkbox-dark}"
@@ -62,7 +76,7 @@
                         Margin="0,0,0,12"
                         Padding="24,14"
                         FontSize="16"/>
-                
+
                 <Button x:Name="backButton"
                         Content="Quay Lại"
                         Style="{StaticResource button-secondary}"

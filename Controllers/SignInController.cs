@@ -36,7 +36,7 @@ namespace Theater_Management_FE.Controllers
         public CheckBox showPasswordCheckBox;
         public Button signInButton;
         public Button backButton;
-        public Hyperlink forgotPasswordLink;
+        // public Hyperlink forgotPasswordLink;
 
         public void HandleOnOpen()
         {
@@ -89,6 +89,16 @@ namespace Theater_Management_FE.Controllers
             {
                 passwordField.Password = visiblePasswordField.Text;
             }
+            if (string.IsNullOrWhiteSpace(usernameField.Text) ||
+
+    string.IsNullOrWhiteSpace(passwordField.Password))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!",
+                                "Thiếu thông tin",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
 
             var user = new User
             {
@@ -133,7 +143,7 @@ namespace Theater_Management_FE.Controllers
                         }
                         return;
                     }
-                    catch 
+                    catch
                     {
                          _screenController.NavigateTo<Home>();
                     }
@@ -173,6 +183,7 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
+        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
         public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
         {
             this.usernameField = usernameField;

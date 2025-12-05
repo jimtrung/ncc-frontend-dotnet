@@ -52,6 +52,7 @@ namespace Theater_Management_FE
             services.AddSingleton<ActorService>();
             services.AddSingleton<ShowtimeService>();
             services.AddSingleton<TicketService>();
+            services.AddSingleton<UserService>();
 
             // === Controllers ===
             services.AddTransient<SignInController>();

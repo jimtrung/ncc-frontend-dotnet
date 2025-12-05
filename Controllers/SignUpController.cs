@@ -27,6 +27,10 @@ namespace Theater_Management_FE.Controllers
         public TextBox emailField;
         public PasswordBox passwordField;
         public TextBox visiblePasswordField;
+
+        public PasswordBox confirmPasswordField;
+        public TextBox visibleConfirmPasswordField;
+
         public CheckBox showPasswordCheckBox;
         public Button signUpButton;
         public Button backButton;
@@ -82,6 +86,53 @@ namespace Theater_Management_FE.Controllers
             if (showPasswordCheckBox.IsChecked == true)
             {
                 passwordField.Password = visiblePasswordField.Text;
+                confirmPasswordField.Password = visibleConfirmPasswordField.Text;
+            }
+
+            // Validate password
+            if (passwordField.Password != confirmPasswordField.Password)
+            {
+                MessageBox.Show("Mật khẩu và xác nhận mật khẩu không khớp!",
+                                "Lỗi đăng ký",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(usernameField.Text) ||
+                string.IsNullOrWhiteSpace(emailField.Text) ||
+                string.IsNullOrWhiteSpace(passwordField.Password))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!",
+                                "Thiếu thông tin",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
+
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(emailField.Text, emailPattern))
+            {
+                MessageBox.Show("Email không hợp lệ! Vui lòng sử dụng email dạng: example@gmail.com",
+                                "Sai định dạng email",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
+
+            // Validate strong password
+            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(passwordField.Password, passwordPattern))
+            {
+                MessageBox.Show(
+                    "Mật khẩu phải có tối thiểu 8 kí tự, bao gồm:\n" +
+                    "- Chữ thường\n" +
+                    "- Chữ hoa\n" +
+                    "- Chữ số\n" +
+                    "- Ký tự đặc biệt (@$!%*?&)",
+                    "Mật khẩu yếu",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
             }
 
             var user = new User
@@ -125,6 +176,11 @@ namespace Theater_Management_FE.Controllers
                 visiblePasswordField.Text = passwordField.Password;
                 visiblePasswordField.Visibility = Visibility.Visible;
                 passwordField.Visibility = Visibility.Collapsed;
+
+                // Show confirm password
+                visibleConfirmPasswordField.Text = confirmPasswordField.Password;
+                visibleConfirmPasswordField.Visibility = Visibility.Visible;
+                confirmPasswordField.Visibility = Visibility.Collapsed;
                 visiblePasswordField.Focus();
             }
             else
@@ -132,6 +188,10 @@ namespace Theater_Management_FE.Controllers
                 passwordField.Password = visiblePasswordField.Text;
                 visiblePasswordField.Visibility = Visibility.Collapsed;
                 passwordField.Visibility = Visibility.Visible;
+
+                confirmPasswordField.Password = visibleConfirmPasswordField.Text;
+                visibleConfirmPasswordField.Visibility = Visibility.Collapsed;
+                confirmPasswordField.Visibility = Visibility.Visible;
                 passwordField.Focus();
             }
         }
@@ -144,12 +204,17 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
-        public void BindUIControls(TextBox usernameField, TextBox emailField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signUpButton, Button backButton)
+        public void BindUIControls(TextBox usernameField, TextBox emailField, PasswordBox passwordField, TextBox visiblePasswordField, PasswordBox confirmPasswordField,
+    TextBox visibleConfirmPasswordField, CheckBox showPasswordCheckBox, Button signUpButton, Button backButton)
         {
             this.usernameField = usernameField;
             this.emailField = emailField;
             this.passwordField = passwordField;
             this.visiblePasswordField = visiblePasswordField;
+
+            this.confirmPasswordField = confirmPasswordField;
+            this.visibleConfirmPasswordField = visibleConfirmPasswordField;
+
             this.showPasswordCheckBox = showPasswordCheckBox;
             this.signUpButton = signUpButton;
             this.backButton = backButton;
@@ -163,6 +228,8 @@ namespace Theater_Management_FE.Controllers
             this.emailField.KeyDown += HandleKeyDown;
             this.passwordField.KeyDown += HandleKeyDown;
             this.visiblePasswordField.KeyDown += HandleKeyDown;
+            this.confirmPasswordField.KeyDown += HandleKeyDown;
+            this.visibleConfirmPasswordField.KeyDown += HandleKeyDown;
         }
     }
 }

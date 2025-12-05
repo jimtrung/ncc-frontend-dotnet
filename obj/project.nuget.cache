@@ -37,5 +37,54 @@
     "C:\\Users\\HAI TRUNG\\.nuget\\packages\\system.text.encodings.web\\10.0.0\\system.text.encodings.web.10.0.0.nupkg.sha512",
     "C:\\Users\\HAI TRUNG\\.nuget\\packages\\system.text.json\\10.0.0\\system.text.json.10.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'LiveChartsCore.SkiaSharpView.WPF 2.0.0-rc6.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "libraryId": "LiveChartsCore.SkiaSharpView.WPF",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'OpenTK 3.3.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "libraryId": "OpenTK",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'OpenTK.GLWpfControl 3.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "libraryId": "OpenTK.GLWpfControl",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'SkiaSharp.Views.WPF 3.119.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\MyApp\\NCC\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+      "libraryId": "SkiaSharp.Views.WPF",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    }
+  ]
 }

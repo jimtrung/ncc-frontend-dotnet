@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,18 +11,22 @@ using Theater_Management_FE.Utils;
 
 namespace Theater_Management_FE.Controllers
 {
-    public class HomePageUserController
+    public class ShowtimePageController
     {
         private ScreenController screenController;
         private AuthService authService;
         private MovieService movieService;
+        private AuditoriumService auditoriumService;
+        public ShowtimeService showtimeService;
         private AuthTokenUtil authTokenUtil;
+        private Guid _uuid;
 
-        public WrapPanel movieList;
-        public Button profileButton;
+        private static readonly Random _rand = new Random();
+
+        public WrapPanel showtimeList;
         public Button logoutButton;
-        public Button showTimeButton;
-        public Button bookTicketButton;
+        public Button homeButton;
+        public Button bookedTicketButton;
         public TextBlock usernameText;
 
         private bool _isInitialized = false;
@@ -46,6 +50,14 @@ namespace Theater_Management_FE.Controllers
         {
             authTokenUtil = util;
         }
+        public void SetShowtimeService(ShowtimeService service)
+        {
+            showtimeService = service;
+        }
+        public void SetAuditoriumService(AuditoriumService service)
+        {
+            auditoriumService = service;
+        }
 
         public async void HandleOnOpen()
         {
@@ -53,10 +65,9 @@ namespace Theater_Management_FE.Controllers
             {
                 if (!_isInitialized)
                 {
-                    if (profileButton != null) profileButton.Click += HandleProfileButton;
                     if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
-                    if (showTimeButton != null) showTimeButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
-                    if (bookTicketButton != null) bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
+                    if (homeButton != null) homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>();
+                    if (bookedTicketButton != null) bookedTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     _isInitialized = true;
                 }
 
@@ -87,48 +98,52 @@ namespace Theater_Management_FE.Controllers
                     screenController.NavigateTo<Home>();
                     return;
                 }
-                
+
                 UpdateUserUI(user);
 
                 // Clear movie list and show loading
-                if (movieList != null) 
+                if (showtimeList != null)
                 {
-                    movieList.Children.Clear();
-                    movieList.Children.Add(new TextBlock 
-                    { 
-                        Text = "Loading movies...", 
-                        Foreground = Brushes.White, 
+                    showtimeList.Children.Clear();
+                    showtimeList.Children.Add(new TextBlock
+                    {
+                        Text = "Loading showtimes...",
+                        Foreground = Brushes.White,
                         FontSize = 16,
                         Margin = new Thickness(10)
                     });
                 }
 
-                List<Movie> movies = null;
+                // List<Movie> movies = null;
+                // string errorMessage = null;
+                // try
+                // {
+                //     movies = await movieService.GetAllMoviesAsync();
+                // }
+                // catch (Exception ex)
+                // {
+                //     System.Diagnostics.Debug.WriteLine($"Failed to load movies: {ex.Message}");
+                //     errorMessage = "Unable to load movies. Please try again later.";
+                //     movies = new List<Movie>();
+                // }
+
+                List<Showtime> showtimes = null;
                 string errorMessage = null;
-                try
-                {
-                    movies = await movieService.GetAllMoviesAsync();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Failed to load movies: {ex.Message}");
-                    errorMessage = "Unable to load movies. Please try again later.";
-                    movies = new List<Movie>();
-                }
+                showtimes = showtimeService.GetAllShowtimes();
 
                 // Clear loading message
-                if (movieList != null) movieList.Children.Clear();
+                if (showtimeList != null) showtimeList.Children.Clear();
 
-                if (movies == null || movies.Count == 0)
+                if (showtimes == null || showtimes.Count == 0)
                 {
-                    if (movieList != null)
+                    if (showtimeList != null)
                     {
                         var msg = errorMessage ?? "No movies available 🎬";
                         var color = errorMessage != null ? Brushes.Red : Brushes.White;
-                        movieList.Children.Add(new TextBlock 
-                        { 
-                            Text = msg, 
-                            Foreground = color, 
+                        showtimeList.Children.Add(new TextBlock
+                        {
+                            Text = msg,
+                            Foreground = color,
                             FontSize = 16,
                             Margin = new Thickness(10)
                         });
@@ -136,9 +151,9 @@ namespace Theater_Management_FE.Controllers
                     return;
                 }
 
-                foreach (var movie in movies)
+                foreach (var showtime in showtimes)
                 {
-                    if (movieList != null) movieList.Children.Add(CreateMovieCard(movie));
+                    if (showtimeList != null) showtimeList.Children.Add(CreateShowtimeCard(showtime));
                 }
             }
             catch (Exception ex)
@@ -157,11 +172,6 @@ namespace Theater_Management_FE.Controllers
             screenController.NavigateTo<SignIn>();
         }
 
-        public void HandleProfileButton(object sender, RoutedEventArgs e)
-        {
-            screenController.NavigateTo<Profile>();
-        }
-
         public void HandleLogOutButton(object sender, RoutedEventArgs e)
         {
             authTokenUtil.ClearRefreshToken();
@@ -172,7 +182,7 @@ namespace Theater_Management_FE.Controllers
 
         private void UpdateUserUI(User user)
         {
-            if (usernameText == null)
+            if (usernameText == null || logoutButton == null)
             {
                 return;
             }
@@ -180,54 +190,59 @@ namespace Theater_Management_FE.Controllers
             if (user == null)
             {
                 usernameText.Text = "Khách";
-                if (logoutButton != null) logoutButton.Visibility = Visibility.Collapsed;
-                if (profileButton != null) profileButton.Visibility = Visibility.Collapsed;
+                logoutButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 usernameText.Text = user.Username ?? "Người dùng";
-                if (logoutButton != null) logoutButton.Visibility = Visibility.Visible;
-                if (profileButton != null) profileButton.Visibility = Visibility.Visible;
+                logoutButton.Visibility = Visibility.Visible;
             }
         }
 
-        // Hàm tạo thẻ phim ở trang chủ
-        private StackPanel CreateMovieCard(Movie movie)
+        private StackPanel CreateShowtimeCard(Showtime showtime)
         {
-            var card = new StackPanel 
-            { 
-                Width = 204,
+            var card = new StackPanel
+            {
+                Width = 220,
                 Margin = new Thickness(12),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
 
-            // Tạo poster
-            var posterBorder = new System.Windows.Controls.Border
+            // --- Poster ---
+            var posterBorder = new Border
             {
-                Width = 204,
-                Height = 280,
+                Width = 220,
+                Height = 250,
                 CornerRadius = new CornerRadius(8),
                 ClipToBounds = true,
-                Background = System.Windows.Media.Brushes.LightGray
+                Background = Brushes.LightGray
             };
 
-            var imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
-            var imageUri = System.IO.File.Exists(imagePath) 
-                ? new Uri(imagePath) 
+            var imagePath = System.IO.Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "Resources",
+                "Images",
+                $"{showtime.MovieId}.jpg"
+            );
+
+            var imageUri = System.IO.File.Exists(imagePath)
+                ? new Uri(imagePath)
                 : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
 
             var poster = new Image
             {
-                Width = 204,
+                Width = 220,
                 Height = 280,
-                Stretch = System.Windows.Media.Stretch.UniformToFill,
+                Stretch = Stretch.UniformToFill,
                 Source = new BitmapImage(imageUri)
             };
+
             posterBorder.Child = poster;
 
+            // --- Movie name ---
             var title = new TextBlock
             {
-                Text = movie.Name,
+                Text = movieService.GetMovieById(showtime.MovieId).Name,
                 FontSize = 15,
                 FontWeight = FontWeights.SemiBold,
                 Margin = new Thickness(0, 10, 0, 4),
@@ -237,52 +252,92 @@ namespace Theater_Management_FE.Controllers
                 Foreground = Brushes.White
             };
 
-            var genresText = new TextBlock
+            // --- Auditorium name ---
+            var auditorium = new TextBlock
             {
-                Text = movie.VietnameseGenres,
-                FontSize = 12,
-                Foreground = Brushes.LightGray,
-                TextTrimming = TextTrimming.CharacterEllipsis,
-                Margin = new Thickness(0, 0, 0, 4)
-            };
-
-            var infoText = new TextBlock
-            {
+                Text = $"Phòng: {auditoriumService.GetAuditoriumById(showtime.AuditoriumId).Name}",
                 FontSize = 12,
                 Foreground = Brushes.LightGray,
                 Margin = new Thickness(0, 0, 0, 4)
             };
-            infoText.Inlines.Add(new Run { Text = $"Giới hạn độ tuổi: {movie.Rated}+ • " });
-            infoText.Inlines.Add(new Run { Text = $"{movie.Duration} phút" });
 
-            var languageText = new TextBlock
+            // --- Time ---
+            var timeText = new TextBlock
             {
-                Text = $"Ngôn ngữ: {movie.Language}",
+                Text = $"Giờ chiếu: {showtime.StartTimeString} - {showtime.EndTimeString}",
                 FontSize = 12,
-                Foreground = Brushes.LightGray
+                Foreground = Brushes.LightGray,
+                Margin = new Thickness(0, 0, 0, 4)
             };
 
+            // --- Date ---
+            var dateText = new TextBlock
+            {
+                Text = $"Ngày: {showtime.ShowDateString}",
+                FontSize = 12,
+                Foreground = Brushes.LightGray,
+                Margin = new Thickness(0, 0, 0, 4)
+            };
+
+            // --- Price (random) ---
+            int[] prices = { 60, 65, 70, 75, 80, 85, 90, 95 };
+            int price = prices[_rand.Next(prices.Length)];
+
+            var priceText = new TextBlock
+            {
+                Text = $"Giá vé: {price}.000 đ",
+                FontSize = 12,
+                Foreground = Brushes.LightGreen,
+                Margin = new Thickness(0, 0, 0, 6)
+            };
+
+
+            // --- Book button ---
+            var bookButton = new Button
+            {
+                Content = "Đặt vé",
+                Background = Brushes.DarkRed,
+                Foreground = Brushes.White,
+                Padding = new Thickness(8, 4, 8, 4),
+                Margin = new Thickness(0, 6, 0, 0),
+                Cursor = System.Windows.Input.Cursors.Hand
+            };
+
+            bookButton.Click += (s, e) =>
+            {
+
+                // Sau này bạn xử lý chuyển sang màn hình đặt vé
+                HandleClickBookTicketButton(showtime.Id, price);
+            };
+
+            // Add children to card
             card.Children.Add(posterBorder);
             card.Children.Add(title);
-            card.Children.Add(genresText);
-            card.Children.Add(infoText);
-            card.Children.Add(languageText);
+            card.Children.Add(auditorium);
+            card.Children.Add(timeText);
+            card.Children.Add(dateText);
+            card.Children.Add(priceText);
+            card.Children.Add(bookButton);
 
             return card;
         }
-
-        public void BindUIControls(WrapPanel movieList, Button profileButton, Button logoutButton, TextBlock usernameText)
+        
+        public void HandleClickBookTicketButton(Guid showtimeId, int price)
         {
-            this.movieList = movieList;
-            this.profileButton = profileButton;
+            var controller = screenController.GetController<BookTicketController>();
+            if (controller != null)
+            {
+                controller.SetShowtimeId(showtimeId);
+                controller.SetPrice(price);
+            }
+            screenController.NavigateTo<BookTicket>();
+        }
+
+        public void BindUIControls(WrapPanel movieList, Button logoutButton, TextBlock usernameText)
+        {
+            this.showtimeList = movieList;
             this.logoutButton = logoutButton;
             this.usernameText = usernameText;
-
-            if (this.profileButton != null)
-            {
-                this.profileButton.Click -= HandleProfileButton;
-                this.profileButton.Click += HandleProfileButton;
-            }
 
             if (this.logoutButton != null)
             {

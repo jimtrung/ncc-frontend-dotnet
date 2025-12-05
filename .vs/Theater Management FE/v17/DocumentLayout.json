@@ -1,9 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\program-languages\\c#\\Theater Management FE\\",
+  "WorkspaceRootPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater management fe\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\models\\showtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:models\\showtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\helpers\\windowhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:helpers\\windowhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\helpers\\snakecasenamingpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:helpers\\snakecasenamingpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\helpers\\selectableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:helpers\\selectableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\helpers\\screencontrollerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:helpers\\screencontrollerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\helpers\\listtostringconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:helpers\\listtostringconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|d:\\program-languages\\c#\\theater-management\\theater management fe\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{95CAE270-3127-42AD-8E25-E0F6E386F6DB}|Theater Management FE.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -23,12 +55,116 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:55:36.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Showtime.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\Showtime.cs",
+              "RelativeDocumentMoniker": "Models\\Showtime.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\Showtime.cs",
+              "RelativeToolTip": "Models\\Showtime.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:55:20.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\Ticket.cs",
+              "RelativeDocumentMoniker": "Models\\Ticket.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Models\\Ticket.cs",
+              "RelativeToolTip": "Models\\Ticket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:55:11.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WindowHelper.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\WindowHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\WindowHelper.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\WindowHelper.cs",
+              "RelativeToolTip": "Helpers\\WindowHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:50:40.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SnakeCaseNamingPolicy.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\SnakeCaseNamingPolicy.cs",
+              "RelativeDocumentMoniker": "Helpers\\SnakeCaseNamingPolicy.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\SnakeCaseNamingPolicy.cs",
+              "RelativeToolTip": "Helpers\\SnakeCaseNamingPolicy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:50:21.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SelectableItem.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\SelectableItem.cs",
+              "RelativeDocumentMoniker": "Helpers\\SelectableItem.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\SelectableItem.cs",
+              "RelativeToolTip": "Helpers\\SelectableItem.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:50:08.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ScreenControllerExtensions.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\ScreenControllerExtensions.cs",
+              "RelativeDocumentMoniker": "Helpers\\ScreenControllerExtensions.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\ScreenControllerExtensions.cs",
+              "RelativeToolTip": "Helpers\\ScreenControllerExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:49:11.609Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ListToStringConverter.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\ListToStringConverter.cs",
+              "RelativeDocumentMoniker": "Helpers\\ListToStringConverter.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Helpers\\ListToStringConverter.cs",
+              "RelativeToolTip": "Helpers\\ListToStringConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:49:00.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "App.xaml.cs",
-              "DocumentMoniker": "D:\\program-languages\\c#\\Theater Management FE\\App.xaml.cs",
+              "DocumentMoniker": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\App.xaml.cs",
               "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "D:\\program-languages\\c#\\Theater Management FE\\App.xaml.cs",
+              "ToolTip": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\App.xaml.cs",
               "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-21T02:21:24.222Z",
               "EditorCaption": ""

@@ -45,7 +45,7 @@
             <RowDefinition Height="*" />   
         </Grid.RowDefinitions>
 
-        <!-- 1. Header -->
+        <!-- Header -->
         <Border Background="{StaticResource SecondaryBackground}" Padding="16" Grid.Row="0">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -53,14 +53,16 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <!-- Logo / Title -->
+                
+                <!-- Logo -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
                     <StackPanel>
                         <TextBlock Text="TRUNG TÂM CHIẾU PHIM QUỐC GIA" Foreground="{StaticResource PrimaryText}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" />
                         <TextBlock Text="National Cinema Center" Foreground="{StaticResource SecondaryText}" FontSize="14" />
                     </StackPanel>
                 </StackPanel>
-                <!-- Navigation Buttons -->
+
+                <!-- Các nút :) --> 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button x:Name="homeButton" Style="{StaticResource NavButtonStyle}" Content="Trang chủ" />
                     <Button x:Name="showTimesButton" Style="{StaticResource NavButtonStyle}" Content="Lịch chiếu" />
@@ -69,7 +71,8 @@
                     <Button x:Name="priceButton" Style="{StaticResource NavButtonStyle}" Content="Giá vé" />
                     <Button x:Name="aboutButton" Style="{StaticResource NavButtonStyle}" Content="Giới thiệu" />
                 </StackPanel>
-                <!-- User Greeting / Dropdown -->
+
+                <!-- Đăng xuất -->
                 <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <StackPanel Margin="0,0,12,0" VerticalAlignment="Center">
                         <TextBlock Text="Xin chào," Foreground="{StaticResource SecondaryText}" FontSize="12" HorizontalAlignment="Right" />
@@ -84,7 +87,7 @@
             </Grid>
         </Border>
 
-        <!-- 2. Main Content -->
+        <!-- Hiển thị phim -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,0,40">
                 <!-- Banner -->
@@ -101,7 +104,7 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Movie Tabs -->
+                <!-- Phim -->
                 <StackPanel Margin="40,40,40,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,30">
                         <RadioButton Content="PHIM ĐANG CHIẾU" IsChecked="True" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryText}" Margin="0,0,30,0" Style="{x:Null}">
@@ -136,9 +139,10 @@
                                 </ControlTemplate>
                             </RadioButton.Template>
                         </RadioButton>
+                        
+                    <!-- Hiển thị phim từ server -->
                     </StackPanel>
 
-                    <!-- Movie Grid -->
                     <WrapPanel x:Name="movieList" HorizontalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>

@@ -5,29 +5,14 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#0F1419" Offset="0"/>
-                <GradientStop Color="#1A1F2E" Offset="0.5"/>
-                <GradientStop Color="#0F1419" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Background="#0F1419">
 
-        <!-- Main Content -->
         <Border Style="{StaticResource card}"
                 Width="500"
                 Padding="48,40"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
             <StackPanel>
-                <!-- Logo/Title -->
-                <TextBlock Text="🎬" 
-                        FontSize="64" 
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,16"
-                        Foreground="White"/>
-
                 
                 <TextBlock Text="Quản Lý Rạp Chiếu Phim"
                            x:Name="titleLabel"
@@ -41,7 +26,6 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,32"/>
 
-                <!-- Action Buttons -->
                 <Button x:Name="signinButton"
                         Content="Đăng Nhập"
                         Style="{StaticResource button-primary}"

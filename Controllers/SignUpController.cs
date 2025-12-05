@@ -33,7 +33,6 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleOnOpen()
         {
-            // Check if user is already logged in
             User user = null;
             try { user = (User)_authService.GetUser(); } catch { }
 
@@ -44,7 +43,8 @@ namespace Theater_Management_FE.Controllers
                 return;
             }
 
-            // Reset all fields when page opens
+            // NOTE: 04/12/25 5:38PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
+            // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi (Tương tự sign in)
             if (usernameField != null) 
             {
                 usernameField.Clear();
@@ -79,7 +79,6 @@ namespace Theater_Management_FE.Controllers
 
         private void PerformSignUp()
         {
-            // Ensure password is up to date from visible field if checked
             if (showPasswordCheckBox.IsChecked == true)
             {
                 passwordField.Password = visiblePasswordField.Text;
@@ -98,17 +97,18 @@ namespace Theater_Management_FE.Controllers
                 response = _authService.SignUp(user);
                 if (response is ErrorResponse errRes)
                 {
-                    MessageBox.Show(errRes.Message, "Sign up error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(errRes.Message, "Lỗi đăng ký", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to sign up: {ex.Message}", "Sign up error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi đăng ký", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Clear fields
+            // NOTE: 04/12/25 5:38PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
+            // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi (Tương tự sign in) 
             usernameField.Clear();
             emailField.Clear();
             passwordField.Clear();
@@ -122,7 +122,6 @@ namespace Theater_Management_FE.Controllers
         {
             if (showPasswordCheckBox.IsChecked == true)
             {
-                // Show password
                 visiblePasswordField.Text = passwordField.Password;
                 visiblePasswordField.Visibility = Visibility.Visible;
                 passwordField.Visibility = Visibility.Collapsed;
@@ -130,7 +129,6 @@ namespace Theater_Management_FE.Controllers
             }
             else
             {
-                // Hide password
                 passwordField.Password = visiblePasswordField.Text;
                 visiblePasswordField.Visibility = Visibility.Collapsed;
                 passwordField.Visibility = Visibility.Visible;
@@ -160,7 +158,7 @@ namespace Theater_Management_FE.Controllers
             this.backButton.Click += HandleBackButton;
             this.showPasswordCheckBox.Click += TogglePasswordVisibility;
             
-            // Add Enter key support
+            // Gán cho phím Enter nút đăng ký
             this.usernameField.KeyDown += HandleKeyDown;
             this.emailField.KeyDown += HandleKeyDown;
             this.passwordField.KeyDown += HandleKeyDown;

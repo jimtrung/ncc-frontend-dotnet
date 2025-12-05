@@ -35,7 +35,7 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleOnOpen()
         {
-            // Only try to fetch user if token exists
+            // Kiểm tra xem có token không để skip quá trình đăng nhập/đăng ký
             var token = _authTokenUtil.LoadAccessToken();
             if (string.IsNullOrEmpty(token))
             {

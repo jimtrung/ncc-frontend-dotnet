@@ -187,6 +187,7 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
+        // Hàm tạo thẻ phim ở trang chủ
         private StackPanel CreateMovieCard(Movie movie)
         {
             var card = new StackPanel 
@@ -196,7 +197,7 @@ namespace Theater_Management_FE.Controllers
                 Cursor = System.Windows.Input.Cursors.Hand
             };
 
-            // Poster with rounded corners
+            // Tạo poster
             var posterBorder = new System.Windows.Controls.Border
             {
                 Width = 204,
@@ -220,7 +221,6 @@ namespace Theater_Management_FE.Controllers
             };
             posterBorder.Child = poster;
 
-            // Movie title
             var title = new TextBlock
             {
                 Text = movie.Name,
@@ -233,7 +233,6 @@ namespace Theater_Management_FE.Controllers
                 Foreground = Brushes.White
             };
 
-            // Genres
             var genresText = new TextBlock
             {
                 Text = movie.VietnameseGenres,
@@ -243,20 +242,18 @@ namespace Theater_Management_FE.Controllers
                 Margin = new Thickness(0, 0, 0, 4)
             };
 
-            // Rating and Duration
             var infoText = new TextBlock
             {
                 FontSize = 12,
                 Foreground = Brushes.LightGray,
                 Margin = new Thickness(0, 0, 0, 4)
             };
-            infoText.Inlines.Add(new Run { Text = $"Rated: {movie.Rated}+ • " });
-            infoText.Inlines.Add(new Run { Text = $"{movie.Duration} min" });
+            infoText.Inlines.Add(new Run { Text = $"Giới hạn độ tuổi: {movie.Rated}+ • " });
+            infoText.Inlines.Add(new Run { Text = $"{movie.Duration} phút" });
 
-            // Language
             var languageText = new TextBlock
             {
-                Text = $"Lang: {movie.Language}",
+                Text = $"Ngôn ngữ: {movie.Language}",
                 FontSize = 12,
                 Foreground = Brushes.LightGray
             };

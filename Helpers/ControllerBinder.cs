@@ -20,7 +20,9 @@ namespace Theater_Management_FE.Helpers
                 }
             }
 
-            // If controller exposes BindUIControls, try to resolve parameters by name and invoke it
+            // Tìm hàm BindUIControls trong controller để gán các biến trong controller với các biến trong UI
+            // NOTE: Tên biến trong controller và .xaml phải giống nhau
+            // Tương tự @FXML trong JavaFX
             var bindMethod = type.GetMethod("BindUIControls", BindingFlags.Public | BindingFlags.Instance);
             if (bindMethod != null)
             {
@@ -32,7 +34,6 @@ namespace Theater_Management_FE.Helpers
                     for (int i = 0; i < parameters.Length; i++)
                     {
                         var p = parameters[i];
-                        // Prefer control looked up by parameter name
                         var control = window.FindName(p.Name);
 
                         // Fallback to already-bound field with same name
@@ -42,9 +43,9 @@ namespace Theater_Management_FE.Helpers
                             control = field?.GetValue(controller);
                         }
 
+                        
                         if (control == null || !p.ParameterType.IsAssignableFrom(control.GetType()))
                         {
-                            // Cannot resolve this parameter, abort binding to avoid runtime errors
                             return;
                         }
 
@@ -53,10 +54,7 @@ namespace Theater_Management_FE.Helpers
 
                     bindMethod.Invoke(controller, args);
                 }
-                catch (Exception)
-                {
-                    // Swallow binding errors to avoid breaking window creation
-                }
+                catch (Exception) {}
             }
         }
     }

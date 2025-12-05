@@ -114,19 +114,6 @@ namespace Theater_Management_FE.Controllers
                     });
                 }
 
-                // List<Movie> movies = null;
-                // string errorMessage = null;
-                // try
-                // {
-                //     movies = await movieService.GetAllMoviesAsync();
-                // }
-                // catch (Exception ex)
-                // {
-                //     System.Diagnostics.Debug.WriteLine($"Failed to load movies: {ex.Message}");
-                //     errorMessage = "Unable to load movies. Please try again later.";
-                //     movies = new List<Movie>();
-                // }
-
                 List<Showtime> showtimes = null;
                 string errorMessage = null;
                 showtimes = showtimeService.GetAllShowtimes();
@@ -337,19 +324,6 @@ namespace Theater_Management_FE.Controllers
                 controller.SetPrice(price);
             }
             screenController.NavigateTo<BookTicket>();
-        }
-
-        public void BindUIControls(WrapPanel movieList, Button logoutButton, TextBlock usernameText)
-        {
-            this.showtimeList = movieList;
-            this.logoutButton = logoutButton;
-            this.usernameText = usernameText;
-
-            if (this.logoutButton != null)
-            {
-                this.logoutButton.Click -= HandleLogOutButton;
-                this.logoutButton.Click += HandleLogOutButton;
-            }
         }
     }
 }

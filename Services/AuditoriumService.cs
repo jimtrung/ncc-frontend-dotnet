@@ -39,7 +39,7 @@ namespace Theater_Management_FE.Services
             if (!response.IsSuccessStatusCode)
             {
                 var body = response.Content.ReadAsStringAsync().Result;
-                throw new Exception($"Failed to insert auditorium. Status: {response.StatusCode}, Body: {body}");
+                throw new Exception($"Không thể thêm phòng chiếu. Trạng thái: {response.StatusCode}, Body: {body}");
             }
         }
 
@@ -83,7 +83,7 @@ namespace Theater_Management_FE.Services
             
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Failed to delete auditorium. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa phòng chiếu. Trạng thái: {response.StatusCode}");
             }
         }
 
@@ -97,7 +97,7 @@ namespace Theater_Management_FE.Services
             
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Failed to delete all auditoriums. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa tất cả phòng chiếu. Trạng thái: {response.StatusCode}");
             }
         }
 

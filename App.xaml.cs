@@ -29,7 +29,7 @@ namespace Theater_Management_FE
             CommandManager.RegisterClassCommandBinding(typeof(Window),
                 new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
-            // Set shutdown mode to close app when main window closes
+            // Khi app đóng thì đóng tất cả các window
             ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             var services = new ServiceCollection();
@@ -127,7 +127,6 @@ namespace Theater_Management_FE
             sc.AutoRegister<BookedTicket, BookedTicketController>(Services);
             sc.AutoRegister<PayPage, PayPageController>(Services);
 
-            // --- STARTUP MAIN WINDOW ---
             // --- STARTUP MAIN WINDOW ---
             sc.NavigateTo<Home>();
         }

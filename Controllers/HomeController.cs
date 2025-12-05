@@ -33,8 +33,17 @@ namespace Theater_Management_FE.Controllers
         public Button signinButton;
         public Button settingsButton;
 
+        private bool _isInitialized = false;
+
         public void HandleOnOpen()
         {
+            if (!_isInitialized)
+            {
+                if (signupButton != null) signupButton.Click += HandleSignUpButton;
+                if (signinButton != null) signinButton.Click += HandleSignInButton;
+                _isInitialized = true;
+            }
+
             // Kiểm tra xem có token không để skip quá trình đăng nhập/đăng ký
             var token = _authTokenUtil.LoadAccessToken();
             if (string.IsNullOrEmpty(token))
@@ -70,14 +79,6 @@ namespace Theater_Management_FE.Controllers
             _screenController.NavigateTo<SignIn>();
         }
 
-        public void BindUIControls(TextBlock titleLabel, Button signupButton, Button signinButton) 
-        {
-            this.titleLabel = titleLabel;
-            this.signupButton = signupButton;
-            this.signinButton = signinButton;
 
-            this.signupButton.Click += HandleSignUpButton;
-            this.signinButton.Click += HandleSignInButton;
-        }
     }
 }

@@ -36,10 +36,24 @@ namespace Theater_Management_FE.Controllers
         public CheckBox showPasswordCheckBox;
         public Button signInButton;
         public Button backButton;
-        // public Hyperlink forgotPasswordLink;
+
+        private bool _isInitialized = false;
 
         public void HandleOnOpen()
         {
+            if (!_isInitialized)
+            {
+                if (signInButton != null) signInButton.Click += HandleSignInButton;
+                if (backButton != null) backButton.Click += HandleBackButton;
+                if (showPasswordCheckBox != null) showPasswordCheckBox.Click += TogglePasswordVisibility;
+                
+                // Gắn cho phím Enter để đăng nhập
+                if (usernameField != null) usernameField.KeyDown += HandleKeyDown;
+                if (passwordField != null) passwordField.KeyDown += HandleKeyDown;
+                if (visiblePasswordField != null) visiblePasswordField.KeyDown += HandleKeyDown;
+
+                _isInitialized = true;
+            }
             User user = null;
             try { user = (User)_authService.GetUser(); } catch { }
 
@@ -183,23 +197,6 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
-        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
-        {
-            this.usernameField = usernameField;
-            this.passwordField = passwordField;
-            this.visiblePasswordField = visiblePasswordField;
-            this.showPasswordCheckBox = showPasswordCheckBox;
-            this.signInButton = signInButton;
-            this.backButton = backButton;
 
-            this.signInButton.Click += HandleSignInButton;
-            this.backButton.Click += HandleBackButton;
-            this.showPasswordCheckBox.Click += TogglePasswordVisibility;
-            
-            // Gắn cho phím Enter để đăng nhập
-            this.usernameField.KeyDown += HandleKeyDown;
-            this.passwordField.KeyDown += HandleKeyDown;
-            this.visiblePasswordField.KeyDown += HandleKeyDown;
-        }
     }
 }

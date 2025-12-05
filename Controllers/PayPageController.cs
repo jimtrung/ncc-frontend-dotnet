@@ -62,10 +62,6 @@ namespace Theater_Management_FE.Controllers
                 ticketSeatName.Text = ticket.Seatname;
                 // Nhân 1000 để hiển thị
                 ticketPrice.Text = (ticket.Price * 1000).ToString("N0", new System.Globalization.CultureInfo("vi-VN"));
-
-
-                // Assuming GenerateQRCode is a method that generates a QR code image from a string
-                // ticketQRCode.Source = QRCodeUtil.GenerateQRCode(ticket.Id.ToString());
             }
             catch (Exception ex)
             {

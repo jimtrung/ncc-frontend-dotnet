@@ -68,7 +68,7 @@ namespace Theater_Management_FE.Controllers
 
                 if (movie == null)
                 {
-                    MessageBox.Show("Movie not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Không tìm thấy phim.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -77,13 +77,12 @@ namespace Theater_Management_FE.Controllers
                 if (movieLanguageField != null) movieLanguageField.Text = movie.Language;
                 if (movieDurationField != null) movieDurationField.Text = movie.Duration.ToString();
                 if (movieRatedField != null) movieRatedField.Text = movie.Rated.ToString();
-                // if (movieDirectorIdField != null) movieDirectorIdField.Text = movie.DirectorId.ToString() ?? "";
                 if (moviePremiereField != null) moviePremiereField.Text = movie.Premiere?.ToString("yyyy-MM-dd HH:mm:ss") ?? "";
                 if (movieGenresField != null) movieGenresField.Text = string.Join(", ", movie.Genres);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load movie details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể tải chi tiết phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -111,7 +110,7 @@ namespace Theater_Management_FE.Controllers
                 // Kiểm tra Rated
                 if (!int.TryParse(movieRatedField.Text.Trim(), out var rated))
                 {
-                    MessageBox.Show("Rated must be an integer.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Độ tuổi giới hạn phải là số nguyên.", "Lỗi nhập liệu", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return; // stop update
 
                 }
@@ -120,7 +119,7 @@ namespace Theater_Management_FE.Controllers
                 // Kiểm tra Duration
                 if (!int.TryParse(movieDurationField.Text.Trim(), out var duration))
                 {
-                    MessageBox.Show("Duration must be an integer.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Thời lượng phải là số nguyên.", "Lỗi nhập liệu", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return; // stop update
                 }
                 updatedMovie.Duration = duration;
@@ -147,7 +146,7 @@ namespace Theater_Management_FE.Controllers
                             genres.Add(genre);
                         else
                         {
-                            MessageBox.Show($"Genre '{g}' is invalid.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show($"Thể loại '{g}' không hợp lệ.", "Lỗi nhập liệu", MessageBoxButton.OK, MessageBoxImage.Warning);
                             return;
 
                         }
@@ -156,7 +155,7 @@ namespace Theater_Management_FE.Controllers
                 }
 
                 _movieService.UpdateMovie(_movieId, updatedMovie);
-                MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cập nhật phim thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 var movie = _movieService.GetMovieById(_movieId);
                 _movieListController.UpdateMovie(movie);
@@ -164,7 +163,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to update movie: {ex.Message}\n\nStack: {ex.StackTrace}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể cập nhật phim: {ex.Message}\n\nStack: {ex.StackTrace}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -173,7 +172,7 @@ namespace Theater_Management_FE.Controllers
         {
             try
             {
-                var result = MessageBox.Show("Are you sure you want to delete this movie?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phim này không?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     _movieService.DeleteMovieById(_movieId);
@@ -183,7 +182,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to delete movie: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể xóa phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

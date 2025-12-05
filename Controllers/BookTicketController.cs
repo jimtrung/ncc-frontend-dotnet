@@ -171,6 +171,5 @@ namespace Theater_Management_FE.Controllers
                 MessageBox.Show($"Đặt vé thất bại: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }

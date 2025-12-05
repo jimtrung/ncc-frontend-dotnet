@@ -42,7 +42,6 @@ namespace Theater_Management_FE.Controllers
             if (!_isInitialized)
             {
                 if (backButton != null) backButton.Click += (s, e) => HandleBackButton();
-                // if (editButton != null) editButton.Click += (s, e) => HandleEditButton();
                 if (deleteButton != null) deleteButton.Click += (s, e) => HandleDeleteButton();
                 _isInitialized = true;
             }
@@ -62,10 +61,8 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load showtime information: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể tải thông tin suất chiếu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-
         }
 
         public void HandleBackButton()
@@ -75,19 +72,19 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleDeleteButton()
         {
-            var result = MessageBox.Show("Are you sure you want to delete this showtime?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa suất chiếu này không?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 try
                 {
                     _showtimeService.DeleteShowtimeById(_showtimeId);
-                    MessageBox.Show("Showtime deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Xóa suất chiếu thành công.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     _showtimeListController.HandleOnOpen();
                     _screenController.NavigateTo<ShowtimeList>();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to delete showtime: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Không thể xóa suất chiếu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

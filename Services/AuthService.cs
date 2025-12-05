@@ -47,7 +47,7 @@ public class AuthService
         }
         catch (Exception ex)
         {
-            return new ErrorResponse(DateTime.UtcNow, 500, "SignUp request failed", ex.Message, "/auth/signup");
+            return new ErrorResponse(DateTime.UtcNow, 500, "Yêu cầu đăng ký thất bại", ex.Message, "/auth/signup");
         }
 
         if (!response.IsSuccessStatusCode)
@@ -60,7 +60,7 @@ public class AuthService
             catch { }
 
             var raw = response.Content.ReadAsStringAsync().Result ?? "";
-            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignUp failed", raw, "/auth/signup");
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "Đăng ký thất bại", raw, "/auth/signup");
         }
 
         return response.Content.ReadAsStringAsync().Result;
@@ -82,7 +82,7 @@ public class AuthService
         catch (Exception ex)
         {
             // Wrap low-level HTTP/serialization issues into an ErrorResponse
-            return new ErrorResponse(DateTime.UtcNow, 500, "SignIn request failed", ex.Message, "/auth/signin");
+            return new ErrorResponse(DateTime.UtcNow, 500, "Yêu cầu đăng nhập thất bại", ex.Message, "/auth/signin");
         }
 
         var raw = response.Content.ReadAsStringAsync().Result ?? "";
@@ -98,7 +98,7 @@ public class AuthService
                     // Ensure we have a message to display
                     if (string.IsNullOrWhiteSpace(error.Message))
                     {
-                        return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Unknown error occurred" };
+                        return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Đã xảy ra lỗi không xác định" };
                     }
                     return error;
                 }
@@ -108,7 +108,7 @@ public class AuthService
                 // ignore and fall through
             }
 
-            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "SignIn failed", !string.IsNullOrWhiteSpace(raw) ? raw : "Unknown server error", "/auth/signin");
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "Đăng nhập thất bại", !string.IsNullOrWhiteSpace(raw) ? raw : "Lỗi máy chủ không xác định", "/auth/signin");
         }
 
         try
@@ -116,7 +116,7 @@ public class AuthService
             var token = response.Content.ReadFromJsonAsync<TokenPair>(JsonOptions).Result;
             if (token == null)
             {
-                return new ErrorResponse(DateTime.UtcNow, 500, "Invalid token response", "Token payload was empty", "/auth/signin");
+                return new ErrorResponse(DateTime.UtcNow, 500, "Phản hồi token không hợp lệ", "Dữ liệu token rỗng", "/auth/signin");
             }
 
             return token;
@@ -124,8 +124,8 @@ public class AuthService
         catch (Exception ex)
         {
             // Most likely a JSON shape mismatch between backend and TokenPair
-            return new ErrorResponse(DateTime.UtcNow, 500, "Failed to parse token response",
-                $"Could not parse token JSON: {ex.Message}. Raw response: {raw}", "/auth/signin");
+            return new ErrorResponse(DateTime.UtcNow, 500, "Không thể xử lý phản hồi token",
+                $"Không thể đọc dữ liệu token: {ex.Message}. Raw response: {raw}", "/auth/signin");
         }
     }
 
@@ -135,7 +135,7 @@ public class AuthService
         
         if (string.IsNullOrEmpty(token))
         {
-            return new ErrorResponse(DateTime.UtcNow, 401, "Unauthorized", "No access token", "/user/");
+            return new ErrorResponse(DateTime.UtcNow, 401, "Không được phép", "Không có token truy cập", "/user/");
         }
 
         var request = new HttpRequestMessage(HttpMethod.Get, "user/");

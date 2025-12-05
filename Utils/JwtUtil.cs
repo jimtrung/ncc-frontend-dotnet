@@ -13,7 +13,6 @@ namespace Theater_Management_FE.Utils
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
 
-            // Lấy từ "sub" hoặc "id"
             var userIdClaim = jwtToken.Claims.FirstOrDefault(c => 
                 c.Type == "sub" || c.Type == "id");
 

@@ -72,7 +72,6 @@ namespace Theater_Management_FE.Controllers
         public void HandleAddAuditoriumButtonClick()
         {
 
-            Console.WriteLine("Add Auditorium button clicked");
             // Validate empty fields
             if (IsEmpty(auditoriumNameField) ||
                 IsEmpty(auditoriumTypeField) ||

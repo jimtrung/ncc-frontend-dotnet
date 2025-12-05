@@ -71,13 +71,6 @@ namespace Theater_Management_FE.Controllers
         // === Add Auditorium ===
         public void HandleAddAuditorium()
         {
-            // var addWindow = new Views.AddAuditorium();
-            // var controller = addWindow.DataContext as AddAuditoriumController;
-            // controller.SetScreenController(_screenController);
-            // controller.SetAuditoriumService(_auditoriumService);
-            // controller.SetAuthTokenUtil(_authTokenUtil);
-            // controller.SetAuditoriumListController(this);
-            // addWindow.ShowDialog();
             _screenController.NavigateTo<AddAuditorium>();
         }
 
@@ -95,7 +88,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to navigate to movie details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể điều hướng đến chi tiết phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -103,8 +96,8 @@ namespace Theater_Management_FE.Controllers
         public void HandleDeleteAllAuditoriums()
         {
             var result = MessageBox.Show(
-                "Are you sure you want to delete all auditoriums?",
-                "Delete confirmation",
+                "Bạn có chắc chắn muốn xóa tất cả phòng chiếu không?",
+                "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
             );
@@ -143,7 +136,5 @@ namespace Theater_Management_FE.Controllers
                 AuditoriumList[idx] = updatedAuditorium;
             }
         }
-
-        
     }
 }

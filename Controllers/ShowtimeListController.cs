@@ -88,7 +88,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to navigate to showtime details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể điều hướng đến chi tiết suất chiếu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -104,7 +104,7 @@ namespace Theater_Management_FE.Controllers
 
         public void HandleDeleteAllShowtime()
         {
-            var result = MessageBox.Show("Are you sure you want to delete all showtimes?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa tất cả suất chiếu không?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 _showtimeService.DeleteAllShowtimes();
@@ -140,8 +140,8 @@ namespace Theater_Management_FE.Controllers
                     ShowDate = s.ShowDate,
 
                     // Có thể dùng các property tạm để binding tên phim, phòng
-                    MovieName = movie?.Name ?? "Unknown",
-                    AuditoriumName = auditorium?.Name ?? "Unknown",
+                    MovieName = movie?.Name ?? "Không xác định",
+                    AuditoriumName = auditorium?.Name ?? "Không xác định",
                     Quantity = auditorium != null ? auditorium.Capacity : 0 // gán capacity
                 };
 

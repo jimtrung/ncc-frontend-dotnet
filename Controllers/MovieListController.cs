@@ -95,13 +95,13 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to navigate to movie details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Không thể điều hướng đến chi tiết phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public void HandleDeleteAllMovie()
         {
-            var result = MessageBox.Show("Are you sure you want to delete all movies?", "Delete confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa tất cả phim không?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 _movieService.DeleteAllMovies();
@@ -132,11 +132,10 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to load movies: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Không thể tải danh sách phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
-
 
         public void UpdateMovie(Movie updatedMovie)
         {

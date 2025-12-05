@@ -16,6 +16,7 @@ namespace Theater_Management_FE.Services
 
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
+            // nếu có một biến là firstName thì trong json sẽ là first_name
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             Converters = { new JsonStringEnumConverter() }

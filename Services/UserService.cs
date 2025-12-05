@@ -31,7 +31,6 @@ namespace Theater_Management_FE.Services
             _tokenUtil = authTokenUtil;
         }
 
-
         public int GetAllUsers()
         {
             var token = _tokenUtil.LoadAccessToken();
@@ -47,13 +46,11 @@ namespace Theater_Management_FE.Services
 
             var body = response.Content.ReadAsStringAsync().Result;
 
-            // Nếu body rỗng => trả về 0
             if (string.IsNullOrWhiteSpace(body))
                 return 0;
 
             try
             {
-                // Deserialize trực tiếp số nguyên
                 return JsonSerializer.Deserialize<int>(body);
             }
             catch (JsonException ex)
@@ -62,6 +59,5 @@ namespace Theater_Management_FE.Services
                 return 0;
             }
         }
-
     }
 }

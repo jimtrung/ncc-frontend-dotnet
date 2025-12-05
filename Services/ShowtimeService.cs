@@ -40,7 +40,7 @@ namespace Theater_Management_FE.Services
             if (!response.IsSuccessStatusCode)
             {
                 var body = await response.Content.ReadAsStringAsync();
-                throw new Exception($"Failed to insert showtime. Status: {response.StatusCode}, Body: {body}");
+                throw new Exception($"Không thể thêm suất chiếu. Trạng thái: {response.StatusCode}, Body: {body}");
             }
         }
 
@@ -52,7 +52,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to get all showtimes. Status: {response.StatusCode}");
+                throw new Exception($"Không thể lấy danh sách suất chiếu. Trạng thái: {response.StatusCode}");
 
             var body = response.Content.ReadAsStringAsync().Result;
             if (string.IsNullOrWhiteSpace(body) || body.TrimStart().StartsWith("{"))
@@ -86,7 +86,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to delete showtime. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa suất chiếu. Trạng thái: {response.StatusCode}");
         }
 
         // Xóa tất cả showtime
@@ -97,7 +97,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to delete all showtimes. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa tất cả suất chiếu. Trạng thái: {response.StatusCode}");
         }
 
         // Cập nhật showtime
@@ -111,7 +111,7 @@ namespace Theater_Management_FE.Services
             if (!response.IsSuccessStatusCode)
             {
                 var body = response.Content.ReadAsStringAsync().Result;
-                throw new Exception($"Failed to update showtime. Status: {response.StatusCode}, Body: {body}");
+                throw new Exception($"Không thể cập nhật suất chiếu. Trạng thái: {response.StatusCode}, Body: {body}");
             }
         }
     }

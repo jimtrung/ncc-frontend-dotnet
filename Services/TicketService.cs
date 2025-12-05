@@ -31,7 +31,6 @@ namespace Theater_Management_FE.Services
             _tokenUtil = tokenUtil;
         }
 
-        // INSERT NEW TICKET
         public async Task InsertTicket(Ticket ticket)
         {
             var content = JsonContent.Create(ticket, options: JsonOptions);
@@ -41,7 +40,6 @@ namespace Theater_Management_FE.Services
                 Content = content
             };
 
-            // Thêm header Authorization nếu có token
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -50,20 +48,17 @@ namespace Theater_Management_FE.Services
 
             var response = await _http.SendAsync(request);
 
-            // Nếu server trả lỗi, ném exception
             if (!response.IsSuccessStatusCode)
             {
                 var body = await response.Content.ReadAsStringAsync();
-                throw new HttpRequestException($"Failed to insert ticket. Status: {response.StatusCode}, Body: {body}");
+                throw new HttpRequestException($"Không thể thêm vé. Trạng thái: {response.StatusCode}, Body: {body}");
             }
         }
 
-        // GET TICKETS BY USER ID
         public List<Ticket> GetTicketsByUserId(Guid userId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"ticket/user/{userId}");
 
-            // Thêm header Authorization nếu có token
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -74,7 +69,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to get tickets for user {userId}. Status: {response.StatusCode}");
+                throw new Exception($"Không thể lấy vé của người dùng {userId}. Trạng thái: {response.StatusCode}");
 
             var body = response.Content.ReadAsStringAsync().Result;
 
@@ -89,7 +84,6 @@ namespace Theater_Management_FE.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "ticket");
 
-            // Thêm header Authorization nếu có token
             var token = _tokenUtil.LoadAccessToken();
             if (!string.IsNullOrEmpty(token))
             {
@@ -100,21 +94,18 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to get all tickets. Status: {response.StatusCode}");
+                throw new Exception($"Không thể lấy tất cả vé. Trạng thái: {response.StatusCode}");
 
             var body = response.Content.ReadAsStringAsync().Result;
 
-            // Nếu body rỗng hoặc trả về object thay vì array, trả về danh sách rỗng
             if (string.IsNullOrWhiteSpace(body) || body.TrimStart().StartsWith("{"))
                 return new List<Ticket>();
 
             return JsonSerializer.Deserialize<List<Ticket>>(body, JsonOptions) ?? new List<Ticket>();
         }
 
-        // Xóa vé theo ID
         public void DeleteTicketById(Guid ticketId)
         {
-            // Hiển thị hộp thoại xác nhận
             var result = MessageBox.Show(
                 "Bạn có chắc chắn muốn xóa vé này không?",
                 "Xác nhận xóa",
@@ -123,7 +114,7 @@ namespace Theater_Management_FE.Services
             );
 
             if (result != MessageBoxResult.Yes)
-                return; // Người dùng hủy, không xóa
+                return;
 
             // Gọi API xóa vé
             var request = new HttpRequestMessage(HttpMethod.Delete, $"ticket/{ticketId}");
@@ -137,11 +128,10 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to delete ticket {ticketId}. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa vé {ticketId}. Trạng thái: {response.StatusCode}");
         }
 
 
-        // Xóa tất cả vé
         public void DeleteAllTickets()
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "ticket");
@@ -155,10 +145,9 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to delete all tickets. Status: {response.StatusCode}");
+                throw new Exception($"Không thể xóa tất cả vé. Trạng thái: {response.StatusCode}");
         }
 
-        // GET TICKET BY ID
         public Ticket? GetTicketById(Guid ticketId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"ticket/{ticketId}");
@@ -175,17 +164,16 @@ namespace Theater_Management_FE.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                // Nếu không tìm thấy, trả về null
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     return null;
 
-                throw new Exception($"Failed to get ticket {ticketId}. Status: {response.StatusCode}");
+                throw new Exception($"Không thể lấy thông tin vé {ticketId}. Trạng thái: {response.StatusCode}");
             }
 
             var body = response.Content.ReadAsStringAsync().Result;
 
             if (string.IsNullOrWhiteSpace(body) || body.TrimStart().StartsWith("["))
-                return null; // Body rỗng hoặc trả về array không hợp lệ
+                return null;
 
             return JsonSerializer.Deserialize<Ticket>(body, JsonOptions);
         }

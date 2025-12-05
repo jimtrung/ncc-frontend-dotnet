@@ -429,22 +429,6 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
-        public void BindUIControls(WrapPanel bookedTicketList, Button logoutButton, TextBlock usernameText, 
-            Button homeButton, Button showTimesButton, Button bookedTicketButton, Button deleteAllButton)
-        {
-            this.bookedTicketList = bookedTicketList;
-            this.logoutButton = logoutButton;
-            this.usernameText = usernameText;
-            this.homeButton = homeButton;
-            this.showTimesButton = showTimesButton;
-            this.bookedTicketButton = bookedTicketButton;
-            this.deleteAllButton = deleteAllButton;
 
-            if (this.logoutButton != null)
-            {
-                this.logoutButton.Click -= HandleLogOutButton;
-                this.logoutButton.Click += HandleLogOutButton;
-            }
-        }
     }
 }

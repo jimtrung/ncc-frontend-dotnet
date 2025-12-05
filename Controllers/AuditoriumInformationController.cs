@@ -61,8 +61,8 @@ namespace Theater_Management_FE.Controllers
                 string.IsNullOrWhiteSpace(AuditoriumTypeField.Text) ||
                 string.IsNullOrWhiteSpace(AuditoriumCapacityField.Text))
             {
-                MessageBox.Show("Please fill in all required fields.",
-                                "Input Error",
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin.",
+                                "Lỗi nhập liệu",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                 return;
@@ -70,8 +70,8 @@ namespace Theater_Management_FE.Controllers
 
             if (!int.TryParse(AuditoriumCapacityField.Text.Trim(), out int capacity))
             {
-                MessageBox.Show("Capacity must be a number.",
-                                "Input Error",
+                MessageBox.Show("Sức chứa phải là một số.",
+                                "Lỗi nhập liệu",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                 return;
@@ -86,7 +86,7 @@ namespace Theater_Management_FE.Controllers
             };
 
             _auditoriumService.UpdateAuditorium(_auditoriumId, updatedAuditorium);
-            MessageBox.Show("Auditorium updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Cập nhật phòng chiếu thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
 
             var updated = _auditoriumService.GetAuditoriumById(_auditoriumId);
             _auditoriumListController.UpdateAuditorium(updated);
@@ -94,31 +94,15 @@ namespace Theater_Management_FE.Controllers
             _screenController.NavigateTo<AuditoriumList>();
         }
 
-
         public void HandleDeleteButton()
         {
-            var result = MessageBox.Show("Are you sure you want to delete this auditorium?", "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phòng chiếu này không?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 _auditoriumService.DeleteAuditoriumById(_auditoriumId);
                 _auditoriumListController.RefreshData();
                 _screenController.NavigateTo<AuditoriumList>();
             }
-        }
-
-        public void BindUIControls(TextBox name, TextBox type, TextBox capacity, TextBox note, Button back, Button edit, Button delete)
-        {
-            AuditoriumNameField = name;
-            AuditoriumTypeField = type;
-            AuditoriumCapacityField = capacity;
-            AuditoriumNoteField = note;
-            backButton = back;
-            editButton = edit;
-            deleteButton = delete;
-
-            backButton.Click += (s, e) => HandleBackButton();
-            editButton.Click += (s, e) => HandleEditButton();
-            deleteButton.Click += (s, e) => HandleDeleteButton();
         }
     }
 }

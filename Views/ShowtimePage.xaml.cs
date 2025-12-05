@@ -8,7 +8,6 @@ namespace Theater_Management_FE.Views
         public ShowtimePage()
         {
             InitializeComponent();
-            WindowHelper.InitializeWindow(this);
         }
     }
 }

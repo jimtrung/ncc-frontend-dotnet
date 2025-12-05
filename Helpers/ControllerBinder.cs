@@ -19,43 +19,6 @@ namespace Theater_Management_FE.Helpers
                     field.SetValue(controller, control);
                 }
             }
-
-            // Tìm hàm BindUIControls trong controller để gán các biến trong controller với các biến trong UI
-            // NOTE: Tên biến trong controller và .xaml phải giống nhau
-            // Tương tự @FXML trong JavaFX
-            var bindMethod = type.GetMethod("BindUIControls", BindingFlags.Public | BindingFlags.Instance);
-            if (bindMethod != null)
-            {
-                try
-                {
-                    var parameters = bindMethod.GetParameters();
-                    var args = new object[parameters.Length];
-
-                    for (int i = 0; i < parameters.Length; i++)
-                    {
-                        var p = parameters[i];
-                        var control = window.FindName(p.Name);
-
-                        // Fallback to already-bound field with same name
-                        if (control == null)
-                        {
-                            var field = fields.FirstOrDefault(f => f.Name == p.Name);
-                            control = field?.GetValue(controller);
-                        }
-
-                        
-                        if (control == null || !p.ParameterType.IsAssignableFrom(control.GetType()))
-                        {
-                            return;
-                        }
-
-                        args[i] = control;
-                    }
-
-                    bindMethod.Invoke(controller, args);
-                }
-                catch (Exception) {}
-            }
         }
     }
 }

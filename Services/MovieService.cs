@@ -37,7 +37,7 @@ namespace Theater_Management_FE.Services
             if (!response.IsSuccessStatusCode)
             {
                 var errorBody = response.Content.ReadAsStringAsync().Result;
-                throw new Exception($"Failed to insert movie. Status: {response.StatusCode}, Body: {errorBody}");
+                throw new Exception($"Không thể thêm phim. Trạng thái: {response.StatusCode}, Body: {errorBody}");
             }
         }
 
@@ -49,7 +49,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
              if (!response.IsSuccessStatusCode)
             {
-                 throw new Exception($"Failed to delete movie. Status: {response.StatusCode}");
+                 throw new Exception($"Không thể xóa phim. Trạng thái: {response.StatusCode}");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
              if (!response.IsSuccessStatusCode)
             {
-                 throw new Exception($"Failed to delete all movies. Status: {response.StatusCode}");
+                 throw new Exception($"Không thể xóa tất cả phim. Trạng thái: {response.StatusCode}");
             }
         }
 
@@ -72,7 +72,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
             if (!response.IsSuccessStatusCode)
             {
-                 throw new Exception($"Failed to get movies. Status: {response.StatusCode}");
+                 throw new Exception($"Không thể lấy danh sách phim. Trạng thái: {response.StatusCode}");
             }
             var body = response.Content.ReadAsStringAsync().Result;
 
@@ -91,7 +91,7 @@ namespace Theater_Management_FE.Services
             var response = await _http.SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                 throw new Exception($"Failed to get movies. Status: {response.StatusCode}");
+                 throw new Exception($"Không thể lấy danh sách phim. Trạng thái: {response.StatusCode}");
             }
             var body = await response.Content.ReadAsStringAsync();
 
@@ -110,7 +110,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
             if (!response.IsSuccessStatusCode)
             {
-                 throw new Exception($"Failed to get movie by id. Status: {response.StatusCode}");
+                 throw new Exception($"Không thể lấy thông tin phim. Trạng thái: {response.StatusCode}");
             }
             var body = response.Content.ReadAsStringAsync().Result;
 
@@ -128,7 +128,7 @@ namespace Theater_Management_FE.Services
             var response = _http.Send(request);
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Failed to update movie. Status: {response.StatusCode}");
+                throw new Exception($"Không thể cập nhật phim. Trạng thái: {response.StatusCode}");
             }
         }
     }

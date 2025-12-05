@@ -7,7 +7,6 @@ namespace Theater_Management_FE.Views
         public AddAuditorium()
         {
             InitializeComponent();
-            
         }
     }
 }

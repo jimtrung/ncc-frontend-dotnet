@@ -60,14 +60,7 @@ namespace Theater_Management_FE.Controllers
                     _isInitialized = true;
                 }
 
-                // Check if required services are available
-                if (authService == null || movieService == null || screenController == null)
-                {
-                    MessageBox.Show("Các dịch vụ yêu cầu chưa được khởi tạo", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                // Try fetch user silently
+                // Check xem đã đăng nhập chưa
                 User user = null;
                 try
                 {
@@ -77,7 +70,6 @@ namespace Theater_Management_FE.Controllers
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Không thể lấy thông tin người dùng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    // Treat as guest or navigate to Home if strict
                     screenController.NavigateTo<Home>();
                     return;
                 }
@@ -112,7 +104,7 @@ namespace Theater_Management_FE.Controllers
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Không thể tải danh sách phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    errorMessage = "Unable to load movies. Please try again later.";
+                    errorMessage = "Unable to load movies. Please try again later."; 
                     movies = new List<Movie>();
                 }
 
@@ -279,22 +271,6 @@ namespace Theater_Management_FE.Controllers
             return card;
         }
 
-        public void BindUIControls(WrapPanel movieList, Button profileButton, Button logoutButton, TextBlock usernameText)
-        {
-            this.movieList = movieList;
-            this.profileButton = profileButton;
-            this.logoutButton = logoutButton;
-            this.usernameText = usernameText;
 
-            if (this.profileButton != null)
-            {
-                this.profileButton.Click += HandleProfileButton;
-            }
-
-            if (this.logoutButton != null)
-            {
-                this.logoutButton.Click += HandleLogOutButton;
-            }
-        }
     }
 }

@@ -35,8 +35,26 @@ namespace Theater_Management_FE.Controllers
         public Button signUpButton;
         public Button backButton;
 
+        private bool _isInitialized = false;
+
         public void HandleOnOpen()
         {
+            if (!_isInitialized)
+            {
+                if (signUpButton != null) signUpButton.Click += HandleSignUpButton;
+                if (backButton != null) backButton.Click += HandleBackButton;
+                if (showPasswordCheckBox != null) showPasswordCheckBox.Click += TogglePasswordVisibility;
+
+                // Gán cho phím Enter nút đăng ký
+                if (usernameField != null) usernameField.KeyDown += HandleKeyDown;
+                if (emailField != null) emailField.KeyDown += HandleKeyDown;
+                if (passwordField != null) passwordField.KeyDown += HandleKeyDown;
+                if (visiblePasswordField != null) visiblePasswordField.KeyDown += HandleKeyDown;
+                if (confirmPasswordField != null) confirmPasswordField.KeyDown += HandleKeyDown;
+                if (visibleConfirmPasswordField != null) visibleConfirmPasswordField.KeyDown += HandleKeyDown;
+                
+                _isInitialized = true;
+            }
             User user = null;
             try { user = (User)_authService.GetUser(); } catch { }
 
@@ -202,34 +220,6 @@ namespace Theater_Management_FE.Controllers
             {
                 PerformSignUp();
             }
-        }
-
-        public void BindUIControls(TextBox usernameField, TextBox emailField, PasswordBox passwordField, TextBox visiblePasswordField, PasswordBox confirmPasswordField,
-    TextBox visibleConfirmPasswordField, CheckBox showPasswordCheckBox, Button signUpButton, Button backButton)
-        {
-            this.usernameField = usernameField;
-            this.emailField = emailField;
-            this.passwordField = passwordField;
-            this.visiblePasswordField = visiblePasswordField;
-
-            this.confirmPasswordField = confirmPasswordField;
-            this.visibleConfirmPasswordField = visibleConfirmPasswordField;
-
-            this.showPasswordCheckBox = showPasswordCheckBox;
-            this.signUpButton = signUpButton;
-            this.backButton = backButton;
-
-            this.signUpButton.Click += HandleSignUpButton;
-            this.backButton.Click += HandleBackButton;
-            this.showPasswordCheckBox.Click += TogglePasswordVisibility;
-            
-            // Gán cho phím Enter nút đăng ký
-            this.usernameField.KeyDown += HandleKeyDown;
-            this.emailField.KeyDown += HandleKeyDown;
-            this.passwordField.KeyDown += HandleKeyDown;
-            this.visiblePasswordField.KeyDown += HandleKeyDown;
-            this.confirmPasswordField.KeyDown += HandleKeyDown;
-            this.visibleConfirmPasswordField.KeyDown += HandleKeyDown;
         }
     }
 }

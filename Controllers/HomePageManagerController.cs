@@ -11,7 +11,7 @@ namespace Theater_Management_FE.Controllers
 {
     public class HomePageManagerController
     {
-        private Grid _chartGrid;
+        public Grid chartGrid;
 
         public Button movieButton;
         public Button profileButton;
@@ -20,6 +20,7 @@ namespace Theater_Management_FE.Controllers
         public Button showtimeButton;
 
         private bool _isInitialized = false;
+
         private ScreenController _screenController;
         private AuthTokenUtil _authTokenUtil;
         private MovieService _movieService;
@@ -74,21 +75,21 @@ namespace Theater_Management_FE.Controllers
                 if (profileButton != null) profileButton.Click += HandleProfileButton;
                 if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
                 if (showtimeButton != null) showtimeButton.Click += HandleShowtimeButton;
+                
+                if (chartGrid != null) DrawColumnChart();
 
                 _isInitialized = true;
             }
+
             var movies = _movieService.GetAllMovies(); int movieCount = movies != null ? movies.Count : 0;
             var auditoriums = _auditoriumService.GetAllAuditoriums(); int auditoriumCount = auditoriums != null ? auditoriums.Count : 0;
             var showtimes = _showtimeService.GetAllShowtimes(); int showtimeCount = showtimes != null ? showtimes.Count : 0;
             var tickets = _ticketService.GetAllTickets(); int ticketCount = tickets != null ? tickets.Count : 0;
             var revenue = 0;
+
             foreach (var ticket in tickets)
             {
                 revenue += ticket.Price;
-            }
-            {
-                // Giả sử mỗi vé có thuộc tính Price (giá vé)
-                // Tổng doanh thu dự kiến là tổng giá của tất cả vé
             }
 
             var users = _userService.GetAllUsers();
@@ -101,13 +102,7 @@ namespace Theater_Management_FE.Controllers
             if (revenueText != null) revenueText.Text = $"- Tổng doanh thu dự kiến: {revenue}.000 VNĐ";
         }
 
-        public void BindUIControls(Grid chartGrid)
-        {
 
-            this._chartGrid = chartGrid;
-
-            DrawColumnChart();
-        }
 
         private void DrawColumnChart()
         {
@@ -118,7 +113,7 @@ namespace Theater_Management_FE.Controllers
             var users = _userService.GetAllUsers();
 
             string[] labels = { "Người dùng", "Phim", "Phòng", "Suất chiếu", "Vé" };
-            double[] values = { users, movieCount, auditoriumCount, showtimeCount, ticketCount }; // dữ liệu demo
+            double[] values = { users, movieCount, auditoriumCount, showtimeCount, ticketCount };
             double maxVal = 0;
 
             foreach (var v in values)
@@ -130,9 +125,9 @@ namespace Theater_Management_FE.Controllers
             double paddingLeft = 20;  // padding trái
             double paddingRight = 20; // padding phải
 
-            _chartGrid.Height = chartHeight + 60; // thêm margin trên + dưới
+            chartGrid.Height = chartHeight + 60; // thêm margin trên + dưới
             var canvas = new Canvas { Height = chartHeight + 60 };
-            _chartGrid.Children.Add(canvas);
+            chartGrid.Children.Add(canvas);
 
             for (int i = 0; i < labels.Length; i++)
             {

@@ -7,6 +7,7 @@ using Theater_Management_FE.Helpers;
 using Theater_Management_FE.Services;
 using Theater_Management_FE.Views;
 using Theater_Management_FE.Utils;
+using Theater_Management_FE.Models;
 
 namespace Theater_Management_FE
 {
@@ -50,6 +51,7 @@ namespace Theater_Management_FE
             services.AddSingleton<DirectorService>();
             services.AddSingleton<ActorService>();
             services.AddSingleton<ShowtimeService>();
+            services.AddSingleton<TicketService>();
 
             // === Controllers ===
             services.AddTransient<SignInController>();
@@ -67,8 +69,11 @@ namespace Theater_Management_FE
 
             services.AddTransient<ShowtimeListController>();
             services.AddTransient<AddShowtimeController>();
-            services.AddTransient<PriceController>();
-
+            services.AddTransient<ShowtimeInformationController>();
+            services.AddTransient<ShowtimePageController>();
+            services.AddTransient<BookTicketController>();
+            services.AddTransient<BookedTicketController>();
+            services.AddTransient<PayPageController>();
 
             // === Windows ===
             services.AddTransient<SignIn>();
@@ -86,8 +91,11 @@ namespace Theater_Management_FE
 
             services.AddTransient<ShowtimeList>();
             services.AddTransient<AddShowtime>();
-            services.AddTransient<Price>();
-
+            services.AddTransient<ShowtimeInformation>();
+            services.AddTransient<ShowtimePage>();
+            services.AddTransient<BookTicket>();
+            services.AddTransient<BookedTicket>();
+            services.AddTransient<PayPage>();
 
             // ScreenController
             services.AddSingleton<ScreenController>();
@@ -112,8 +120,11 @@ namespace Theater_Management_FE
 
             sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
             sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
-            sc.AutoRegister<Price, PriceController>(Services);
-
+            sc.AutoRegister<ShowtimeInformation, ShowtimeInformationController>(Services);
+            sc.AutoRegister<ShowtimePage, ShowtimePageController>(Services);
+            sc.AutoRegister<BookTicket, BookTicketController>(Services);
+            sc.AutoRegister<BookedTicket, BookedTicketController>(Services);
+            sc.AutoRegister<PayPage, PayPageController>(Services);
 
             // --- STARTUP MAIN WINDOW ---
             // --- STARTUP MAIN WINDOW ---

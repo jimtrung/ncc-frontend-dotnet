@@ -12,7 +12,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Header Section -->
             <StackPanel Grid.Row="0" Margin="0,0,0,30">
                 <TextBlock Text="Hồ Sơ Cá Nhân" 
                           Style="{StaticResource title}"
@@ -25,7 +24,7 @@
                           HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <!-- Main Content -->
+            <!-- Một trang page ta chia ra làm 2 phần, phần đầu là phần thông tin tài khoản, phần sau là thông tin cá nhân =)) -->
             <Grid Grid.Row="1" MaxWidth="900">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -33,7 +32,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Column - Account Info -->
+                <!-- Phần thông tin tài khoản --> 
                 <Border Grid.Column="0" 
                        Style="{StaticResource card}" 
                        Padding="30">
@@ -70,7 +69,7 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Right Column - Personal Info -->
+                <!-- Phần thông tin cá nhân -->
                 <Border Grid.Column="2" 
                        Style="{StaticResource card}" 
                        Padding="30">
@@ -81,7 +80,7 @@
                                   Foreground="{StaticResource PrimaryText}"
                                   Margin="0,0,0,20"/>
 
-                        <!-- Verified Status -->
+                        <!-- Trạng thái xác thực -->
                         <StackPanel Margin="0,0,0,20">
                             <TextBlock Text="Trạng Thái Xác Thực" 
                                       Style="{StaticResource form-label}"/>
@@ -98,7 +97,7 @@
                             </Border>
                         </StackPanel>
 
-                        <!-- Created Date -->
+                        <!-- Ngày tạo tài khoản -->
                         <StackPanel Margin="0,0,0,0">
                             <TextBlock Text="Ngày Tạo Tài Khoản" 
                                       Style="{StaticResource form-label}"/>
@@ -113,7 +112,7 @@
                 </Border>
             </Grid>
 
-            <!-- Action Buttons at Bottom -->
+            <!-- Các lút -->
             <StackPanel Grid.Row="1" 
                        Orientation="Horizontal" 
                        HorizontalAlignment="Center" 

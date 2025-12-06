@@ -15,7 +15,6 @@ namespace Theater_Management_FE.Helpers
             var window = services.GetRequiredService<TWindow>();
             var controller = services.GetRequiredService<TController>();
 
-            // Inject all Set* methods with their corresponding services
             var setMethods = typeof(TController).GetMethods(
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
                 .Where(m => m.Name.StartsWith("Set") && m.GetParameters().Length == 1);
@@ -30,10 +29,8 @@ namespace Theater_Management_FE.Helpers
                 }
             }
 
-            // bind UI controls
             ControllerBinder.BindControls(window, controller);
 
-            // register
             sc.Register(window, controller);
         }
     }

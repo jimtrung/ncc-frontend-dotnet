@@ -50,7 +50,8 @@ namespace Theater_Management_FE.Controllers
                 return;
             }
 
-            // Reset password fields and checkbox state when page opens
+            // NOTE: 04/12/25 5:35PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
+            // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi
             if (passwordField != null)
             {
                 passwordField.Clear();
@@ -101,7 +102,7 @@ namespace Theater_Management_FE.Controllers
                 response = _authService.SignIn(user);
                 if (response is ErrorResponse errRes)
                 {
-                    MessageBox.Show(errRes.Message, "Sign in error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(errRes.Message, "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -109,20 +110,16 @@ namespace Theater_Management_FE.Controllers
                 _authTokenUtil.SaveAccessToken(tokenPair.AccessToken);
                 _authTokenUtil.SaveRefreshToken(tokenPair.RefreshToken);
 
-                // Clear fields
+                // NOTE: 04/12/25 5:36PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
+                // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi
                 usernameField.Clear();
                 passwordField.Clear();
                 visiblePasswordField.Clear();
                 showPasswordCheckBox.IsChecked = false;
 
-                // Navigate based on role
+                // Kiểm tra token
                 if (tokenPair.AccessToken != null)
                 {
-                    // Decode token to get role or fetch user
-                    // Since we just have the token, let's fetch the user to be sure about the role
-                    // Or we can decode the token if we had a helper for that.
-                    // But fetching user is safer and we have the token saved.
-                    
                     try 
                     {
                         var currentUser = (User)_authService.GetUser();
@@ -138,7 +135,6 @@ namespace Theater_Management_FE.Controllers
                     }
                     catch 
                     {
-                        // Fallback
                          _screenController.NavigateTo<Home>();
                     }
                 }
@@ -151,15 +147,10 @@ namespace Theater_Management_FE.Controllers
             _screenController.NavigateTo<Home>();
         }
 
-        public void HandleForgotPassword(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void TogglePasswordVisibility(object sender, RoutedEventArgs e)
         {
             if (showPasswordCheckBox.IsChecked == true)
             {
-                // Show password
                 visiblePasswordField.Text = passwordField.Password;
                 visiblePasswordField.Visibility = Visibility.Visible;
                 passwordField.Visibility = Visibility.Collapsed;
@@ -167,7 +158,6 @@ namespace Theater_Management_FE.Controllers
             }
             else
             {
-                // Hide password
                 passwordField.Password = visiblePasswordField.Text;
                 visiblePasswordField.Visibility = Visibility.Collapsed;
                 passwordField.Visibility = Visibility.Visible;
@@ -183,7 +173,7 @@ namespace Theater_Management_FE.Controllers
             }
         }
 
-        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton, Hyperlink forgotPasswordLink)
+        public void BindUIControls(TextBox usernameField, PasswordBox passwordField, TextBox visiblePasswordField, CheckBox showPasswordCheckBox, Button signInButton, Button backButton)
         {
             this.usernameField = usernameField;
             this.passwordField = passwordField;
@@ -191,14 +181,12 @@ namespace Theater_Management_FE.Controllers
             this.showPasswordCheckBox = showPasswordCheckBox;
             this.signInButton = signInButton;
             this.backButton = backButton;
-            this.forgotPasswordLink = forgotPasswordLink;
 
             this.signInButton.Click += HandleSignInButton;
             this.backButton.Click += HandleBackButton;
-            this.forgotPasswordLink.Click += HandleForgotPassword;
             this.showPasswordCheckBox.Click += TogglePasswordVisibility;
             
-            // Add Enter key support
+            // Gắn cho phím Enter để đăng nhập
             this.usernameField.KeyDown += HandleKeyDown;
             this.passwordField.KeyDown += HandleKeyDown;
             this.visiblePasswordField.KeyDown += HandleKeyDown;

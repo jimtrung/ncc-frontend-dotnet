@@ -5,23 +5,14 @@
         WindowState="Maximized"
         Style="{StaticResource CustomWindowStyle}"
         Background="{StaticResource PrimaryBackground}">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#0F1419" Offset="0"/>
-                <GradientStop Color="#1A1F2E" Offset="0.5"/>
-                <GradientStop Color="#0F1419" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Background="#0F1419">
 
-        <!-- Main Content -->
         <Border Style="{StaticResource card}"
                 Width="450"
                 Padding="48,40"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
             <StackPanel>
-                <!-- Title -->
                 <TextBlock Text="Chào Mừng Trở Lại"
                            Style="{StaticResource title}"
                            FontSize="28"
@@ -33,7 +24,6 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,32"/>
 
-                <!-- Username Field -->
                 <StackPanel Margin="0,0,0,20">
                     <TextBlock Text="Tên đăng nhập"
                                Style="{StaticResource form-label}"/>
@@ -42,7 +32,6 @@
                              FontSize="15"/>
                 </StackPanel>
 
-                <!-- Password Field -->
                 <StackPanel Margin="0,0,0,12">
                     <TextBlock Text="Mật khẩu"
                                Style="{StaticResource form-label}"/>
@@ -62,17 +51,6 @@
                           Style="{StaticResource checkbox-dark}"
                           Margin="0,0,0,24"/>
 
-                <!-- Forgot Password Link -->
-                <TextBlock HorizontalAlignment="Right" Margin="0,0,0,24">
-                    <Hyperlink x:Name="forgotPasswordLink" 
-                               NavigateUri="#" 
-                               TextDecorations="None"
-                               Foreground="{StaticResource PrimaryAccent}">
-                        Forgot password?
-                    </Hyperlink>
-                </TextBlock>
-
-                <!-- Buttons -->
                 <Button x:Name="signInButton"
                         Content="Đăng Nhập"
                         Style="{StaticResource button-primary}"

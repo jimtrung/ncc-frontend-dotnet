@@ -124,22 +124,6 @@
                                 </ControlTemplate>
                             </RadioButton.Template>
                         </RadioButton>
-                        <RadioButton Content="PHIM SẮP CHIẾU" FontSize="20" FontWeight="Bold" Foreground="{StaticResource SecondaryText}" Style="{x:Null}">
-                            <RadioButton.Template>
-                                <ControlTemplate TargetType="RadioButton">
-                                    <Grid Cursor="Hand">
-                                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}"/>
-                                        <Border x:Name="underline" Height="3" Background="{StaticResource PrimaryAccent}" VerticalAlignment="Bottom" Margin="0,0,0,-5" Visibility="Collapsed"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsChecked" Value="True">
-                                            <Setter Property="Foreground" Value="{StaticResource PrimaryAccent}"/>
-                                            <Setter TargetName="underline" Property="Visibility" Value="Visible"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </RadioButton.Template>
-                        </RadioButton>
                         
                     <!-- Hiển thị phim từ server -->
                     </StackPanel>

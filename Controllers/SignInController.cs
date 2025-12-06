@@ -43,14 +43,14 @@ namespace Theater_Management_FE.Controllers
         {
             if (!_isInitialized)
             {
-                if (signInButton != null) signInButton.Click += HandleSignInButton;
-                if (backButton != null) backButton.Click += HandleBackButton;
-                if (showPasswordCheckBox != null) showPasswordCheckBox.Click += TogglePasswordVisibility;
+                signInButton.Click += HandleSignInButton;
+                backButton.Click += HandleBackButton;
+                showPasswordCheckBox.Click += TogglePasswordVisibility;
                 
                 // Gắn cho phím Enter để đăng nhập
-                if (usernameField != null) usernameField.KeyDown += HandleKeyDown;
-                if (passwordField != null) passwordField.KeyDown += HandleKeyDown;
-                if (visiblePasswordField != null) visiblePasswordField.KeyDown += HandleKeyDown;
+                usernameField.KeyDown += HandleKeyDown;
+                passwordField.KeyDown += HandleKeyDown;
+                visiblePasswordField.KeyDown += HandleKeyDown;
 
                 _isInitialized = true;
             }
@@ -66,25 +66,15 @@ namespace Theater_Management_FE.Controllers
 
             // NOTE: 04/12/25 5:35PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
             // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi
-            if (passwordField != null)
-            {
-                passwordField.Clear();
-                passwordField.Visibility = Visibility.Visible;
-            }
-            if (visiblePasswordField != null)
-            {
-                visiblePasswordField.Clear();
-                visiblePasswordField.Visibility = Visibility.Collapsed;
-            }
-            if (showPasswordCheckBox != null)
-            {
-                showPasswordCheckBox.IsChecked = false;
-            }
-            if (usernameField != null)
-            {
-                usernameField.Clear();
-                usernameField.Focus();
-            }
+            passwordField.Clear();
+            passwordField.Visibility = Visibility.Visible;
+
+            visiblePasswordField.Clear();
+            visiblePasswordField.Visibility = Visibility.Collapsed;
+            showPasswordCheckBox.IsChecked = false;
+
+            usernameField.Clear();
+            usernameField.Focus();
         }
 
         public void HandleBackButton(object sender, RoutedEventArgs e)
@@ -104,8 +94,7 @@ namespace Theater_Management_FE.Controllers
                 passwordField.Password = visiblePasswordField.Text;
             }
             if (string.IsNullOrWhiteSpace(usernameField.Text) ||
-
-    string.IsNullOrWhiteSpace(passwordField.Password))
+                string.IsNullOrWhiteSpace(passwordField.Password))
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin!",
                                 "Thiếu thông tin",
@@ -196,7 +185,5 @@ namespace Theater_Management_FE.Controllers
                 PerformSignIn();
             }
         }
-
-
     }
 }

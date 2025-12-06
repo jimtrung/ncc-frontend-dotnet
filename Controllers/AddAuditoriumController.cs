@@ -77,8 +77,8 @@ namespace Theater_Management_FE.Controllers
                 IsEmpty(auditoriumTypeField) ||
                 IsEmpty(auditoriumCapacityField))
             {
-                MessageBox.Show("Please enter complete information",
-                                "Input Error",
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin",
+                                "Lỗi nhập liệu",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                 return;
@@ -87,8 +87,8 @@ namespace Theater_Management_FE.Controllers
             // Validate capacity
             if (!int.TryParse(auditoriumCapacityField.Text.Trim(), out int capacity))
             {
-                MessageBox.Show("Capacity must be a numeric value",
-                                "Input Error",
+                MessageBox.Show("Sức chứa phải là số",
+                                "Lỗi nhập liệu",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
                 return;
@@ -109,8 +109,8 @@ namespace Theater_Management_FE.Controllers
 
                 _auditoriumListController?.RefreshData();
 
-                MessageBox.Show("Auditorium added successfully!",
-                                "Success",
+                MessageBox.Show("Thêm phòng chiếu thành công!",
+                                "Thành công",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
 
@@ -118,8 +118,8 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add auditorium: " + ex.Message,
-                                "Error",
+                MessageBox.Show("Không thể thêm phòng chiếu: " + ex.Message,
+                                "Lỗi",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             }

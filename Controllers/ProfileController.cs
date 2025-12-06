@@ -33,8 +33,8 @@ namespace Theater_Management_FE.Controllers
         {
             if (!_isInitialized)
             {
-                if (backButton != null) backButton.Click += HandleBackButton;
-                if (logOutButton != null) logOutButton.Click += HandleLogOutButton;
+                backButton.Click += HandleBackButton;
+                logOutButton.Click += HandleLogOutButton;
                 _isInitialized = true;
             }
 

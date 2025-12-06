@@ -13,20 +13,9 @@ namespace Theater_Management_FE.Controllers
         private AuthService _authService;
         private AuthTokenUtil _authTokenUtil;
 
-        public void SetScreenController(ScreenController screenController)
-        {
-            _screenController = screenController;
-        }
-
-        public void SetAuthService(AuthService authService)
-        {
-            _authService = authService;
-        }
-
-        public void SetAuthTokenUtil(AuthTokenUtil authTokenUtil)
-        {
-            _authTokenUtil = authTokenUtil;
-        }
+        public void SetScreenController(ScreenController screenController) => _screenController = screenController;
+        public void SetAuthService(AuthService authService) => _authService = authService;
+        public void SetAuthTokenUtil(AuthTokenUtil authTokenUtil) => _authTokenUtil = authTokenUtil;
 
         public TextBlock titleLabel;
         public Button signupButton;
@@ -39,8 +28,8 @@ namespace Theater_Management_FE.Controllers
         {
             if (!_isInitialized)
             {
-                if (signupButton != null) signupButton.Click += HandleSignUpButton;
-                if (signinButton != null) signinButton.Click += HandleSignInButton;
+                signupButton.Click += (s, e) => _screenController.NavigateTo<SignUp>();
+                signinButton.Click += (s, e) => _screenController.NavigateTo<SignIn>();
                 _isInitialized = true;
             }
 
@@ -68,17 +57,5 @@ namespace Theater_Management_FE.Controllers
                     _screenController.NavigateTo<HomePageManager>();
             }
         }
-
-        public void HandleSignUpButton(object sender, RoutedEventArgs e)
-        {
-            _screenController.NavigateTo<SignUp>();
-        }
-
-        public void HandleSignInButton(object sender, RoutedEventArgs e)
-        {
-            _screenController.NavigateTo<SignIn>();
-        }
-
-
     }
 }

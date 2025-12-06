@@ -13,15 +13,8 @@ namespace Theater_Management_FE.Controllers
         private ScreenController _screenController;
         private AuthService _authService;
 
-        public void SetScreenController(ScreenController screenController)
-        {
-            _screenController = screenController;
-        }
-
-        public void SetAuthService(AuthService authService)
-        {
-            _authService = authService;
-        }
+        public void SetScreenController(ScreenController screenController) => _screenController = screenController;
+        public void SetAuthService(AuthService authService) => _authService = authService;
 
         public TextBox usernameField;
         public TextBox emailField;
@@ -41,17 +34,17 @@ namespace Theater_Management_FE.Controllers
         {
             if (!_isInitialized)
             {
-                if (signUpButton != null) signUpButton.Click += HandleSignUpButton;
-                if (backButton != null) backButton.Click += HandleBackButton;
-                if (showPasswordCheckBox != null) showPasswordCheckBox.Click += TogglePasswordVisibility;
+                signUpButton.Click += HandleSignUpButton;
+                backButton.Click += HandleBackButton;
+                showPasswordCheckBox.Click += TogglePasswordVisibility;
 
                 // Gán cho phím Enter nút đăng ký
-                if (usernameField != null) usernameField.KeyDown += HandleKeyDown;
-                if (emailField != null) emailField.KeyDown += HandleKeyDown;
-                if (passwordField != null) passwordField.KeyDown += HandleKeyDown;
-                if (visiblePasswordField != null) visiblePasswordField.KeyDown += HandleKeyDown;
-                if (confirmPasswordField != null) confirmPasswordField.KeyDown += HandleKeyDown;
-                if (visibleConfirmPasswordField != null) visibleConfirmPasswordField.KeyDown += HandleKeyDown;
+                usernameField.KeyDown += HandleKeyDown;
+                emailField.KeyDown += HandleKeyDown;
+                passwordField.KeyDown += HandleKeyDown;
+                visiblePasswordField.KeyDown += HandleKeyDown;
+                confirmPasswordField.KeyDown += HandleKeyDown;
+                visibleConfirmPasswordField.KeyDown += HandleKeyDown;
                 
                 _isInitialized = true;
             }
@@ -67,37 +60,24 @@ namespace Theater_Management_FE.Controllers
 
             // NOTE: 04/12/25 5:38PM - Vì có lỗi khiến chỗ nhập mật khẩu bị rỗng kể cả khi đã 
             // nhập mật khẩu nên chúng ta sẽ clear tất cả mọi thứ để tránh lỗi (Tương tự sign in)
-            if (usernameField != null) 
-            {
-                usernameField.Clear();
-                usernameField.Focus();
-            }
-            if (emailField != null) emailField.Clear();
-            if (passwordField != null)
-            {
-                passwordField.Clear();
-                passwordField.Visibility = Visibility.Visible;
-            }
-            if (visiblePasswordField != null)
-            {
-                visiblePasswordField.Clear();
-                visiblePasswordField.Visibility = Visibility.Collapsed;
-            }
-            if (showPasswordCheckBox != null)
-            {
-                showPasswordCheckBox.IsChecked = false;
-            }
+            usernameField.Clear();
+            usernameField.Focus();
+            emailField.Clear();
+            passwordField.Clear();
+
+            passwordField.Visibility = Visibility.Visible;
+            visiblePasswordField.Clear();
+            visiblePasswordField.Visibility = Visibility.Collapsed;
+            confirmPasswordField.Clear();
+            visibleConfirmPasswordField.Clear();
+            visibleConfirmPasswordField.Visibility = Visibility.Collapsed;
+
+            showPasswordCheckBox.IsChecked = false;
         }
 
-        public void HandleBackButton(object sender, RoutedEventArgs e)
-        {
-            _screenController.NavigateTo<Home>();
-        }
+        public void HandleBackButton(object sender, RoutedEventArgs e) => _screenController.NavigateTo<Home>();
 
-        public void HandleSignUpButton(object sender, RoutedEventArgs e)
-        {
-            PerformSignUp();
-        }
+        public void HandleSignUpButton(object sender, RoutedEventArgs e) => PerformSignUp();
 
         private void PerformSignUp()
         {
@@ -107,7 +87,7 @@ namespace Theater_Management_FE.Controllers
                 confirmPasswordField.Password = visibleConfirmPasswordField.Text;
             }
 
-            // Validate password
+            // Kiểm tra mật khẩu
             if (passwordField.Password != confirmPasswordField.Password)
             {
                 MessageBox.Show("Mật khẩu và xác nhận mật khẩu không khớp!",
@@ -127,6 +107,7 @@ namespace Theater_Management_FE.Controllers
                 return;
             }
 
+            // Kiểm tra định dạng email
             string emailPattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
             if (!System.Text.RegularExpressions.Regex.IsMatch(emailField.Text, emailPattern))
             {
@@ -137,7 +118,7 @@ namespace Theater_Management_FE.Controllers
                 return;
             }
 
-            // Validate strong password
+            // Kiểm tra mật khẩu mạnh
             string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
             if (!System.Text.RegularExpressions.Regex.IsMatch(passwordField.Password, passwordPattern))
             {
@@ -160,6 +141,7 @@ namespace Theater_Management_FE.Controllers
                 Password = passwordField.Password
             };
 
+            // Gửi yêu cầu đăng ký tới backend
             object response;
             try
             {
@@ -191,11 +173,12 @@ namespace Theater_Management_FE.Controllers
         {
             if (showPasswordCheckBox.IsChecked == true)
             {
+                // Hiển thị mật khẩu
                 visiblePasswordField.Text = passwordField.Password;
                 visiblePasswordField.Visibility = Visibility.Visible;
                 passwordField.Visibility = Visibility.Collapsed;
 
-                // Show confirm password
+                // Hiển thị xác nhận mật khẩu
                 visibleConfirmPasswordField.Text = confirmPasswordField.Password;
                 visibleConfirmPasswordField.Visibility = Visibility.Visible;
                 confirmPasswordField.Visibility = Visibility.Collapsed;

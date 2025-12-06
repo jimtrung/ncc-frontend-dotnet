@@ -59,14 +59,13 @@ namespace Theater_Management_FE.Controllers
             {
                 if (!_isInitialized)
                 {
-                    if (profileButton != null) profileButton.Click += HandleProfileButton;
-                    if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
-                    if (showTimeButton != null) showTimeButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
-                    if (bookTicketButton != null) bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
-                    if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
-                    if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
-                    // Home button already on Home, maybe reload or nothing? 
-                    if (homeButton != null) homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>(); 
+                    profileButton.Click += HandleProfileButton;
+                    logoutButton.Click += HandleLogOutButton;
+                    showTimeButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
+                    bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
+                    newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
+                    promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
+                    homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>(); 
 
                     _isInitialized = true;
                 }
@@ -99,7 +98,7 @@ namespace Theater_Management_FE.Controllers
                     movieList.Children.Clear();
                     movieList.Children.Add(new TextBlock 
                     { 
-                        Text = "Loading movies...", 
+                        Text = "Đang tải danh sách phim...", 
                         Foreground = Brushes.White, 
                         FontSize = 16,
                         Margin = new Thickness(10)
@@ -115,7 +114,7 @@ namespace Theater_Management_FE.Controllers
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Không thể tải danh sách phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    errorMessage = "Unable to load movies. Please try again later."; 
+                    errorMessage = "Không thể tải danh sách phim. Vui lòng thử lại sau."; 
                     movies = new List<Movie>();
                 }
 
@@ -281,7 +280,5 @@ namespace Theater_Management_FE.Controllers
 
             return card;
         }
-
-
     }
 }

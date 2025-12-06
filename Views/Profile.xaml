@@ -9,7 +9,8 @@
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Margin="0,0,0,30">
@@ -113,11 +114,11 @@
             </Grid>
 
             <!-- Các lút -->
-            <StackPanel Grid.Row="1" 
+            <StackPanel Grid.Row="2" 
                        Orientation="Horizontal" 
                        HorizontalAlignment="Center" 
-                       Margin="0,100,0,0"
-                       VerticalAlignment="Bottom">
+                       Margin="0,30,0,0"
+                       VerticalAlignment="Top">
                 <Button x:Name="backButton" 
                        Content="Quay Lại" 
                        Style="{StaticResource button-secondary}" 

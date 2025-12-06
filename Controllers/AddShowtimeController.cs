@@ -71,7 +71,7 @@ namespace Theater_Management_FE.Controllers
             var selectedMovie = _movies.FirstOrDefault(x => x.IsSelected)?.Item;
             if (selectedMovie == null)
             {
-                MessageBox.Show("Please select a movie.");
+                MessageBox.Show("Vui lòng chọn phim.");
                 return;
             }
 
@@ -79,7 +79,7 @@ namespace Theater_Management_FE.Controllers
             var selectedAuditorium = _auditoriums.FirstOrDefault(x => x.IsSelected)?.Item;
             if (selectedAuditorium == null)
             {
-                MessageBox.Show("Please select an auditorium.");
+                MessageBox.Show("Vui lòng chọn phòng chiếu.");
                 return;
             }
 
@@ -87,14 +87,14 @@ namespace Theater_Management_FE.Controllers
             if (startTimePicker.SelectedItem is not ComboBoxItem startItem ||
                 endTimePicker.SelectedItem is not ComboBoxItem endItem)
             {
-                MessageBox.Show("Please select start and end time.");
+                MessageBox.Show("Vui lòng chọn thời gian bắt đầu và kết thúc.");
                 return;
             }
 
             if (!TimeSpan.TryParse(startItem.Content.ToString(), out var startTimeSpan) ||
                 !TimeSpan.TryParse(endItem.Content.ToString(), out var endTimeSpan))
             {
-                MessageBox.Show("Invalid time format.");
+                MessageBox.Show("Định dạng thời gian không hợp lệ.");
                 return;
             }
 
@@ -106,7 +106,7 @@ namespace Theater_Management_FE.Controllers
             // Kiểm tra hợp lệ
             if (endDateTimeLocal <= startDateTimeLocal)
             {
-                MessageBox.Show("End time must be after start time.");
+                MessageBox.Show("Thời gian kết thúc phải sau thời gian bắt đầu.");
                 return;
             }
 
@@ -115,7 +115,7 @@ namespace Theater_Management_FE.Controllers
             if (endDateTimeLocal > maxEndTime)
             {
                 endDateTimeLocal = maxEndTime;
-                MessageBox.Show("End time limited to maximum 3 hours after start time.");
+                MessageBox.Show("Thời gian chiếu giới hạn tối đa 3 giờ.");
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace Theater_Management_FE.Controllers
 
             _showtimeService.InsertShowtime(showtime);
 
-            MessageBox.Show("Showtime added successfully!");
+            MessageBox.Show("Thêm lịch chiếu thành công!");
             _screenController.NavigateTo<ShowtimeList>();
         }
 

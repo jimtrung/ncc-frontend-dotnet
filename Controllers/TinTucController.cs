@@ -64,16 +64,16 @@ namespace Theater_Management_FE.Controllers
             {
                 if (!_isInitialized)
                 {
-                    if (BtnPrev != null) BtnPrev.Click += HandlePrev;
-                    if (BtnNext != null) BtnNext.Click += HandleNext;
+                    BtnPrev.Click += HandlePrev;
+                    BtnNext.Click += HandleNext;
                     
-                    if (homeButton != null) homeButton.Click += (s, e) => _screenController.NavigateTo<HomePageUser>();
-                    if (showTimeButton != null) showTimeButton.Click += (s, e) => _screenController.NavigateTo<ShowtimePage>();
-                    if (promotionButton != null) promotionButton.Click += (s, e) => _screenController.NavigateTo<EventList>();
-                    if (bookTicketButton != null) bookTicketButton.Click += (s, e) => _screenController.NavigateTo<BookedTicket>();
+                    homeButton.Click += (s, e) => _screenController.NavigateTo<HomePageUser>();
+                    showTimeButton.Click += (s, e) => _screenController.NavigateTo<ShowtimePage>();
+                    promotionButton.Click += (s, e) => _screenController.NavigateTo<EventList>();
+                    bookTicketButton.Click += (s, e) => _screenController.NavigateTo<BookedTicket>();
                     
-                    if (profileButton != null) profileButton.Click += HandleProfileButton;
-                    if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
+                    profileButton.Click += HandleProfileButton;
+                    logoutButton.Click += HandleLogOutButton;
 
                     LoadData();
                     _isInitialized = true;

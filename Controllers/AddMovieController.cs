@@ -99,7 +99,7 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to load directors: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Không thể tải danh sách đạo diễn: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 // Actors
@@ -114,12 +114,12 @@ namespace Theater_Management_FE.Controllers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to load actors: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Không thể tải danh sách diễn viên: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An unexpected error occurred while loading data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -174,19 +174,19 @@ namespace Theater_Management_FE.Controllers
                 string.IsNullOrWhiteSpace(movieLanguageField.Text) ||
                 string.IsNullOrWhiteSpace(movieRatedField.Text))
             {
-                MessageBox.Show("Please enter complete information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (!int.TryParse(movieDurationField.Text.Trim(), out var duration))
             {
-                MessageBox.Show("Duration must be a number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Thời lượng phải là số", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (!int.TryParse(movieRatedField.Text.Trim(), out var rated))
             {
-                MessageBox.Show("Rated must be a number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Giới hạn độ tuổi phải là số", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -195,7 +195,7 @@ namespace Theater_Management_FE.Controllers
 
             if (selectedDirectorItem == null || selectedDirectorItem.Item == null)
             {
-                MessageBox.Show("Please select a director", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Vui lòng chọn đạo diễn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -244,11 +244,11 @@ namespace Theater_Management_FE.Controllers
                         {
                             encoder.Save(stream);
                         }
-                        MessageBox.Show($"[DEBUG] Image successfully saved to: {destPath}", "Debug Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"[DEBUG] Đã lưu ảnh thành công vào: {destPath}", "Thông tin Debug", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to save image: {ex.Message}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show($"Không thể lưu ảnh: {ex.Message}", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
 
@@ -262,8 +262,8 @@ namespace Theater_Management_FE.Controllers
                 }
 
                 _movieListController.RefreshData();
-                MessageBox.Show("Movie added successfully!",
-                "Success",
+                MessageBox.Show("Thêm phim thành công!",
+                "Thành công",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
                 _screenController.NavigateTo<MovieList>();
@@ -271,7 +271,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the movie: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi thêm phim: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

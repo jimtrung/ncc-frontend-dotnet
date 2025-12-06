@@ -31,6 +31,10 @@ namespace Theater_Management_FE.Controllers
         public Button showTimesButton;
         public TextBlock usernameText;
         public Button deleteAllButton;
+        public Button newsButton;
+        public Button promotionButton;
+        public Button priceButton;
+        public Button aboutButton;
 
         private bool _isInitialized = false;
 
@@ -77,6 +81,9 @@ namespace Theater_Management_FE.Controllers
                     if (bookedTicketButton != null) bookedTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     if (showTimesButton != null) showTimesButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (deleteAllButton != null) deleteAllButton.Click += (s, e) => DeleteAllButton();
+                    
+                    if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
+                    if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
                     _isInitialized = true;
                 }
 

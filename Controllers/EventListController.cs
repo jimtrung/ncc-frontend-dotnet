@@ -35,7 +35,6 @@ namespace Theater_Management_FE.Controllers
                 if (btnBackHome != null) btnBackHome.Click += (s, e) => _screenController.NavigateTo<HomePageUser>();
                 if (btnShowTime != null) btnShowTime.Click += (s, e) => _screenController.NavigateTo<ShowtimePage>();
                 if (btnNews != null) btnNews.Click += (s, e) => _screenController.NavigateTo<TinTuc>();
-                // btnPromotion is current page
                 if (btnCinema != null) btnCinema.Click += (s, e) => _screenController.NavigateTo<HomePageUser>(); 
 
                 _isInitialized = true;

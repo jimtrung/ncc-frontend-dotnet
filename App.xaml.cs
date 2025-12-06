@@ -67,6 +67,8 @@ namespace Theater_Management_FE
 
             services.AddTransient<ShowtimeListController>();
             services.AddTransient<AddShowtimeController>();
+            services.AddTransient<PriceController>();
+
 
             // === Windows ===
             services.AddTransient<SignIn>();
@@ -84,6 +86,8 @@ namespace Theater_Management_FE
 
             services.AddTransient<ShowtimeList>();
             services.AddTransient<AddShowtime>();
+            services.AddTransient<Price>();
+
 
             // ScreenController
             services.AddSingleton<ScreenController>();
@@ -108,6 +112,8 @@ namespace Theater_Management_FE
 
             sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
             sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
+            sc.AutoRegister<Price, PriceController>(Services);
+
 
             // --- STARTUP MAIN WINDOW ---
             // --- STARTUP MAIN WINDOW ---

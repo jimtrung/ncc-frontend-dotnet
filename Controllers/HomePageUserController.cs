@@ -1,13 +1,14 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Documents;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
-using Theater_Management_FE.Views;
 using Theater_Management_FE.Utils;
+using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE.Controllers
 {
@@ -22,6 +23,8 @@ namespace Theater_Management_FE.Controllers
         public Button profileButton;
         public Button logoutButton;
         public TextBlock usernameText;
+        public Button priceButton;
+        public Button homeButton;
 
         private bool _isInitialized = false;
 
@@ -83,17 +86,17 @@ namespace Theater_Management_FE.Controllers
                     screenController.NavigateTo<Home>();
                     return;
                 }
-                
+
                 UpdateUserUI(user);
 
                 // Clear movie list and show loading
-                if (movieList != null) 
+                if (movieList != null)
                 {
                     movieList.Children.Clear();
-                    movieList.Children.Add(new TextBlock 
-                    { 
-                        Text = "Loading movies...", 
-                        Foreground = Brushes.White, 
+                    movieList.Children.Add(new TextBlock
+                    {
+                        Text = "Loading movies...",
+                        Foreground = Brushes.White,
                         FontSize = 16,
                         Margin = new Thickness(10)
                     });
@@ -121,10 +124,10 @@ namespace Theater_Management_FE.Controllers
                     {
                         var msg = errorMessage ?? "No movies available 🎬";
                         var color = errorMessage != null ? Brushes.Red : Brushes.White;
-                        movieList.Children.Add(new TextBlock 
-                        { 
-                            Text = msg, 
-                            Foreground = color, 
+                        movieList.Children.Add(new TextBlock
+                        {
+                            Text = msg,
+                            Foreground = color,
                             FontSize = 16,
                             Margin = new Thickness(10)
                         });
@@ -141,6 +144,16 @@ namespace Theater_Management_FE.Controllers
             {
                 System.Diagnostics.Debug.WriteLine($"An error occurred in HomePageUser: {ex.Message}");
             }
+        }
+
+        private void PriceButton_Click(object sender, RoutedEventArgs e)
+        {
+            screenController.NavigateTo<Price>();
+        }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            screenController.NavigateTo<HomePageUser>();
         }
 
         public void HandleSignUpButton(object sender, RoutedEventArgs e)
@@ -189,8 +202,8 @@ namespace Theater_Management_FE.Controllers
 
         private StackPanel CreateMovieCard(Movie movie)
         {
-            var card = new StackPanel 
-            { 
+            var card = new StackPanel
+            {
                 Width = 204,
                 Margin = new Thickness(12),
                 Cursor = System.Windows.Input.Cursors.Hand
@@ -207,8 +220,8 @@ namespace Theater_Management_FE.Controllers
             };
 
             var imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", $"{movie.Id}.jpg");
-            var imageUri = System.IO.File.Exists(imagePath) 
-                ? new Uri(imagePath) 
+            var imageUri = System.IO.File.Exists(imagePath)
+                ? new Uri(imagePath)
                 : new Uri("pack://application:,,,/Resources/Images/cat.jpg");
 
             var poster = new Image
@@ -270,23 +283,30 @@ namespace Theater_Management_FE.Controllers
             return card;
         }
 
-        public void BindUIControls(WrapPanel movieList, Button profileButton, Button logoutButton, TextBlock usernameText)
+        public void BindUIControls(WrapPanel movieList, Button profileButton, Button homeButton, Button logoutButton, Button priceButton, TextBlock usernameText)
         {
             this.movieList = movieList;
             this.profileButton = profileButton;
             this.logoutButton = logoutButton;
             this.usernameText = usernameText;
+            this.priceButton = priceButton;
 
             if (this.profileButton != null)
             {
-                this.profileButton.Click -= HandleProfileButton;
                 this.profileButton.Click += HandleProfileButton;
             }
 
             if (this.logoutButton != null)
             {
-                this.logoutButton.Click -= HandleLogOutButton;
                 this.logoutButton.Click += HandleLogOutButton;
+            }
+            if (this.priceButton != null)
+            {
+                this.priceButton.Click += PriceButton_Click;
+            }
+            if (this.homeButton != null)
+            {
+                this.homeButton.Click += homeButton_Click;
             }
         }
     }

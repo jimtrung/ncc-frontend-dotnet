@@ -1,28 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {}
+    "C:\\Users\\Admin\\ncc-frontend-dotnet\\Theater Management FE.csproj": {}
   },
   "projects": {
-    "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj": {
+    "C:\\Users\\Admin\\ncc-frontend-dotnet\\Theater Management FE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\ncc-frontend-dotnet\\Theater Management FE.csproj",
         "projectName": "Theater Management FE",
-        "projectPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\Theater Management FE.csproj",
-        "packagesPath": "C:\\Users\\HAI TRUNG\\.nuget\\packages\\",
-        "outputPath": "D:\\program-languages\\c#\\theater-management\\Theater Management FE\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\ncc-frontend-dotnet\\Theater Management FE.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\ncc-frontend-dotnet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\.Net3\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HAI TRUNG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net9.0-windows7.0"
+          "net8.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0-windows7.0": {
-            "targetAlias": "net9.0-windows7.0",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows7.0",
             "projectReferences": {}
           }
         },
@@ -45,11 +45,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
-        "net9.0-windows7.0": {
-          "targetAlias": "net9.0-windows7.0",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows7.0",
           "dependencies": {
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -103,7 +103,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

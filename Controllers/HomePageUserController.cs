@@ -65,6 +65,7 @@ namespace Theater_Management_FE.Controllers
                     bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
                     promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
+                    priceButton.Click += (s, e) => screenController.NavigateTo<Price>();
                     homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>(); 
 
                     _isInitialized = true;
@@ -147,16 +148,6 @@ namespace Theater_Management_FE.Controllers
             {
                 MessageBox.Show($"Lỗi trong HomePageUserController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        public void HandleSignUpButton(object sender, RoutedEventArgs e)
-        {
-            screenController.NavigateTo<SignUp>();
-        }
-
-        public void HandleSignInButton(object sender, RoutedEventArgs e)
-        {
-            screenController.NavigateTo<SignIn>();
         }
 
         public void HandleProfileButton(object sender, RoutedEventArgs e)

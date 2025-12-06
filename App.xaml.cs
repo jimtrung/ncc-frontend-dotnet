@@ -24,10 +24,13 @@ namespace Theater_Management_FE
                 // Bật các nút đóng, zoom nhỏ/zoom to, đóng Window
                 CommandManager.RegisterClassCommandBinding(typeof(Window),
                     new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+
                 CommandManager.RegisterClassCommandBinding(typeof(Window),
                     new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+
                 CommandManager.RegisterClassCommandBinding(typeof(Window),
                     new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+
                 CommandManager.RegisterClassCommandBinding(typeof(Window),
                     new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
@@ -78,6 +81,7 @@ namespace Theater_Management_FE
                 services.AddTransient<PayPageController>();
                 services.AddTransient<TinTucController>();
                 services.AddTransient<EventListController>();
+                services.AddTransient<PriceController>();
 
                 // === Windows ===
                 services.AddTransient<SignIn>();
@@ -101,6 +105,7 @@ namespace Theater_Management_FE
                 services.AddTransient<PayPage>();
                 services.AddTransient<EventList>();
                 services.AddTransient<TinTuc>(); 
+                services.AddTransient<Price>();
 
                 // ScreenController
                 services.AddSingleton<ScreenController>();
@@ -122,7 +127,7 @@ namespace Theater_Management_FE
                 sc.AutoRegister<AddAuditorium, AddAuditoriumController>(Services);
                 sc.AutoRegister<MovieInformation, MovieInformationController>(Services);
                 sc.AutoRegister<AuditoriumInformation, AuditoriumInformationController>(Services);
-
+                sc.AutoRegister<Price, PriceController>(Services);
                 sc.AutoRegister<ShowtimeList, ShowtimeListController>(Services);
                 sc.AutoRegister<AddShowtime, AddShowtimeController>(Services);
                 sc.AutoRegister<ShowtimeInformation, ShowtimeInformationController>(Services);

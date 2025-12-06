@@ -2,9 +2,9 @@ using System.Windows;
 
 namespace Theater_Management_FE.Views
 {
-    public partial class ShowtimePage : Window
+    public partial class Price : Window
     {
-        public ShowtimePage()
+        public Price()
         {
             InitializeComponent();
         }

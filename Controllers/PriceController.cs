@@ -1,8 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
-using Theater_Management_FE.DTOs;
 using System.Windows.Controls;
 using Theater_Management_FE.Models;
 using Theater_Management_FE.Services;
@@ -11,7 +8,7 @@ using Theater_Management_FE.Views;
 
 namespace Theater_Management_FE.Controllers
 {
-    public class EventListController
+    public class PriceController
     {
         private ScreenController screenController;
         private AuthService authService;
@@ -23,8 +20,6 @@ namespace Theater_Management_FE.Controllers
         public Button bookTicketButton;
         public Button newsButton;
         public Button promotionButton;
-        public Button priceButton;
-        public Button aboutButton;
 
         // User profile buttons
         public Button profileButton;
@@ -58,7 +53,7 @@ namespace Theater_Management_FE.Controllers
                     if (showTimeButton != null) showTimeButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (bookTicketButton != null) bookTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
-                    if (priceButton != null) priceButton.Click += (s, e) => screenController.NavigateTo<Price>();
+                    if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
 
                     if (profileButton != null) profileButton.Click += HandleProfileButton;
                     if (logoutButton != null) logoutButton.Click += HandleLogOutButton;
@@ -97,7 +92,7 @@ namespace Theater_Management_FE.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi trong EventListController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lỗi trong PriceController: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

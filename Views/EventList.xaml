@@ -4,89 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Danh Sách Sự Kiện" Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen"
-        Background="#F5F7FA">
-    <Window.Resources>
-        <!-- Navbar Buttons -->
-        <Style x:Key="NavBtn" TargetType="Button">
-            <Setter Property="Foreground" Value="#ccc"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="5,2"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        Title="National Cinema Center"
+        Width="1200" Height="800"
+        WindowState="Maximized"
+        Style="{StaticResource CustomWindowStyle}"
+        WindowStartupLocation="CenterScreen">
 
-        <Style x:Key="NavBtnActive" TargetType="Button" BasedOn="{StaticResource NavBtn}">
-            <Setter Property="Foreground" Value="#c0392b"/>
-            <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
-        </Style>
-    </Window.Resources> 
+
+ 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Navbar -->
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/> <!-- Header -->
             <RowDefinition Height="Auto"/> <!-- Filter -->
             <RowDefinition Height="*"/>    <!-- Content -->
         </Grid.RowDefinitions>
 
-        <!-- NAVBAR -->
-        <Grid Background="#0e1015" Height="70" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="300"/>
-            </Grid.ColumnDefinitions>
+        <!-- Header -->
+        <Border Background="{StaticResource SecondaryBackground}" Padding="16" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Logo -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock Text="TRUNG TÂM CHIẾU PHIM QUỐC GIA" Foreground="{StaticResource PrimaryText}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" />
+                        <TextBlock Text="National Cinema Center" Foreground="{StaticResource SecondaryText}" FontSize="14" />
+                    </StackPanel>
+                </StackPanel>
 
-            <!-- Logo -->
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0">
-                <Image Source="pack://application:,,,/Resources/Images/logo.png" Height="45" Margin="0,0,10,0"/>
-                <TextBlock Text="NATIONAL CINEMA CENTER" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
+                <!-- Navigation Buttons -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="homeButton" Style="{StaticResource NavButtonStyle}" Content="Trang chủ" />
+                    <Button x:Name="showTimeButton" Style="{StaticResource NavButtonStyle}" Content="Lịch chiếu" />
+                    <Button x:Name="bookTicketButton" Style="{StaticResource NavButtonStyle}" Content="Các vé đã đặt" />
+                    <Button x:Name="newsButton" Style="{StaticResource NavButtonStyle}" Content="Tin tức" />
+                    <Button x:Name="promotionButton" Style="{StaticResource NavButtonStyle}" Content="Khuyến mãi" />
+                    <Button x:Name="priceButton" Style="{StaticResource NavButtonStyle}" Content="Giá vé" />
+                    <Button x:Name="aboutButton" Style="{StaticResource NavButtonStyle}" Content="Giới thiệu" />
+                </StackPanel>
 
-            <!-- Menu -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Style="{StaticResource NavBtn}" Content="Trang chủ" Margin="12,0" x:Name="btnBackHome"/>
-                <Button Style="{StaticResource NavBtn}" Content="Lịch chiếu" Margin="12,0" x:Name="btnShowTime"/>
-                <Button Style="{StaticResource NavBtn}" Content="Tin tức" Margin="12,0" x:Name="btnNews"/>
-                <Button Style="{StaticResource NavBtnActive}" Content="Khuyến mãi" Margin="12,0" x:Name="btnPromotion"/>
-                <Button Style="{StaticResource NavBtn}" Content="Giá vé" Margin="12,0" x:Name="btnPrice"/>
-                <Button Style="{StaticResource NavBtn}" Content="Liên hoan phim" Margin="12,0" x:Name="btnCinema"/>
-            </StackPanel>
-        </Grid>
+                <!-- User Profile Section -->
+                <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel Margin="0,0,12,0" VerticalAlignment="Center">
+                        <TextBlock Text="Xin chào," Foreground="{StaticResource SecondaryText}" FontSize="12" HorizontalAlignment="Right" />
+                        <TextBlock x:Name="usernameText" Text="Khách" Foreground="{StaticResource PrimaryText}" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="profileButton" Content="Hồ sơ" Style="{StaticResource NavButtonStyle}" Margin="0,0,8,0" Visibility="Collapsed"/>
+                        <Button x:Name="logoutButton" Content="Đăng xuất" Style="{StaticResource NavButtonStyle}" Foreground="{StaticResource Danger}" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <Border Grid.Row="1" Background="#1A202C" Padding="20">
+        <Border Grid.Row="1" Background="{StaticResource SecondaryBackground}" Padding="20">
             <StackPanel HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,5">
                     <TextBlock Text="Ưu Đãi &amp; Khuyến Mãi"
-  
-                             Foreground="White"
+                             Foreground="{StaticResource PrimaryText}"
                                FontSize="28" FontWeight="Bold" />
                     </StackPanel>
                 <Rectangle Height="2" 
-Width="200" Fill="#4CAF50" Margin="0,5,0,0"/> 
+Width="200" Fill="{StaticResource PrimaryAccent}" Margin="0,5,0,0"/> 
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,15">
-            <TextBlock Text="Lọc theo:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="#333333"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,15" Background="{StaticResource PrimaryBackground}">
+            <TextBlock Text="Lọc theo:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource PrimaryText}"/>
             
             <ComboBox SelectedIndex="0" Width="150" Margin="0,0,10,0">
                 <ComboBoxItem Content="Tất cả"/>
- 
                <ComboBoxItem Content="Phim"/>
                 <ComboBoxItem Content="Âm nhạc"/>
                 <ComboBoxItem Content="Du lịch"/>
@@ -94,7 +87,7 @@ Width="200" Fill="#4CAF50" Margin="0,5,0,0"/>
             </ComboBox>
 
             <TextBlock Text="Sắp xếp:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="14" FontWeight="SemiBold" 
-Foreground="#333333"/>
+Foreground="{StaticResource PrimaryText}"/>
             <ComboBox SelectedIndex="0" Width="150">
                 <ComboBoxItem Content="Ngày kết thúc (sớm nhất)"/>
                 <ComboBoxItem Content="Ngày kết thúc (muộn nhất)"/>

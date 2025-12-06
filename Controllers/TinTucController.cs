@@ -71,6 +71,7 @@ namespace Theater_Management_FE.Controllers
                     showTimeButton.Click += (s, e) => _screenController.NavigateTo<ShowtimePage>();
                     promotionButton.Click += (s, e) => _screenController.NavigateTo<EventList>();
                     bookTicketButton.Click += (s, e) => _screenController.NavigateTo<BookedTicket>();
+                    priceButton.Click += (s, e) => _screenController.NavigateTo<Price>();
                     
                     profileButton.Click += HandleProfileButton;
                     logoutButton.Click += HandleLogOutButton;

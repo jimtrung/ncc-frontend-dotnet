@@ -10,35 +10,6 @@
         Style="{StaticResource CustomWindowStyle}"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <Style x:Key="NavButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="16,10"/>
-            <Setter Property="Margin" Value="4,0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="6">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#33FFFFFF"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> 
@@ -85,8 +56,8 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,0,40">
                 <!-- Banner -->
-                <Grid Height="250">
-                    <Image Source="pack://application:,,,/Resources/Images/cat.jpg" Stretch="UniformToFill"/>
+                <Grid Height="400">
+                    <Image Source="pack://application:,,,/Resources/Images/pb.jpg" Stretch="UniformToFill"/>
                     <Border Background="#40000000"/> 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Text="TRẢI NGHIỆM ĐIỆN ẢNH ĐỈNH CAO" FontSize="40" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center">
@@ -101,7 +72,7 @@
                 <!-- Movie Tabs -->
                 <StackPanel Margin="40,40,40,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,30">
-                        <RadioButton Content="ĐẶT VÉ Ở ĐÂY NHÉ" FontSize="20" FontWeight="Bold" Foreground="{StaticResource SecondaryText}" Style="{x:Null}">
+                        <RadioButton Content="ĐẶT VÉ" FontSize="20" FontWeight="Bold" Foreground="{StaticResource SecondaryText}" Style="{x:Null}">
                             <RadioButton.Template>
                                 <ControlTemplate TargetType="RadioButton">
                                     <Grid Cursor="Hand">

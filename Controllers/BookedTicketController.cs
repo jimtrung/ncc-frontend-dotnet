@@ -81,9 +81,9 @@ namespace Theater_Management_FE.Controllers
                     if (bookedTicketButton != null) bookedTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     if (showTimesButton != null) showTimesButton.Click += (s, e) => screenController.NavigateTo<ShowtimePage>();
                     if (deleteAllButton != null) deleteAllButton.Click += (s, e) => DeleteAllButton();
-                    
                     if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
                     if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
+                    if (priceButton != null) priceButton.Click += (s, e) => screenController.NavigateTo<Price>();
                     _isInitialized = true;
                 }
 
@@ -121,25 +121,24 @@ namespace Theater_Management_FE.Controllers
                 if (bookedTicketList != null)
                 {
                     bookedTicketList.Children.Clear();
-                        bookedTicketList.Children.Add(new TextBlock
-                        {
-                            Text = "Đang tải vé đã đặt...",
-                            Foreground = Brushes.White,
-                            FontSize = 16,
-                            Margin = new Thickness(10)
-                        });
-                    }
-                    var token = authTokenUtil.LoadAccessToken();
-                    var userId = JwtUtil.GetUserIdFromToken(token);
+                    bookedTicketList.Children.Add(new TextBlock
+                    {
+                        Text = "Đang tải vé đã đặt...",
+                        Foreground = Brushes.White,
+                        FontSize = 16,
+                        Margin = new Thickness(10)
+                    });
+                }
+                var token = authTokenUtil.LoadAccessToken();
+                var userId = JwtUtil.GetUserIdFromToken(token);
 
-                    List<Ticket> tickets = null;
-                    string errorMessage = null;
-                    // MessageBox.Show($"User ID: {userId}");
-                    tickets = ticketService.GetTicketsByUserId(userId.Value);
+                List<Ticket> tickets = null;
+                string errorMessage = null;
+                tickets = ticketService.GetTicketsByUserId(userId.Value);
 
 
-                    // Clear loading message
-                    if (bookedTicketList != null) bookedTicketList.Children.Clear();
+                // Clear loading message
+                if (bookedTicketList != null) bookedTicketList.Children.Clear();
 
                     if (tickets == null || tickets.Count == 0)
                     {

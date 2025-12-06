@@ -10,34 +10,7 @@
         Style="{StaticResource CustomWindowStyle}"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <Style x:Key="NavButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="16,10"/>
-            <Setter Property="Margin" Value="4,0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="6">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#33FFFFFF"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -93,7 +66,7 @@
             <StackPanel Margin="0,0,0,40">
                 <!-- Banner -->
                 <Grid Height="400">
-                    <Image Source="pack://application:,,,/Resources/Images/cat.jpg" Stretch="UniformToFill"/>
+                    <Image Source="pack://application:,,,/Resources/Images/zootopia.jpg" Stretch="UniformToFill"/>
                     <Border Background="#40000000"/> 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Text="TRẢI NGHIỆM ĐIỆN ẢNH ĐỈNH CAO" FontSize="40" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center">

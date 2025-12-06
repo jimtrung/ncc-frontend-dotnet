@@ -28,6 +28,8 @@ namespace Theater_Management_FE.Controllers
         public Button homeButton;
         public Button bookedTicketButton;
         public Button newsButton;
+        public Button promotionButton;
+        public Button priceButton;
         public TextBlock usernameText;
 
         private bool _isInitialized = false;
@@ -70,6 +72,8 @@ namespace Theater_Management_FE.Controllers
                     if (homeButton != null) homeButton.Click += (s, e) => screenController.NavigateTo<HomePageUser>();
                     if (bookedTicketButton != null) bookedTicketButton.Click += (s, e) => screenController.NavigateTo<BookedTicket>();
                     if (newsButton != null) newsButton.Click += (s, e) => screenController.NavigateTo<TinTuc>();
+                    if (promotionButton != null) promotionButton.Click += (s, e) => screenController.NavigateTo<EventList>();
+                    if (priceButton != null) priceButton.Click += (s, e) => screenController.NavigateTo<Price>();
                     _isInitialized = true;
                 }
 

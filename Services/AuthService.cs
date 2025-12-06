@@ -54,12 +54,13 @@ public class AuthService
             try
             {
                 var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
-                if (error != null) return error;
-            }
-            catch { }
+                if (error != null)
+                {
+                    return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Đã xảy ra lỗi không xác định" };
+                }
+            } catch {} 
 
-            var raw = response.Content.ReadAsStringAsync().Result ?? "";
-            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "Đăng ký thất bại", raw, "/auth/signup");
+            return new ErrorResponse(DateTime.UtcNow, (int)response.StatusCode, "Đăng ký thất bại", "", "/auth/signup");
         }
 
         return response.Content.ReadAsStringAsync().Result;
@@ -92,12 +93,7 @@ public class AuthService
                 var error = response.Content.ReadFromJsonAsync<ErrorResponse>(JsonOptions).Result;
                 if (error != null)
                 {
-                    // Ensure we have a message to display
-                    if (string.IsNullOrWhiteSpace(error.Message))
-                    {
-                        return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Đã xảy ra lỗi không xác định" };
-                    }
-                    return error;
+                    return error with { Message = !string.IsNullOrWhiteSpace(error.Error) ? error.Error : "Đã xảy ra lỗi không xác định" };
                 }
             }
             catch {}
